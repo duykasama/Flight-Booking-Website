@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Duc viết rằng......
+Huy nói rằng......
 
 ## Requirements
 

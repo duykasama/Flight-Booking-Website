@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Duc viết rằng...... Duc có thêm hàm A
+
+Duc viết rằng...... Duc có thêm hàm A ++++ Huy code
+
 
 ## Requirements
 

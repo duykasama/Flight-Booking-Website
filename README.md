@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Duc viết rằng......
+Duc viết rằng...... Duc có thêm hàm A
 
 ## Requirements
 

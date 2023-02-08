@@ -115,6 +115,8 @@
 
 # 3. Database design:
 
+- **ERD:**
+![Alt text](ERD/ERD.png)
 ---
 
 # 4. System design:

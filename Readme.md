@@ -44,11 +44,11 @@
     - Filter flights using price range, departure time in four day sessions and different airlines.
     - Sort flights by ascending price, earliest take-off time, latest take-off time.
     - Show the number of available seats on every flights displayed.
-    - Select flight - click "Buy Ticket".
 
-    d. Booking flights:
+    d. Flight booking:
 
-    - Fill in passenger information (required) and choose luggage weight (optional).
+    - Select one flight for booking.
+    - Fill in passenger information, select seat for each passenger (required) and choose luggage weight (optional).
     - Buy ticket for "more than one" passengers by clicking "Add Passenger" button.
     - Show total price after providing passengers' information.
     - Confirm buying ticket(s) by clicking "Purchase" (log-in necessity).
@@ -56,7 +56,7 @@
     e. Booking history:
 
     - View your booking history.
-    - Select seat for passengers. (optional)
+    - Edit passenger information.
 
     f. Feedback:
 

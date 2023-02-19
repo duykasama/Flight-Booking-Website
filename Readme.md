@@ -99,10 +99,9 @@
   5. **Change password:**![Alt text](Wireframe/Change%20Password.png)
   6. **Search flights:**![Alt text](Wireframe/Search%20Flights.png)
   7. **Flight details:**![Alt text](Wireframe/Flight%20Details.png)
-  8. **Passenger information and purchase:**![Alt text](Wireframe/Passenger%20Info.png)
+  8. **Passenger information and purchase:**![Alt text](Wireframe/Passenger%20Info%20and%20Seat%20Booking.png)
   9. **Booking history:**![Alt text](Wireframe/Booking%20History.png)
-  10. **Seat selection:**![Alt text](Wireframe/Booking%20Seat.png)
-  11. **Feedback:**![Alt text](Wireframe/Feedback.png)
+  10. **Feedback:**![Alt text](Wireframe/Feedback.png)
 - ## Admin wireframe:
   1. **Login as admin:**![Alt text](Wireframe/Admin%20login.png)
   2. **Admin Homepage:**![Alt text](Wireframe/ADMIN%20HOMEPAGE.png)

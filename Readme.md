@@ -45,7 +45,7 @@
     - Sort flights by ascending price, earliest take-off time, latest take-off time.
     - Show the number of available seats on every flights displayed.
 
-    d. Flight booking:
+    d. Flight booking + Seat selection:
 
     - Select one flight for booking.
     - Fill in passenger information, select seat for each passenger (required) and choose luggage weight (optional).
@@ -115,7 +115,8 @@
 # 3. Database design:
 
 - **ERD:**
-![Alt text](ERD/ERD.png)
+  ![Alt text](ERD/ERD.png)
+
 ---
 
 # 4. System design:

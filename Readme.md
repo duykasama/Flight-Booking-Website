@@ -48,19 +48,16 @@
     d. Flight booking + Seat selection:
 
     - Select one flight for booking.
-    - Fill in passenger information, select seat for each passenger (required) and choose luggage weight (optional).
-    - Buy ticket for "more than one" passengers by clicking "Add Passenger" button.
-    - Show total price after providing passengers' information.
-    - Confirm buying ticket(s) by clicking "Purchase" (log-in necessity).
+    - Fill in passenger ticket information, select seat for each passenger (required) and choose luggage weight (optional).
+    - Buy ticket for "more than one" passengers by clicking "Add Passenger Ticket" button.
+    - Show total price after providing passenger tickets' information.
+    - Confirm buying ticket(s) by clicking "Purchase" (log-in necessity) or Save without purchase.
 
     e. Booking history:
 
     - View your booking history.
-    - Edit passenger information.
-
-    f. Feedback:
-
-    - Send feedback to admin.
+    - Confirm purchase for saved invoices.
+    - Edit passenger ticket information.
 
   - **Admin:**
 
@@ -78,12 +75,7 @@
     c. Manage invoices:
 
     - View invoices.
-    - Calculate revenue in day, month or year.
-
-    d. Read feedbacks:
-
-    - Read all feedbacks from users.
-    - Filter feedbacks by username or phone number.
+    - Calculate revenue in day, month or year. -
 
 ---
 
@@ -99,16 +91,14 @@
   5. **Change password:**![Alt text](Wireframe/Change%20Password.png)
   6. **Search flights:**![Alt text](Wireframe/Search%20Flights.png)
   7. **Flight details:**![Alt text](Wireframe/Flight%20Details.png)
-  8. **Passenger information, seat selection and purchase:**![Alt text](Wireframe/Passenger%20Info%20and%20Seat%20Booking.png)
+  8. **Passenger ticket information, seat selection and purchase:**![Alt text](Wireframe/Passenger%20Info%20and%20Seat%20Booking.png)
   9. **Booking history:**![Alt text](Wireframe/Booking%20History.png)
-  10. **Feedback:**![Alt text](Wireframe/Feedback.png)
 - ## Admin wireframe:
   1. **Login as admin:**![Alt text](Wireframe/Admin%20login.png)
   2. **Admin Homepage:**![Alt text](Wireframe/ADMIN%20HOMEPAGE.png)
   3. **Flight management:**![Alt text](Wireframe/Flights%20Admin.png)
   4. **User management:**![Alt text](Wireframe/Users%20Admin.png)
   5. **Invoice management:**![Alt text](Wireframe/Invoices%20Admin.png)
-  6. **Read feedbacks:**![Alt text](Wireframe/Read%20Feedbacks%20Admin.png)
 
 ---
 

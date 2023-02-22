@@ -75,7 +75,7 @@
     c. Manage invoices:
 
     - View invoices.
-    - Calculate revenue in day, month or year. -
+    - Calculate revenue in day, month or year.
 
 ---
 

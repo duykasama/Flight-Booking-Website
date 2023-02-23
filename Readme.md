@@ -43,7 +43,6 @@
     - Searh all flights having the same departure point, landing point and departure date.
     - Filter flights using price range, departure time in four day sessions and different airlines.
     - Sort flights by ascending price, earliest take-off time, latest take-off time.
-    - Show the number of available seats on every flights displayed.
 
     d. Flight booking + Seat selection:
 

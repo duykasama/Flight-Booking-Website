@@ -51,7 +51,7 @@
     <div class="text1">COMFORT<span>Guaranteed</span>
       <p>A website for booking domestic flight tickets!</p>
     </div>
-    <a href="#" class="button_top">LOGIN</a></div>
+    <a href="#" class="button_top">LOGIN AS ADMIN</a></div>
 </div>
 <div class="main">
   <section id="content">
@@ -81,14 +81,14 @@
               <input type="text" class="input input1" value="Enter City or Airport Code" onBlur="if(this.value=='') this.value='Enter City or Airport Code'" onFocus="if(this.value =='Enter City or Airport Code' ) this.value=''">
             </div>
           </div>
-          <div class="wrapper"> Departure Date and Time:
+          <div class="wrapper"> Departure Date:
             <div class="wrapper">
               <div class="bg left">
                 <input type="text" class="input input2" value="mm/dd/yyyy " onBlur="if(this.value=='') this.value='mm/dd/yyyy '" onFocus="if(this.value =='mm/dd/yyyy ' ) this.value=''">
               </div>
-              <div class="bg right">
+<!--              <div class="bg right">
                 <input type="text" class="input input2" value="12:00am" onBlur="if(this.value=='') this.value='12:00am'" onFocus="if(this.value =='12:00am' ) this.value=''">
-              </div>
+              </div>-->
             </div>
           </div>
 <!--          <div class="wrapper"> Return Date and Time:
@@ -108,13 +108,13 @@
             </div>-->
             <a href="#" class="button2 searchButton">Search</a> </div>
         </form>
-        <h2>Recent News</h2>
+<!--        <h2>Recent News</h2>
         <p class="under"><a href="#" class="link1">Nemo enim ipsam voluptatem quia</a><br>
           November 5, 2010</p>
         <p class="under"><a href="#" class="link1">Voluptas aspernatur autoditaut fjugit</a><br>
           November 1, 2010</p>
         <p><a href="#" class="link1">Sed quia consequuntur magni</a><br>
-          October 23, 2010</p>
+          October 23, 2010</p>-->
       </div>
     </article>
     <article class="col2 pad_left1">

@@ -49,7 +49,6 @@
         <div class="main">
             <div id="banner">
                 <div class="text1"> COMFORT<span>Guaranteed</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
             </div>
         </div>
@@ -69,7 +68,7 @@
                         <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia.</p>
                     </div>
                 </article>
-                
+
                 <!--Login Part-->
                 <article class="col2 pad_left1">
                     <!--<h1>Please login</h1>-->
@@ -82,7 +81,7 @@
                         <input value="Login" type="submit">
                     </form>
                 </article>
-                 <!--End Login Part-->       
+                <!--End Login Part-->       
             </section>
         </div>
         <div class="body2">

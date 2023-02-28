@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>AirLines | Safety</title>
+<title>AirLines | Aircrafts</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
@@ -17,13 +17,13 @@
 <script type="text/javascript" src="js/html5.js"></script>
 <![endif]-->
 </head>
-<body id="page3">
+<body id="page2">
 <!-- START PAGE SOURCE -->
 <div class="body1">
   <div class="main">
     <header>
       <div class="wrapper">
-        <h1><a href="index.html" id="logo">AirLines</a><span id="slogan">International Travel</span></h1>
+        <h1><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
         <div class="right">
           <nav>
             <ul id="top_nav">
@@ -34,11 +34,11 @@
           </nav>
           <nav>
             <ul id="menu">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="aircrafts.html">Our Aircraft</a></li>
-              <li id="menu_active"><a href="safety.html">Safety</a></li>
-              <li><a href="charters.html">Charters</a></li>
-              <li><a href="contacts.html">Contacts</a></li>
+              <li><a href="index.jsp">Home</a></li>
+              <li id="menu_active"><a href="aircrafts.jsp">Our Aircraft</a></li>
+              <li><a href="safety.jsp">Safety</a></li>
+              <li><a href="charters.jsp">Charters</a></li>
+              <li><a href="login.jsp">Contacts</a></li>
             </ul>
           </nav>
         </div>
@@ -108,24 +108,18 @@
             </div>
             <a href="#" class="button2">go!</a> </div>
         </form>
-        <h2>Safety Experts</h2>
-        <p><strong>Temporibus autem</strong> quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis.</p>
+        <h2>Did You Know?</h2>
+        <p><strong>Lorem ipsum dolor</strong> sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. </p>
         <div class="wrapper pad_bot2"><a href="#" class="button2">Read More</a></div>
       </div>
     </article>
     <article class="col2 pad_left1">
-      <h2>About Safety</h2>
+      <h2>Aircraft Sales</h2>
       <div class="wrapper">
-        <figure class="left marg_right1"><img src="images/page3_img1.jpg" alt=""></figure>
-        <p><strong>At vero eos et accusamus</strong> et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga quod maxime. </p>
+        <figure class="left marg_right1"><img src="images/page2_img1.jpg" alt=""></figure>
+        <p><strong>Sed ut perspiciatis</strong> unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.</p>
       </div>
-      <div class="wrapper">
-        <figure class="left marg_right1"><img src="images/page3_img2.jpg" alt=""></figure>
-        <p><strong>Et harum quidem rerum</strong> facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut.</p>
-      </div>
-      <div class="wrapper"><a href="#" class="button1">Read More</a></div>
-      <h2>Safety Programs</h2>
-      <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus omnis assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum:</p>
+      <p>Vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem:</p>
       <div class="wrapper pad_bot1">
         <ul class="list1 cols marg_right1">
           <li><a href="#">Lipsum quia dolor amet consectetur</a></li>
@@ -139,6 +133,13 @@
           <li><a href="#">Ullam corporis suscipit laboriosam</a></li>
           <li><a href="#">Nisi ut aliquid ex commodi</a></li>
         </ul>
+      </div>
+      <div class="wrapper"><a href="#" class="button1">Read More</a></div>
+      <h2>Aircraft Management</h2>
+      <div class="wrapper">
+        <figure class="right marg_left1"><img src="images/page2_img2.jpg" alt=""></figure>
+        <p><strong>At vero eos et accusamus</strong> et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excep- turi sint occaecati cupiditate.</p>
+        <p><strong>Non provident</strong>, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus omnis.</p>
       </div>
     </article>
   </section>

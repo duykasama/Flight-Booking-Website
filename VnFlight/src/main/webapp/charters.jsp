@@ -23,7 +23,7 @@
   <div class="main">
     <header>
       <div class="wrapper">
-        <h1><a href="index.html" id="logo">AirLines</a><span id="slogan">International Travel</span></h1>
+        <h1><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
         <div class="right">
           <nav>
             <ul id="top_nav">
@@ -34,11 +34,11 @@
           </nav>
           <nav>
             <ul id="menu">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="aircrafts.html">Our Aircraft</a></li>
-              <li><a href="safety.html">Safety</a></li>
-              <li id="menu_active"><a href="charters.html">Charters</a></li>
-              <li><a href="contacts.html">Contacts</a></li>
+              <li><a href="index.jsp">Home</a></li>
+              <li><a href="aircrafts.jsp">Our Aircraft</a></li>
+              <li><a href="safety.jsp">Safety</a></li>
+              <li id="menu_active"><a href="charters.jsp">Charters</a></li>
+              <li><a href="login.jsp">Contacts</a></li>
             </ul>
           </nav>
         </div>

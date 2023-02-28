@@ -23,7 +23,7 @@
             <div class="main">
                 <header>
                     <div class="wrapper">
-                        <h1><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
+                        <h1 class="header-logo"><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
                         <div class="right">
                             <nav>
                                 <ul id="top_nav">
@@ -56,7 +56,7 @@
             <section id="content">
                 <article class="col1">
                     <div class="pad_1">
-                        <h2>Your Flight Planner</h2>
+                        <h2 class="h2_style">Your Flight Planner</h2>
                         <form id="form_1" action="#" method="post">
                             <div class="wrapper pad_bot1">
                                 <div class="radio marg_right1">
@@ -121,13 +121,13 @@
                                 </div>
                                 <a href="#" class="button2">go!</a> </div>
                         </form>
-                        <h2>Safety Experts</h2>
+                        <h2 class="h2_style">Safety Experts</h2>
                         <p><strong>Temporibus autem</strong> quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis.</p>
                         <div class="wrapper pad_bot2"><a href="#" class="button2">Read More</a></div>
                     </div>
                 </article>
                 <article class="col2 pad_left1">
-                    <h2>About Safety</h2>
+                    <h2 class="h2_style">About Safety</h2>
                     <div class="wrapper">
                         <figure class="left marg_right1"><img src="images/page3_img1.jpg" alt=""></figure>
                         <p><strong>At vero eos et accusamus</strong> et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga quod maxime. </p>
@@ -137,7 +137,7 @@
                         <p><strong>Et harum quidem rerum</strong> facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut.</p>
                     </div>
                     <div class="wrapper"><a href="#" class="button1">Read More</a></div>
-                    <h2>Safety Programs</h2>
+                    <h2 class="h2_style">Safety Programs</h2>
                     <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus omnis assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum:</p>
                     <div class="wrapper pad_bot1">
                         <ul class="list1 cols marg_right1">

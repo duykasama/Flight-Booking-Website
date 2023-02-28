@@ -23,7 +23,7 @@
             <div class="main">
                 <header>
                     <div class="wrapper">
-                        <h1><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
+                        <h1 class="header-logo"><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
                         <div class="right">
                             <nav>
                                 <ul id="top_nav">
@@ -56,7 +56,7 @@
             <section id="content">
                 <article class="col1">
                     <div class="pad_1">
-                        <h2>Your Flight Planner</h2>
+                        <h2 class="h2_style">Your Flight Planner</h2>
                         <form id="form_1" action="#" method="post">
                             <div class="wrapper pad_bot1">
                                 <div class="radio marg_right1">
@@ -121,13 +121,13 @@
                                 </div>
                                 <a href="#" class="button2">go!</a> </div>
                         </form>
-                        <h2>Did You Know?</h2>
+                        <h2 class="h2_style">Did You Know?</h2>
                         <p><strong>Lorem ipsum dolor</strong> sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. </p>
                         <div class="wrapper pad_bot2"><a href="#" class="button2">Read More</a></div>
                     </div>
                 </article>
                 <article class="col2 pad_left1">
-                    <h2>Aircraft Sales</h2>
+                    <h2 class="h2_style">Aircraft Sales</h2>
                     <div class="wrapper">
                         <figure class="left marg_right1"><img src="images/page2_img1.jpg" alt=""></figure>
                         <p><strong>Sed ut perspiciatis</strong> unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.</p>
@@ -148,7 +148,7 @@
                         </ul>
                     </div>
                     <div class="wrapper"><a href="#" class="button1">Read More</a></div>
-                    <h2>Aircraft Management</h2>
+                    <h2 class="h2_style">Aircraft Management</h2>
                     <div class="wrapper">
                         <figure class="right marg_left1"><img src="images/page2_img2.jpg" alt=""></figure>
                         <p><strong>At vero eos et accusamus</strong> et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excep- turi sint occaecati cupiditate.</p>

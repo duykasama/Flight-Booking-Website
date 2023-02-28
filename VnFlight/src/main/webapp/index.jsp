@@ -8,8 +8,6 @@
         <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
         <script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
-        <script type="text/javascript" src="js/cufon-yui.js"></script>
-        <script type="text/javascript" src="js/cufon-replace.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_italic_600.font.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_italic_400.font.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
@@ -24,7 +22,7 @@
             <div class="main">
                 <header>
                     <div class="wrapper">
-                        <h1><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
+                        <h1 class="header-logo"><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
                         <div class="right">
                             <nav>
                                 <ul id="top_nav">
@@ -57,7 +55,7 @@
             <section id="content">
                 <article class="col1">
                     <div class="pad_1">
-                        <h2>Search Flight</h2>
+                        <h2 class="h2_style">Search Flight</h2>
                         <form id="form_1" action="#" method="post">
                             <!--          <div class="wrapper pad_bot1">
                                         <div class="radio marg_right1">
@@ -114,7 +112,7 @@
                                             </div>-->
                                 <a href="#" class="button2 searchButton">Search</a> </div>
                         </form>
-                        <!--        <h2>Recent News</h2>
+                        <!--        <h2 class="h2_style">Recent News</h2>
                                 <p class="under"><a href="#" class="link1">Nemo enim ipsam voluptatem quia</a><br>
                                   November 5, 2010</p>
                                 <p class="under"><a href="#" class="link1">Voluptas aspernatur autoditaut fjugit</a><br>
@@ -124,7 +122,7 @@
                     </div>
                 </article>
                 <article class="col2 pad_left1">
-                    <h2>Welcome to our Website!</h2>
+                    <h2 class="h2_style">Welcome to our Website!</h2>
                     <p class="color1">Aliquefauctor ac nulla ant vestibulum ris sed tincidunt pede ut faucibus. Necpellus vel orci pede justo eros elit eget tellus ero nunc. Hendnibh pretium nec lorem tor tempus vel nibh urna quis morbi.</p>
                     <p class="color1">Maecenatoquetamet tempus arcu adipis duis partur convallisi sed eget et inte. Fauctormassa ligula por nam velit id eros et curabitudin dolor id.</p>
                     <div class="marker">
@@ -143,7 +141,7 @@
                     <div class="wrapper pad_bot2"> <a href="#" class="button1">Reservation</a> <a href="#" class="button2">Fleet</a> </div>
                     <div class="wrapper">
                         <article class="cols">
-                            <h2>Our Clients</h2>
+                            <h2 class="h2_style">Our Clients</h2>
                             <p><strong>Avero eoset</strong> accusamus et iusto odio dig- nissimos ducimus qui blanditiis praesentium voluptatum deleniti.</p>
                             <p>Atque corrupti quos dolores et quas moles- tias excepturi sint <a href="#">occaecati cupiditate</a> non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
                         </article>
@@ -171,7 +169,6 @@
                 </footer>
             </div>
         </div>
-        <script type="text/javascript"> Cufon.now();</script>
         <!-- END PAGE SOURCE -->
     </body>
 </html>

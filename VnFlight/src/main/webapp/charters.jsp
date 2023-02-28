@@ -23,7 +23,7 @@
             <div class="main">
                 <header>
                     <div class="wrapper">
-                        <h1><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
+                        <h1 class="header-logo"><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
                         <div class="right">
                             <nav>
                                 <ul id="top_nav">
@@ -56,7 +56,7 @@
             <section id="content">
                 <article class="col1">
                     <div class="pad_1">
-                        <h2>Your Flight Planner</h2>
+                        <h2 class="h2_style">Your Flight Planner</h2>
                         <form id="form_1" action="#" method="post">
                             <div class="wrapper pad_bot1">
                                 <div class="radio marg_right1">
@@ -121,7 +121,7 @@
                                 </div>
                                 <a href="#" class="button2">go!</a> </div>
                         </form>
-                        <h2>Among the Benefits</h2>
+                        <h2 class="h2_style">Among the Benefits</h2>
                         <ul class="list1 pad_bot1">
                             <li><a href="#">Lipsum quia dolor consectetur</a></li>
                             <li><a href="#">Vdipisci velit, sed quia numquam</a></li>
@@ -135,7 +135,7 @@
                     </div>
                 </article>
                 <article class="col2 pad_left1">
-                    <h2>A Premier Air Charter Services Broker</h2>
+                    <h2 class="h2_style">A Premier Air Charter Services Broker</h2>
                     <div class="wrapper">
                         <figure class="left marg_right1"><img src="images/page4_img1.jpg" alt=""></figure>
                         <p><strong>Et harum quidem</strong> facilis est et expedita distinctio nam libero tempore, cum soluta nobis:</p>
@@ -147,7 +147,7 @@
                     </div>
                     <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
                     <div class="wrapper"><a href="#" class="button1">Read More</a></div>
-                    <h2>Aircraft for Charter</h2>
+                    <h2 class="h2_style">Aircraft for Charter</h2>
                     <div class="wrapper">
                         <figure class="left marg_right1"><img src="images/page4_img2.jpg" alt=""></figure>
                         <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus omnis assumenda.</p>

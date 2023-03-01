@@ -34,8 +34,8 @@
                             <nav>
                                 <ul id="menu">
                                     <li><a href="index.jsp">Home</a></li>
-                                    <li><a href="aircrafts.jsp">Account</a></li>
-                                    <li><a href="safety.jsp">Booking History</a></li>
+                                    <li><a href="#">Account</a></li>
+                                    <li><a href="#">Booking History</a></li>
                                     <li id="menu_active"><a href="login.jsp">Login</a></li>
                                 </ul>
                             </nav>

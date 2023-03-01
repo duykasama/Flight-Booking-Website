@@ -173,7 +173,7 @@ header .right {
     line-height:30px;
     behavior:url(../js/PIE.htc);
     position:relative;
-    padding:0 20px;
+    padding:0px 10px;
     margin:1px 0;
 }
 #menu li a:hover, #menu #menu_active a {

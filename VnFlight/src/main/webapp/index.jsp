@@ -49,7 +49,7 @@
                 <div class="text1">COMFORT<span>Guaranteed</span>
                     <p>A website for booking domestic flight tickets!</p>
                 </div>
-                <a href="#" class="button_top">LOGIN AS ADMIN</a></div>
+                <a href="login_admin.jsp" class="button_top">LOGIN AS ADMIN</a></div>
         </div>
         <div class="main">
             <section id="content">

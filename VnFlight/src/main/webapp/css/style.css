@@ -58,6 +58,9 @@ body {
     color:#3c4046;
     line-height:20px;
     min-width:1000px;
+    display:grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
 }
 .inner_copy, .inner_copy a {
     border:0;

@@ -7,36 +7,20 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    <filter>
-        <filter-name>AuthorizationFilter</filter-name>
-        <filter-class>com.fptuni.prj301.demo.filter.AuthorizationFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>AuthorizationFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
     <servlet>
-        <servlet-name>StudentController</servlet-name>
-        <servlet-class>com.fptuni.prj301.demo.controller.StudentController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StudentController1</servlet-name>
-        <servlet-class>com.fptuni.prj301.demo.controller.StudentController1</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AccessController</servlet-name>
-        <servlet-class>com.fptuni.prj301.demo.controller.AccessController</servlet-class>
+        <servlet-name>AdminAccessController</servlet-name>
+        <servlet-class>com.fptuni.prj301.demo.controller.AdminAccessController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>StudentController</servlet-name>
-        <url-pattern>/Student/*</url-pattern>
+        <servlet-name>AdminAccessController</servlet-name>
+        <url-pattern>/AdminAccess/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UserAccessController</servlet-name>
+        <servlet-class>com.fptuni.prj301.demo.controller.UserAccessController</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>StudentController1</servlet-name>
-        <url-pattern>/Student1/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AccessController</servlet-name>
+        <servlet-name>UserAccessController</servlet-name>
         <url-pattern>/Access/*</url-pattern>
     </servlet-mapping>
     <session-config>

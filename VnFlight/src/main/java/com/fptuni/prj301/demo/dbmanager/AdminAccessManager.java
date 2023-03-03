@@ -1,6 +1,6 @@
 package com.fptuni.prj301.demo.dbmanager;
 
-import com.fptuni.prj301.demo.model.UserSession;
+import com.fptuni.prj301.demo.model.AdminSession;
 import java.util.Date;
 
 
@@ -13,12 +13,12 @@ import java.util.Date;
  *
  * @author DUNGHUYNH
  */
-public class AccessManager {
+public class AdminAccessManager {
     
-    public UserSession login (String username, String password){
-        if (username.equals("dung")){
-            UserSession us =  new UserSession();
-            us.setUsername(username);
+    public AdminSession login (String adminname, String password){
+        if (adminname.equals("dung")&&password.equals("dung")){
+            AdminSession us =  new AdminSession();
+            us.setAdminname(adminname);
             us.setLoginDate(new Date());
             
             us.setAccessRight("Admin");
@@ -27,5 +27,4 @@ public class AccessManager {
         return null;
     }
     
-
 }

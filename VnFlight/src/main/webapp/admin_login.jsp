@@ -6,7 +6,7 @@
         <%@include file="css.jsp"%>
     </head>
     <body id="page1">
-        <%@include file="/admin_header.jsp" %>
+        <%@include file="/header.jsp" %>
         <div class="main">
             <section id="content">
                 <article class="col1">

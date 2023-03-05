@@ -3,17 +3,10 @@
 <html lang="en">
     <head>
         <title>Home</title>
-        <meta charset="utf-8">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
-        <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
-        <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-        <script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
-        <script type="text/javascript" src="js/Myriad_Pro_italic_600.font.js"></script>
-        <script type="text/javascript" src="js/Myriad_Pro_italic_400.font.js"></script>
-        <script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
+        <%@include file="/css.jsp" %>
     </head>
     <body id="page1">
+<<<<<<< HEAD
         <!-- START PAGE SOURCE -->
         <div class="body1">
             <div class="main">
@@ -61,5 +54,12 @@
             </div>
         </div>
         <!-- END PAGE SOURCE -->
+=======
+        <!-- Header -->
+        <%@include file="/header.jsp" %>
+        <!--Main-->
+        <!-- Footer -->
+        <%@include file="/footer.jsp" %>
+>>>>>>> dcc2da8a2625aa8bddce86eb59145b1120588b1f
     </body>
 </html>

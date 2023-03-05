@@ -1,6 +1,6 @@
 <%@page import="com.fptuni.prj301.demo.model.Flight"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.fptuni.prj301.demo.model.FlightManger"%>
+<%@page import="com.fptuni.prj301.demo.model.FlightManager"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
@@ -98,7 +98,7 @@
                 <th>Delete</th>
                 </thead>
                 <tbody>
-                    <% FlightManger fManager = new FlightManger();
+                    <% FlightManager fManager = new FlightManager();
                         for (int i = 10 * pageNumber - 10; i < 10 * pageNumber; i++) {
                             out.print("<tr>");
                             out.println("<td>" + fManager.get(i).getId() + "</td>");
@@ -150,6 +150,13 @@
                 </footer>
             </div>
         </div>
-        <!-- END PAGE SOURCE -->
-    </body>
+
+        <%@include file="css.jsp"%>
+    </head>
+<body id="page1">
+    <%@include file="/admin_header.jsp" %>
+    <%@include file="/footer.jsp" %>
+
+    <!-- END PAGE SOURCE -->
+</body>
 </html>

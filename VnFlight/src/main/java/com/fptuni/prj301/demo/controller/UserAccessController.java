@@ -4,7 +4,7 @@
  */
 package com.fptuni.prj301.demo.controller;
 
-import com.fptuni.prj301.demo.dbmanager.AccessManager;
+import com.fptuni.prj301.demo.dbmanager.UserAccessManager;
 import com.fptuni.prj301.demo.model.UserSession;
 import com.fptuni.prj301.demo.utils.DBUtils;
 import java.io.IOException;
@@ -15,8 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fptuni.prj301.demo.model.Student;
-import com.fptuni.prj301.demo.dbmanager.StudentManager;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 
@@ -24,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author DUNGHUYNH
  */
-public class AccessController extends HttpServlet {
+public class UserAccessController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,46 +35,38 @@ public class AccessController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-            String path = request.getPathInfo();
-            System.out.println(path);
-            if (path.equals("/login")){
-                
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                
-                if (username == null){
-                    RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
-                    rd.forward(request, response);                
-                }
-                else{
-                    AccessManager manager = new AccessManager();
-                    UserSession us = manager.login(username, password);
 
-                    HttpSession ss = request.getSession(true);
+        String path = request.getPathInfo();
+        System.out.println(path);
+        if (path.equals("/login")) {
+
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            if (username == null || password == null) {
+                response.sendRedirect(request.getContextPath() + "/login.jsp");
+            } else {
+                UserAccessManager manager = new UserAccessManager();
+                UserSession us = manager.login(username, password);
+                HttpSession ss = request.getSession(true);
+                if (us != null) {
                     ss.setAttribute("usersession", us);
-
-                    if (us != null){
-                        response.sendRedirect(request.getContextPath()+"/Student1/list");
-                    }else{
-                        request.setAttribute("login-msg", "Wrong username or password");
-                        RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
-                        rd.forward(request, response);
-                    }
+                    response.sendRedirect(request.getContextPath() + "/index.jsp");
+                } else {
+                    request.setAttribute("login-msg", "Wrong username or password");
+                    ss.removeAttribute("usersession");
+                    response.sendRedirect(request.getContextPath() + "/login.jsp");
                 }
-                    
-                
-            }else if (path.equals("/logout")){
-                HttpSession ss = request.getSession();
-                ss.setAttribute("usersession", null);
-                
-                request.setAttribute("login-msg", "");
-                RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
-                rd.forward(request, response);
             }
 
+        } else if (path.equals("/logout")) {
+            HttpSession ss = request.getSession();
+            ss.removeAttribute("usersession");
+            request.setAttribute("login-msg", "Log out");
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
         }
-    
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

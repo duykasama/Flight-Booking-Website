@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
     <head>
-        <title>Login</title>        
+        <title>Login Admin</title>        
         <%@include file="css.jsp"%>
     </head>
     <body id="page1">
@@ -26,13 +26,13 @@
 
                 <!--Login Part-->
                 <div class="col2 pad_left1 login_div">
-                    <c:url var="loginLink" value="${request.contextPath}/Access/login"/>
+                    <c:url var="loginLink" value="${request.contextPath}/AdminAccess/login"/>
                     <form action="${loginLink}" name="" method="POST">
                         <!-- Main container for all inputs -->
                         <div class="mainContainer">
-                            <!-- Username -->
-                            <label class="label_title" for="username">Username</label>
-                            <input type="text" placeholder="Enter Username" name="username" required>
+                            <!-- Adminname -->
+                            <label class="label_title" for="adminname">Adminname</label>
+                            <input type="text" placeholder="Enter Adminname" name="adminname" required>
 
                             <br><br>
 

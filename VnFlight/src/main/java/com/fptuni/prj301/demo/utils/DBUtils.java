@@ -6,6 +6,9 @@ package com.fptuni.prj301.demo.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,13 +17,20 @@ import java.sql.DriverManager;
 public class DBUtils {
     
 
-    public static Connection getConnection() throws Exception {
-        String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + "\\" + instance + ";databaseName=" + dbName;
-        if (instance == null || instance.trim().isEmpty()) {
-            url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
+    public static Connection getConnection() {
+        try {
+            String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + "\\" + instance + ";databaseName=" + dbName;
+            if (instance == null || instance.trim().isEmpty()) {
+                url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
+            }
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            return DriverManager.getConnection(url, userID, password);
+        } catch (SQLException ex) {
+            System.out.println("Connection error! " + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Connection error! " + ex.getMessage());
         }
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        return DriverManager.getConnection(url, userID, password);
+        return null;
     }
     private final static String serverName = "localhost";
     private final static String dbName = "vnflight";

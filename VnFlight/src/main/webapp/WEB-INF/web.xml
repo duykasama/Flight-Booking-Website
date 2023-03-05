@@ -27,6 +27,18 @@
         <servlet-name>AccessController</servlet-name>
         <servlet-class>com.fptuni.prj301.demo.controller.AccessController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FilghtManger</servlet-name>
+        <servlet-class>com.fptuni.prj301.demo.model.FilghtManger</servlet-class>
+    </servlet>
+<!--    <servlet>
+        <servlet-name>FilghtController</servlet-name>
+        <servlet-class>com.fptuni.prj301.demo.controller.FlightController</servlet-class>
+    </servlet>-->
+    <servlet>
+        <servlet-name>PageController</servlet-name>
+        <servlet-class>com.fptuni.prj301.demo.controller.PagingController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StudentController</servlet-name>
         <url-pattern>/Student/*</url-pattern>
@@ -39,6 +51,18 @@
         <servlet-name>AccessController</servlet-name>
         <url-pattern>/Access/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilghtManger</servlet-name>
+        <url-pattern>/FilghtManger</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PageController</servlet-name>
+        <url-pattern>/PageController</url-pattern>
+    </servlet-mapping>
+<!--    <servlet-mapping>
+        <servlet-name>FlightController</servlet-name>
+        <url-pattern>/FlightController</url-pattern>
+    </servlet-mapping>-->
     <session-config>
         <session-timeout>
             30

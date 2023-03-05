@@ -19,7 +19,7 @@
             <div class="main">
                 <header>
                     <div class="wrapper">
-                        <h1 class="header-logo"><a href="index.jsp" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
+                        <h1 class="header-logo"><a href="pages/index.html" id="logo">VnFlight</a><span id="slogan">Domestic Flight Tickets</span></h1>
                         <div class="right">
                             <nav>
                                 <ul id="top_nav">

@@ -1,5 +1,6 @@
 package com.fptuni.prj301.demo.dbmanager;
 
+import com.fptuni.prj301.demo.model.User;
 import com.fptuni.prj301.demo.model.UserSession;
 import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;
@@ -47,6 +48,52 @@ public class UserAccessManager {
             System.out.println("Query Student error!" + ex.getMessage());
         }
         return us;
+    }
+
+    public static boolean isUserExist(String username) {
+        boolean check =false;
+        String sql = "select [username] from [user1] "
+                + " where [username] = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+                check = rs.next();
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Query Student error!" + ex.getMessage());
+        }
+        return check;
+    }
+
+    public static void  signup(String username, String password, String email, String phone) {
+
+            String sql = "insert into [user1] values "
+                    + " (?, ?, ?, ?)";
+            try {
+                Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ps.setString(3, email);
+                ps.setString(4, phone);
+
+                ResultSet rs = ps.executeQuery();
+                rs.close();
+                ps.close();
+                conn.close();
+            } catch (SQLException ex) {
+                System.out.println("Query Student error!" + ex.getMessage());
+            }
+
+        
+        
     }
 
 }

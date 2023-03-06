@@ -154,10 +154,10 @@
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
-                                        <c:forEach var="i" begin="0" end="1">
+                                        <c:forEach var="i" begin="0" end="5">
                                             <tr>
 
-                                                <td>${iList.get(i).getInvoiceId()}</td>
+                                                <td>${iList.get(i).getId()}</td>
                                                 <td>${iList.get(i).getUserId()}</td>
                                                 <td>${iList.get(i).getFlightId()}</td>
                                                 <td>${iList.get(i).getBookingDate()}</td>
@@ -172,8 +172,6 @@
                                                 </c:choose>
                                                 <td><a href="">edit</a></td>
                                                 <td><a href=""><i class="icon-delete"></i></a></td>
-
-
                                             </tr>
                                         </c:forEach>
                                     </table>

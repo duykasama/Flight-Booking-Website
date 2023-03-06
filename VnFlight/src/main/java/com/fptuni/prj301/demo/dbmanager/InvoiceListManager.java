@@ -23,7 +23,7 @@ public class InvoiceListManager extends ArrayList<Invoice> {
     }
 
     private void loadInvoice() {
-        String sql = "select i.id, u.id, f.id, i.booking_date, i.total_price, i.purchase_status\n"
+        String sql = "select i.id, u.id as \'user_id\', f.id as \'flight_id\', i.booking_date, i.total_price, i.purchase_status\n"
                 + "from invoice i join [user] u on i.[user_id] = u.id join flight f on i.flight_id = f.id";
         try {
             Connection conn = DBUtils.getConnection();
@@ -36,7 +36,7 @@ public class InvoiceListManager extends ArrayList<Invoice> {
                 invoice.setFlightId(rs.getInt("flight_id"));
                 invoice.setBookingDate(rs.getDate("booking_date"));
                 invoice.setTotalPrice(rs.getInt("total_price"));
-                invoice.setPurchaseStatus(rs.getInt("status"));
+                invoice.setPurchaseStatus(rs.getInt("purchase_status"));
                 this.add(invoice);
             }
             rs.close();
@@ -45,5 +45,4 @@ public class InvoiceListManager extends ArrayList<Invoice> {
         } catch (Exception ex) {
         }
     }
-    
 }

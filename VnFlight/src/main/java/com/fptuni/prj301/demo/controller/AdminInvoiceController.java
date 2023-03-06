@@ -5,6 +5,7 @@
  */
 package com.fptuni.prj301.demo.controller;
 
+import com.fptuni.prj301.demo.dbmanager.InvoiceListManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,7 +32,7 @@ public class AdminInvoiceController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         if(request.getSession().getAttribute("iList") == null){
-            request.getSession().setAttribute("iList", new AdminInvoiceController());
+            request.getSession().setAttribute("iList", new InvoiceListManager());
         }
         response.sendRedirect("admin_invoice.jsp");
     }

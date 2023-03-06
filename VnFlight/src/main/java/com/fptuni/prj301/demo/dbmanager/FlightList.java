@@ -19,9 +19,9 @@ import com.fptuni.prj301.demo.utils.DBUtils;
  *
  * @author MSI GF63
  */
-public class AdminFlightManager extends ArrayList<FlightSession> {
+public class FlightList extends ArrayList<FlightSession> {
 
-    public AdminFlightManager() {
+    public FlightList() {
         loadFlight();
     }
 
@@ -51,7 +51,7 @@ public class AdminFlightManager extends ArrayList<FlightSession> {
             stm.close();
             conn.close();
         } catch (Exception ex) {
-            Logger.getLogger(AdminFlightManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FlightList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

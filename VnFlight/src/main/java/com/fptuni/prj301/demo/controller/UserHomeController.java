@@ -10,7 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fptuni.prj301.demo.dbmanager.AdminFlightManager;
+import com.fptuni.prj301.demo.dbmanager.FlightList;
+import com.fptuni.prj301.demo.dbmanager.UserAccessManager;
+import com.fptuni.prj301.demo.dbmanager.UserList;
 
 
 
@@ -32,6 +34,9 @@ public class UserHomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        if(request.getSession().getAttribute("uList") == null){
+            request.getSession().setAttribute("uList", new UserList());
+        }
         response.sendRedirect("user_home.jsp");
     }
 

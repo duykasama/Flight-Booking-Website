@@ -91,106 +91,26 @@
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="pd-setting">On Going</button>
-                                            </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="ps-setting">Up Coming</button>
-                                            </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="ds-setting">Taken off</button>
-                                            </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="pd-setting">On Going</button>
-                                            </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="pd-setting">On Going</button>
-                                            </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="ps-setting">Up Coming</button>
-                                            </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-                                        </tr>
+                                        <c:forEach var="i" begin="390" end="410">
+                                            <tr><td>${fList.get(i).getId()}</td>
+                                                <td>${fList.get(i).getAirlineName()}</td>
+                                                <td>${fList.get(i).getDeparture()}</td>
+                                                <td>${fList.get(i).getDestination()}</td>
+                                                <td>${fList.get(i).getDepartureDate()}</td>
+                                                <td>${fList.get(i).getTakeOffTime()}</td>
+                                                <td>${fList.get(i).getNoOfSeats()}</td>
+                                                <c:choose>
+                                                    <c:when test="${fList.get(i).getStatus().equals('Up Coming')}">
+                                                        <td><button class="pd-setting">${fList.get(i).getStatus()}</button></td>
+                                                    </c:when>
+                                                    <c:when test="${fList.get(i).getStatus().equals('Taken Off')}">
+                                                        <td><button class="ds-setting">${fList.get(i).getStatus()}</button></td>
+                                                    </c:when>
+                                                </c:choose>
+                                                <td><a href="">edit</a></td>
+                                                <td><a href=""><i class="icon-delete"></i></a></td>
+                                            </tr>
+                                        </c:forEach>
                                     </table>
                                     <div class="custom-pagination">
                                         <ul class="pagination">

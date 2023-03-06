@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fptuni.prj301.demo.dbmanager.AdminFlightManager;
+import com.fptuni.prj301.demo.dbmanager.FlightList;
 
 
 
@@ -32,7 +32,12 @@ public class AdminFlightController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getSession().setAttribute("fList", new AdminFlightManager());
+        if (request.getSession().getAttribute("fList") == null) {
+            request.getSession().setAttribute("fList", new FlightList());
+        }
+//        if (request.getSession().getAttribute("page") == null) {
+//            request.getSession().setAttribute("page", 1);
+//        }
         response.sendRedirect("admin_flight.jsp");
     }
 

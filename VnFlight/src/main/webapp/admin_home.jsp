@@ -25,7 +25,7 @@
         <meta name="twitter:image" content="" />
         <meta name="twitter:url" content="" />
         <meta name="twitter:card" content="" />
-
+        <link rel="icon" href="images/logo.png" type="image/png">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 
         <!-- Animate.css -->

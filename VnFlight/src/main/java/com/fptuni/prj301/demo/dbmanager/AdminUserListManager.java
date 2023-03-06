@@ -17,9 +17,9 @@ import com.fptuni.prj301.demo.utils.DBUtils;
  *
  * @author MSI GF63
  */
-public class UserList extends ArrayList<User>{
+public class AdminUserListManager extends ArrayList<User>{
 
-    public UserList() {
+    public AdminUserListManager() {
         loadUser();
     }
     
@@ -32,7 +32,7 @@ public class UserList extends ArrayList<User>{
             while (rs.next()) {
                 User user = new User();
                 user.setUserId(rs.getInt("id"));
-                user.setUserName(rs.getString("username"));
+                user.setUserName(rs.getString("name"));
                 user.setPhone(rs.getString("phone"));
                 user.setEmail(rs.getString("email"));
                 this.add(user);

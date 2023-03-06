@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fptuni.prj301.demo.dbmanager.FlightList;
+import com.fptuni.prj301.demo.dbmanager.AdminFlightListManager;
 
 
 
@@ -33,7 +33,7 @@ public class AdminFlightController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         if (request.getSession().getAttribute("fList") == null) {
-            request.getSession().setAttribute("fList", new FlightList());
+            request.getSession().setAttribute("fList", new AdminFlightListManager());
         }
 //        if (request.getSession().getAttribute("page") == null) {
 //            request.getSession().setAttribute("page", 1);

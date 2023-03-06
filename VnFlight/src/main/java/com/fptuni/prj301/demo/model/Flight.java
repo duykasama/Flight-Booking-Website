@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author MSI GF63
  */
-public class FlightSession {
+public class Flight {
 
     private int id;
     private Time takeOffTime;

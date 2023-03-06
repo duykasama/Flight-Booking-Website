@@ -6,7 +6,7 @@
 package com.fptuni.prj301.demo.dbmanager;
 
 
-import com.fptuni.prj301.demo.model.FlightSession;
+import com.fptuni.prj301.demo.model.Flight;
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,9 +19,9 @@ import com.fptuni.prj301.demo.utils.DBUtils;
  *
  * @author MSI GF63
  */
-public class FlightList extends ArrayList<FlightSession> {
+public class AdminFlightListManager extends ArrayList<Flight> {
 
-    public FlightList() {
+    public AdminFlightListManager() {
         loadFlight();
     }
 
@@ -34,7 +34,7 @@ public class FlightList extends ArrayList<FlightSession> {
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                FlightSession flight = new FlightSession();
+                Flight flight = new Flight();
                 flight.setId(rs.getInt("id"));
                 flight.setTakeOffTime(rs.getTime("takeoff_time"));
                 flight.setLandingTime(rs.getTime("landing_time"));
@@ -51,7 +51,7 @@ public class FlightList extends ArrayList<FlightSession> {
             stm.close();
             conn.close();
         } catch (Exception ex) {
-            Logger.getLogger(FlightList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminFlightListManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

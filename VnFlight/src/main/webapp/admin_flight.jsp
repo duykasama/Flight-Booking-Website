@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!--
         Traveler by freehtml5.co
         Twitter: http://twitter.com/fh5co
@@ -59,15 +60,20 @@
 
     </head>
     <body>
-
+        <%
+            System.out.println("The page number is " + request.getSession().getAttribute("page"));
+        %>
+        
+        <c:set var="numb" value="${request.getSession().getAttribute('page')}"></c:set>
+        <h1>the value of numb is ${numb}</h1>
         <div class="gtco-loader"></div>
 
         <div id="page">
 
 
             <!-- <div class="page-inner"> -->
-            <%@include file="/admin_header.jsp" %>
-
+            <%@include file="/admin_header.jsp" %>                
+    
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
                 <div class="product-status mgtop mg-b-30">
                     <div class="container-fluid">
@@ -91,7 +97,7 @@
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
-                                        <c:forEach var="i" begin="390" end="410">
+                                        <c:forEach var="i" begin="0" end="9">
                                             <tr><td>${fList.get(i).getId()}</td>
                                                 <td>${fList.get(i).getAirlineName()}</td>
                                                 <td>${fList.get(i).getDeparture()}</td>
@@ -130,8 +136,7 @@
         </div>
 
     </header>
-
-
+            
 
     <footer id="gtco-footer" role="contentinfo">
         <div class="gtco-container">

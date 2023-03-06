@@ -35,9 +35,9 @@ public class AdminFlightController extends HttpServlet {
         if (request.getSession().getAttribute("fList") == null) {
             request.getSession().setAttribute("fList", new AdminFlightListManager());
         }
-//        if (request.getSession().getAttribute("page") == null) {
-//            request.getSession().setAttribute("page", 1);
-//        }
+        if (request.getSession().getAttribute("page") == null) {
+            request.getSession().setAttribute("page", 1);
+        }
         response.sendRedirect("admin_flight.jsp");
     }
 

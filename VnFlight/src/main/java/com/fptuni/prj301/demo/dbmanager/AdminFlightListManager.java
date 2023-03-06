@@ -5,15 +5,14 @@
  */
 package com.fptuni.prj301.demo.dbmanager;
 
-
 import com.fptuni.prj301.demo.model.Flight;
-import java.util.ArrayList;
+import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.fptuni.prj301.demo.utils.DBUtils;
 
 /**
  *
@@ -35,16 +34,16 @@ public class AdminFlightListManager extends ArrayList<Flight> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Flight flight = new Flight();
-                flight.setId(rs.getInt("id"));
-                flight.setTakeOffTime(rs.getTime("takeoff_time"));
-                flight.setLandingTime(rs.getTime("landing_time"));
-                flight.setDepartureDate(rs.getDate("departure_date"));
-                flight.setPrice(rs.getInt("price"));
-                flight.setAirlineName(rs.getString("airline_name"));
-                flight.setNoOfSeats(rs.getInt("no_of_seats"));
-                flight.setDeparture(rs.getNString("departure"));
-                flight.setDestination(rs.getNString("destination"));
-                flight.setStatus(rs.getInt("status"));
+                flight.setId(rs.getInt(1));
+                flight.setTakeOffTime(rs.getTime(2));
+                flight.setLandingTime(rs.getTime(3));
+                flight.setDepartureDate(rs.getDate(4));
+                flight.setPrice(rs.getInt(5));
+                flight.setAirlineName(rs.getString(6));
+                flight.setNoOfSeats(rs.getInt(7));
+                flight.setDeparture(rs.getNString(8));
+                flight.setDestination(rs.getNString(9));
+                flight.setStatus(rs.getInt(10));
                 this.add(flight);
             }
             rs.close();
@@ -53,5 +52,9 @@ public class AdminFlightListManager extends ArrayList<Flight> {
         } catch (Exception ex) {
             Logger.getLogger(AdminFlightListManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new AdminFlightListManager().size());
     }
 }

@@ -60,12 +60,7 @@
 
     </head>
     <body>
-        <%
-            System.out.println("The page number is " + request.getSession().getAttribute("page"));
-        %>
-        
-        <c:set var="numb" value="${request.getSession().getAttribute('page')}"></c:set>
-        <h1>the value of numb is ${numb}</h1>
+       
         <div class="gtco-loader"></div>
 
         <div id="page">

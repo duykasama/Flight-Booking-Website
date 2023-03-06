@@ -30,7 +30,7 @@ create table [user](
 
 create table airport(
 	id int primary key,
-	airport_name nvarchar(50)
+	name nvarchar(50)
 )
 
 create table flight(

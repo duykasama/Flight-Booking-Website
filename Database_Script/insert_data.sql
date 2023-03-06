@@ -1026,6 +1026,11 @@ INSERT INTO FLIGHT VALUES
 (999,'12:30:00','15:55:00','6-1-2022',2300000,N'Vietjet Air',150,17,20,0),
 (1000,'14:50:00','20:30:00','6-2-2020',2200000,N'Vietnam Airline',200,5,6,0)
 
+
+insert into [dbo].[user] values 
+(1,'Hai','Hai','hunghai@gmail.com','0123456789')
+
+select id, name, email, phone from [user]
 exec pro_checkFlightStatus
 
 
@@ -1034,4 +1039,8 @@ USE VNFLIGHT
 GO
 SELECT FL.ID,FL.TAKEOFF_TIME,FL.LANDING_TIME,FL.DEPARTURE_DATE,FL.PRICE,FL.[NAME],FL.NO_OF_SEATS,AP.[NAME] AS 'DEPARTURE',AP2.[NAME] AS 'DESTINATION'
 FROM FLIGHT FL JOIN AIRPORT AP ON FL.DEPARTURE_ID = AP.ID JOIN AIRPORT AP2 ON FL.DESTINATION_ID = AP2.ID
+select * from flight
 
+select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status 
+                 from flight fl join airport ap1 on fl.departure_id = ap1.id 
+                join airport ap2 on fl.destination_id = ap2.id

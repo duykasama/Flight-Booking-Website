@@ -53,8 +53,4 @@ public class AdminFlightListManager extends ArrayList<Flight> {
             Logger.getLogger(AdminFlightListManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public static void main(String[] args) {
-        System.out.println(new AdminFlightListManager().size());
-    }
 }

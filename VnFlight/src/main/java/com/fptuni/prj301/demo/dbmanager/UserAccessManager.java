@@ -21,8 +21,8 @@ public class UserAccessManager {
 
     public static UserSession login(String username, String password) {
         UserSession us = null;
-        String sql = "select [username] from [user] "
-                + " where [username] = ? and [password] = ?";
+        String sql = "select [name] from [user] "
+                + " where [name] = ? and [password] = ?";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -35,7 +35,7 @@ public class UserAccessManager {
 
                 us = new UserSession();
 
-                us.setUsername(rs.getString("username"));
+                us.setUsername(rs.getString("name"));
                 us.setLoginDate(new Date());
                 us.setAccessRight("User");
 

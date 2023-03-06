@@ -62,6 +62,24 @@
     </head>
     <body>
 
+        <c:choose>
+            <c:when test="${param.page != null && param.page > 0}">
+                <c:set var="pageNumb" value="${param.page}"></c:set>
+            </c:when>
+            <c:otherwise>
+                <c:set var="pageNumb" value="1"></c:set>
+            </c:otherwise>
+        </c:choose>
+        <c:set var="begin" value="${(pageNumb-1)*6}"></c:set>
+        <c:if test="${begin >= iList.size()}">
+            <c:set var="pageNumb" value="${pageNumb-1}"></c:set>
+            <c:set var="begin" value="${(pageNumb-1)*6}"></c:set>
+        </c:if>
+        <c:set var="end" value="${pageNumb*6-1}"></c:set>
+        <c:if test="${end >= iList.size()}">
+            <c:set var="end" value="${iList.size()-1}"></c:set>
+        </c:if>
+        
         <div class="gtco-loader"></div>
 
         <div id="page">
@@ -154,7 +172,7 @@
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
-                                        <c:forEach var="i" begin="0" end="5">
+                                        <c:forEach var="i" begin="${begin}" end="${end}">
                                             <tr>
 
                                                 <td>${iList.get(i).getId()}</td>
@@ -175,13 +193,24 @@
                                             </tr>
                                         </c:forEach>
                                     </table>
+                                    
+                                    <c:url var="urlNext" value="/admin_invoice.jsp">
+                                        <c:param name="page" value="${pageNumb+1}"/>
+                                    </c:url>
+                                    <c:url var="urlPrev" value="/admin_invoice.jsp">
+                                        <c:param name="page" value="${pageNumb-1}"/>
+                                    </c:url>
+                                    <c:url var="urlDoubleNext" value="/admin_invoice.jsp">
+                                        <c:param name="page" value="${pageNumb+2}"/>
+                                    </c:url>
+                                    
                                     <div class="custom-pagination">
                                         <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlPrev}">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">${pageNumb}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlNext}">${pageNumb+1}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlDoubleNext}">${pageNumb+2}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlNext}">Next</a></li>
                                         </ul>
                                     </div>
                                 </div>

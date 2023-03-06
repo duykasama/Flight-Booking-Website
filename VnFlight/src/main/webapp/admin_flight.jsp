@@ -60,9 +60,25 @@
 
     </head>
     <body>
-       
+        <c:choose>
+            <c:when test="${param.page != null && param.page > 0}">
+                <c:set var="pageNumb" value="${param.page}"></c:set>
+            </c:when>
+            <c:otherwise>
+                <c:set var="pageNumb" value="1"></c:set>
+            </c:otherwise>
+        </c:choose>
+        <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
+        <c:if test="${begin >= fList.size()}">
+            <c:set var="pageNumb" value="${pageNumb-1}"></c:set>
+            <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
+        </c:if>
+        <c:set var="end" value="${pageNumb*10-1}"></c:set>
+        <c:if test="${end >= fList.size()}">
+            <c:set var="end" value="${fList.size()-1}"></c:set>
+        </c:if>
+        
         <div class="gtco-loader"></div>
-
         <div id="page">
 
 
@@ -92,7 +108,7 @@
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
-                                        <c:forEach var="i" begin="0" end="9">
+                                        <c:forEach var="i" begin="${begin}" end="${end}">
                                             <tr><td>${fList.get(i).getId()}</td>
                                                 <td>${fList.get(i).getAirlineName()}</td>
                                                 <td>${fList.get(i).getDeparture()}</td>
@@ -104,22 +120,32 @@
                                                     <c:when test="${fList.get(i).getStatus().equals('Up Coming')}">
                                                         <td><button class="pd-setting">${fList.get(i).getStatus()}</button></td>
                                                     </c:when>
-                                                    <c:when test="${fList.get(i).getStatus().equals('Taken Off')}">
+                                                    <c:otherwise>
                                                         <td><button class="ds-setting">${fList.get(i).getStatus()}</button></td>
-                                                    </c:when>
+                                                    </c:otherwise>
                                                 </c:choose>
                                                 <td><a href="">edit</a></td>
                                                 <td><a href=""><i class="icon-delete"></i></a></td>
                                             </tr>
                                         </c:forEach>
                                     </table>
+                                    <c:url var="urlNext" value="/admin_flight.jsp">
+                                        <c:param name="page" value="${pageNumb+1}"/>
+                                    </c:url>
+                                    <c:url var="urlPrev" value="/admin_flight.jsp">
+                                        <c:param name="page" value="${pageNumb-1}"/>
+                                    </c:url>
+                                    <c:url var="urlDoubleNext" value="/admin_flight.jsp">
+                                        <c:param name="page" value="${pageNumb+2}"/>
+                                    </c:url>
+                                    
                                     <div class="custom-pagination">
                                         <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlPrev}">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">${pageNumb}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlNext}">${pageNumb+1}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlDoubleNext}">${pageNumb+2}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlNext}">Next</a></li>
                                         </ul>
                                     </div>
                                 </div>

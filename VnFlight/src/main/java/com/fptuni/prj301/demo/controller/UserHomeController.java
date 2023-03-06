@@ -37,7 +37,7 @@ public class UserHomeController extends HttpServlet {
         if(request.getSession().getAttribute("uList") == null){
             request.getSession().setAttribute("uList", new UserList());
         }
-        response.sendRedirect("user_home.jsp");
+        response.sendRedirect("admin_user_list.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

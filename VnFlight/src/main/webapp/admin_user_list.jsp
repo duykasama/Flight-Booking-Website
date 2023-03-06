@@ -85,87 +85,19 @@
                                             <th>UserName</th>
                                             <th>Phone</th>
                                             <th>Email</th>
-                                            <th>Password</th>
-
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
-                                        <tr>
-
-                                            <td>VNU001</td>
-
-                                            <td>Nguyen Hung Hai</td>
-                                            <td>012345421</td>
-                                            <td>hunghai@gmail.com</td>
-                                            <td>hongbiet123</td>
-
-
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNU001</td>
-                                            <td>Nguyen Hung Hai</td>
-                                            <td>012345421</td>
-                                            <td>hunghai@gmail.com</td>
-                                            <td>hongbiet123</td>
-
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNU001</td>
-
-                                            <td>Nguyen Hung Hai</td>
-                                            <td>012345421</td>
-                                            <td>hunghai@gmail.com</td>
-                                            <td>hongbiet123</td>
-
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNU001</td>
-
-                                            <td>Nguyen Hung Hai</td>
-                                            <td>012345421</td>
-                                            <td>hunghai@gmail.com</td>
-                                            <td>hongbiet123</td>
-
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNU001</td>
-
-                                            <td>Nguyen Hung Hai</td>
-                                            <td>012345421</td>
-                                            <td>hunghai@gmail.com</td>
-                                            <td>hongbiet123</td>
-
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-
-                                            <td>Nguyen Hung Hai</td>
-                                            <td>012345421</td>
-                                            <td>hunghai@gmail.com</td>
-                                            <td>hongbiet123</td>
-
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
+                                        <c:forEach var="i" begin="0" end="${uList.size() - 1}">
+                                            <tr>
+                                                <td>${uList.get(i).getUserId()}</td>
+                                                <td>${uList.get(i).getUserName()}</td>
+                                                <td>${uList.get(i).getPhone()}</td>
+                                                <td>${uList.get(i).getEmail()}</td>
+                                                <td><a href="">edit</a></td>
+                                                <td><a href=""><i class="icon-delete"></i></a></td></tr>
+                                            </tr>
+                                        </c:forEach>
                                         </tr>
                                     </table>
                                     <div class="custom-pagination">

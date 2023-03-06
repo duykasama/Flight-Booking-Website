@@ -31,6 +31,14 @@
         <servlet-name>UserAccessController</servlet-name>
         <url-pattern>/UserAccessController/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UserHomeController</servlet-name>
+        <servlet-class>com.fptuni.prj301.demo.controller.UserHomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserHomeController</servlet-name>
+        <url-pattern>/UserHomeController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

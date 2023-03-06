@@ -42,9 +42,4 @@ public class AdminUserListManager extends ArrayList<User> {
         } catch (Exception ex) {
         }
     }
-
-    public static void main(String[] args) {
-        System.out.println(new AdminUserListManager().size());
-    }
-
 }

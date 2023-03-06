@@ -11,11 +11,15 @@
         <servlet-name>AdminAccessController</servlet-name>
         <servlet-class>com.fptuni.prj301.demo.controller.AdminAccessController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminInvoiceController</servlet-name>
+        <servlet-class>com.fptuni.prj301.demo.controller.AdminInvoiceController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminAccessController</servlet-name>
         <url-pattern>/AdminAccessController/*</url-pattern>
     </servlet-mapping>
-        <servlet>
+    <servlet>
         <servlet-name>AdminFlightController</servlet-name>
         <servlet-class>com.fptuni.prj301.demo.controller.AdminFlightController</servlet-class>
     </servlet>
@@ -38,6 +42,10 @@
     <servlet-mapping>
         <servlet-name>UserHomeController</servlet-name>
         <url-pattern>/UserHomeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminInvoiceController</servlet-name>
+        <url-pattern>/AdminInvoiceController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

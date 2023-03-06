@@ -71,202 +71,130 @@
             <%@include file="/admin_header.jsp" %>
 
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
-		<div class="overlay"></div>
-		<div class="gtco-container statictis-mgtop">
-			<div class="row">
-				<div class="col-md-12 col-md-offset-0 text-left">
-					
-					
-							<div class="col-md-4">
-								<div class="card card-stats card-warning">
-									<div class="card-body ">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="icon-user"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers" style="text-align: center;">
-													<p class="card-category">Passengers</p>
-													<h4 class="card-title">1,294</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="card card-stats card-success">
-									<div class="card-body ">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="icon-bucket"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers" style="text-align: center;">
-													<p class="card-category">Revenue</p>
-													<h4 class="card-title">$ 1,345</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="card card-stats card-danger">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="icon-aircraft-take-off"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers" style="text-align: center;">
-													<p class="card-category">Flights</p>
-													<h4 class="card-title">1303</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-						
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<div class="product-status-wrap">
-									<h4>Invoice List</h4>
-									<div class="add-product">
-										<a href="#">Add Flight</a>
-									</div>
-									<table>
-										<tr>
-											<th>Invoice ID</th>
-											<th>UserName</th>
-											<th>FLightID</th>
-											<th>Booking Date</th>
-											<th>Amount</th>
-											<th>Purchase Status</th>
-											
-											<th>Edit</th>
-											<th>Delete</th>
-										</tr>
-										<tr>
-											
-											<td>VNF001</td>
-											
-											<td>Vietnam Airlines</td>
-											<td>HCM</td>
-											<td>HAN</td>
-											<td>1/1/2022</td>
-											
-											<td>
-												<button class="pd-setting">Purchasing</button>
-											</td>
-											<td><a href="">edit</a></td>
-											<td><a href=""><i class="icon-delete"></i></a></td>
-			
-											
-										</tr>
-										<tr>
-											
-											<td>VNF001</td>
-											<td>Vietnam Airlines</td>
-											<td>HCM</td>
-											<td>HAN</td>
-											<td>1/1/2022</td>
-											
-											<td>
-												<button class="ds-setting">Done</button>
-											</td>
-											<td><a href="">edit</a></td>
-											<td><a href=""><i class="icon-delete"></i></a></td>
-											
-										</tr>
-										<tr>
-											
-											<td>VNF001</td>
-											
-											<td>Vietnam Airlines</td>
-											<td>HCM</td>
-											<td>HAN</td>
-											<td>1/1/2022</td>
-											
-											<td>
-												<button class="ds-setting">Done</button>
-											</td>
-											<td><a href="">edit</a></td>
-											<td><a href=""><i class="icon-delete"></i></a></td>
-										</tr>
-										<tr>
-											
-											<td>VNF001</td>
-											
-											<td>Vietnam Airlines</td>
-											<td>HCM</td>
-											<td>HAN</td>
-											<td>1/1/2022</td>
-											
-											<td>
-												<button class="pd-setting">Purchasing</button>
-											</td>
-											<td><a href="">edit</a></td>
-											<td><a href=""><i class="icon-delete"></i></a></td>
-											
-										</tr>
-										<tr>
-											
-											<td>VNF001</td>
-											
-											<td>Vietnam Airlines</td>
-											<td>HCM</td>
-											<td>HAN</td>
-											<td>1/1/2022</td>
-											
-											<td>
-												<button class="pd-setting">Purchasing</button>
-											</td>
-											<td><a href="">edit</a></td>
-											<td><a href=""><i class="icon-delete"></i></a></td>
-											
-										</tr>
-										<tr>
-											
-											<td>VNF001</td>
-											
-											<td>Vietnam Airlines</td>
-											<td>HCM</td>
-											<td>HAN</td>
-											<td>1/1/2022</td>
-											
-											<td>
-												<button class="ds-setting">Done</button>
-											</td>
-											<td><a href="">edit</a></td>
-											<td><a href=""><i class="icon-delete"></i></a></td>
-										</tr>
-									</table>
-									<div class="custom-pagination">
-										<ul class="pagination">
-											<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-											<li class="page-item"><a class="page-link" href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item"><a class="page-link" href="#">Next</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>		
-							
-					
-				</div>
-			</div>
-		</div>
-		
-	</header>
+                <div class="overlay"></div>
+                <div class="gtco-container statictis-mgtop">
+                    <div class="row">
+                        <div class="col-md-12 col-md-offset-0 text-left">
+
+
+                            <div class="col-md-4">
+                                <div class="card card-stats card-warning">
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="icon-big text-center">
+                                                    <i class="icon-user"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-7 d-flex align-items-center">
+                                                <div class="numbers" style="text-align: center;">
+                                                    <p class="card-category">Passengers</p>
+                                                    <h4 class="card-title">1,294</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card card-stats card-success">
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="icon-big text-center">
+                                                    <i class="icon-bucket"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-7 d-flex align-items-center">
+                                                <div class="numbers" style="text-align: center;">
+                                                    <p class="card-category">Revenue</p>
+                                                    <h4 class="card-title">$ 1,345</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card card-stats card-danger">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="icon-big text-center">
+                                                    <i class="icon-aircraft-take-off"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-7 d-flex align-items-center">
+                                                <div class="numbers" style="text-align: center;">
+                                                    <p class="card-category">Flights</p>
+                                                    <h4 class="card-title">1303</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="product-status-wrap">
+                                    <h4>Invoice List</h4>
+                                    <div class="add-product">
+                                        <a href="#">Add Flight</a>
+                                    </div>
+                                    <table>
+                                        <tr>
+                                            <th>Invoice ID</th>
+                                            <th>UserName</th>
+                                            <th>FLightID</th>
+                                            <th>Booking Date</th>
+                                            <th>Amount</th>
+                                            <th>Purchase Status</th>
+
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                        <c:forEach var="i" begin="0" end="1">
+                                            <tr>
+
+                                                <td>${iList.get(i).getInvoiceId()}</td>
+                                                <td>${iList.get(i).getUserId()}</td>
+                                                <td>${iList.get(i).getFlightId()}</td>
+                                                <td>${iList.get(i).getBookingDate()}</td>
+                                                <td>${iList.get(i).getTotalPrice()}</td>
+                                                <c:choose>
+                                                    <c:when test="${iList.get(i).getPurchaseStatus().equals('Purchasing')}">
+                                                        <td><button class="pd-setting">${iList.get(i).getPurchaseStatus()}</button></td>
+                                                    </c:when>
+                                                    <c:when test="${iList.get(i).getPurchaseStatus().equals('Purchased')}">
+                                                        <td><button class="ds-setting">${iList.get(i).getPurchaseStatus()}</button></td>
+                                                    </c:when>
+                                                </c:choose>
+                                                <td><a href="">edit</a></td>
+                                                <td><a href=""><i class="icon-delete"></i></a></td>
+
+
+                                            </tr>
+                                        </c:forEach>
+                                    </table>
+                                    <div class="custom-pagination">
+                                        <ul class="pagination">
+                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>		
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </header>
 
 
 

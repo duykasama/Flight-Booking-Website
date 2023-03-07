@@ -1,6 +1,5 @@
 package com.fptuni.prj301.demo.dbmanager;
 
-import com.fptuni.prj301.demo.model.User;
 import com.fptuni.prj301.demo.model.UserSession;
 import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;
@@ -52,8 +51,8 @@ public class UserAccessManager {
 
     public static boolean isUserExist(String username) {
         boolean check =false;
-        String sql = "select [username] from [user1] "
-                + " where [username] = ?";
+        String sql = "select [name] from [user] "
+                + " where [name] = ?";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -73,7 +72,7 @@ public class UserAccessManager {
 
     public static void  signup(String username, String password, String email, String phone) {
 
-            String sql = "insert into [user1] values "
+            String sql = "insert into [user] values "
                     + " (?, ?, ?, ?)";
             try {
                 Connection conn = DBUtils.getConnection();

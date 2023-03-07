@@ -80,16 +80,13 @@ public class UserAccessController extends HttpServlet {
             } else {
 
                 UserAccessManager manager = new UserAccessManager();
-                if (manager.isUserExist(username) != true) {
-                    manager.signup(username, password, email, phone);
-                    log("false");
-
+                if (manager.isUserExist(username)) {
+                    request.setAttribute("signup_msg", "Username Exists, Signup Fails");
                     RequestDispatcher rd = request.getRequestDispatcher("/user_login.jsp");
                     rd.forward(request, response);
                 } else {
-                    log("true");
-
-                    request.setAttribute("signup_msg", "Please enter username or password");
+                    manager.signup(username, password, email, phone);
+                    request.setAttribute("signup_msg", "Signup Succeeds");
                     RequestDispatcher rd = request.getRequestDispatcher("/user_login.jsp");
                     rd.forward(request, response);
                 }

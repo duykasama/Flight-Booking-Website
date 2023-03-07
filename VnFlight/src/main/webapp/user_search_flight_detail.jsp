@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!--
         Traveler by freehtml5.co
         Twitter: http://twitter.com/fh5co

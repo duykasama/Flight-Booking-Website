@@ -9,7 +9,7 @@
             <div class="col-xs-8 text-right menu-1">
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/user_home.jsp">Home</a></li>
-                    <li><a href="${pageContext.request.contextPath}/user_search_flight.jsp">Search Flight</a></li>
+                    <li><a href="${pageContext.request.contextPath}/UserFlightController/search">Search Flight</a></li>
                     <li><a href="${pageContext.request.contextPath}/user_account.jsp">Account</a></li>
                     <li><a href="${pageContext.request.contextPath}/user_booking_history.jsp">Booking History</a></li>
                     <c:choose>

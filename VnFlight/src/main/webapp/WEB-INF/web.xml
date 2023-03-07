@@ -35,6 +35,14 @@
         <servlet-name>UserAccessController</servlet-name>
         <url-pattern>/UserAccessController/*</url-pattern>
     </servlet-mapping>
+        <servlet>
+        <servlet-name>UserFlightController</servlet-name>
+        <servlet-class>com.fptuni.prj301.demo.controller.UserFlightController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserFlightController</servlet-name>
+        <url-pattern>/UserFlightController/*</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>UserHomeController</servlet-name>
         <servlet-class>com.fptuni.prj301.demo.controller.UserHomeController</servlet-class>

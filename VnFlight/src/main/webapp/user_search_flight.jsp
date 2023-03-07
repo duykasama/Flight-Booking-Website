@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!--
         Traveler by freehtml5.co
         Twitter: http://twitter.com/fh5co
@@ -82,43 +83,40 @@
                                             <div class="tab-content">
                                                 <div class="tab-content-inner active" data-content="signup">
                                                     <h3>FLIGHT SEARCH </h3>
-                                                    <form action="#">
+                                                    <c:url var="searchFlightLink" value="${request.contextPath}/UserFlightController/searchResult"/>
+                                                    <form action="${searchFlightLink}" name="" method="GET">
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <label for="fullname">FROM</label>
-                                                                <select class="form-control" id="from">
+                                                                <label for="from">FROM</label>
+                                                                <select class="form-control" id="from" placeholder="departure" name="departure">
                                                                     <option></option>
-                                                                    <option value="BOM">Mumbai - BOM</option>
-                                                                    <option value="DEL">Delhi - DEL</option>
-                                                                    <option value="BLR">Bangalore - BLR</option>
-                                                                    <option value="PUN">Pune - PUN</option>
-                                                                    <option value="KOL">Kolkatta - KOL</option>
+                                                                    <c:forEach var="i" begin="0" end="22">
+                                                                        <option value="${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
+                                                                    </c:forEach>
                                                                 </select>
                                                             </div>
                                                         </div>
 
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <label for="fullname">TO</label>
-                                                                <select class="form-control" id="to">
+                                                                <label for="to">TO</label>
+                                                                <select class="form-control" id="to" placeholder="destination" name="destination">
                                                                     <option></option>
-                                                                    <option value="BOM">Mumbai - BOM</option>
-                                                                    <option value="DEL">Delhi - DEL</option>
-                                                                    <option value="BLR">Bangalore - BLR</option>
-                                                                    <option value="PUN">Pune - PUN</option>
-                                                                    <option value="KOL">Kolkatta - KOL</option>
+                                                                    <c:forEach var="i" begin="0" end="22">
+                                                                        <option value="${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
+                                                                    </c:forEach>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="fullname">DEPARTURE TIME</label>
-                                                                <input type="date" id="fullname" class="form-control">
+                                                                <input type="date" id="fullname" class="form-control" placeholder="departure_date" name="departure_date">
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <input type="submit" class="btn btn-primary btn-block" value="SEARCH">
+                                                                <button type="submit" class="btn btn-primary btn-block" value="SEARCH">SEARCH</button>
                                                             </div>
                                                         </div>
                                                     </form>	

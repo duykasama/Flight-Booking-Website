@@ -1144,7 +1144,7 @@ INSERT INTO INVOICE VALUES
 --select id, name, email, phone from [user]
 exec pro_checkFlightStatus
 
-
+select * from [user]
 
 USE VNFLIGHT
 GO

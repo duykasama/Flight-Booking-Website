@@ -10,7 +10,9 @@ import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  *
@@ -44,5 +46,42 @@ public class InvoiceListManager extends ArrayList<Invoice> {
             conn.close();
         } catch (Exception ex) {
         }
+    }
+    
+    public String getRevenue(){
+        String sql = "select sum(total_price) as 'revenue' from invoice";
+        int revenue = 0;
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                revenue = rs.getInt("revenue");
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (Exception ex) {
+        }
+        String output = NumberFormat.getCurrencyInstance(new Locale("jp", "JP")).format(revenue);
+        return output.substring(4) + " vnd";
+    }
+    
+    public int getTotalFlights(){
+        int quantity = 0;
+        String sql = "select count(id) as 'quantity' from flight";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                quantity = rs.getInt("quantity");
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (Exception ex) {
+        }
+        return quantity;
     }
 }

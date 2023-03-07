@@ -126,7 +126,7 @@
                                             <div class="col-7 d-flex align-items-center">
                                                 <div class="numbers" style="text-align: center;">
                                                     <p class="card-category">Revenue</p>
-                                                    <h4 class="card-title">$ 1,345</h4>
+                                                    <h4 class="card-title">${iList.getRevenue()}</h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -145,7 +145,7 @@
                                             <div class="col-7 d-flex align-items-center">
                                                 <div class="numbers" style="text-align: center;">
                                                     <p class="card-category">Flights</p>
-                                                    <h4 class="card-title">1303</h4>
+                                                    <h4 class="card-title">${iList.getTotalFlights()}</h4>
                                                 </div>
                                             </div>
                                         </div>

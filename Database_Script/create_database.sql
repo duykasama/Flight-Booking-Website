@@ -14,27 +14,27 @@ use vnflight
 go
 
 create table [admin](
-	admin_name nvarchar(30) primary key,
-	admin_password varchar(20) not null,
+	[name] varchar(30) primary key,
+	[password] varchar(20) not null,
 	email varchar(30),
 	phone varchar(10)
 )
 
 create table [user](
-	id int primary key,
-	name varchar(20) not null,
-	password varchar(20) not null,
+	id int primary key identity(1,1),
+	[name] varchar(20) not null,
+	[password] varchar(20) not null,
 	email varchar(30),
 	phone varchar(10)
 )
 
 create table airport(
-	id int primary key,
+	id int primary key identity(1,1),
 	name nvarchar(50)
 )
 
 create table flight(
-	id int primary key,
+	id int primary key identity(1,1),
 	takeoff_time time not null,
 	landing_time time not null,
 	departure_date date not null,
@@ -47,7 +47,7 @@ create table flight(
 )
 
 create table invoice(
-	id int primary key,
+	id int primary key identity(1,1),
 	[user_id] int not null foreign key references [user](id),
 	flight_id int not null foreign key references flight(id),
 	booking_date date not null,
@@ -56,7 +56,7 @@ create table invoice(
 )
 
 create table passenger_ticket(
-	id int primary key,
+	id int primary key identity(1,1),
 	invoice_id int foreign key references invoice(id),
 	firstname nvarchar(15) not null,
 	lastname nvarchar(15) not null,
@@ -69,7 +69,7 @@ create table passenger_ticket(
 )
 
 create table seat(
-	seat_id int primary key,
+	seat_id int primary key identity(1,1),
 	seat_number varchar(10) not null,
 	flight_id int foreign key references flight(id),
 	[passenger_ticket_id] int foreign key references [passenger_ticket](id),
@@ -143,8 +143,3 @@ end
 --			begin
 --			rollback
 --			end
-		
-	
-	
-
-

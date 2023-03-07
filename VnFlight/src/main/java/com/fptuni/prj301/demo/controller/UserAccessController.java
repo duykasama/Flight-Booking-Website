@@ -5,6 +5,7 @@
 package com.fptuni.prj301.demo.controller;
 
 import com.fptuni.prj301.demo.dbmanager.UserAccessManager;
+import com.fptuni.prj301.demo.model.User;
 import com.fptuni.prj301.demo.model.UserSession;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -65,8 +66,32 @@ public class UserAccessController extends HttpServlet {
             ss.removeAttribute("usersession");
             request.setAttribute("login-msg", "Log out");
             response.sendRedirect(request.getContextPath() + "/user_home.jsp");
-        }
+        } else if (path.equals("/signup")) {
 
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+
+            if (username == null || password == null) {
+                request.setAttribute("signup_msg", "Please Enter Username and Password");
+                RequestDispatcher rd = request.getRequestDispatcher("/user_login.jsp");
+                rd.forward(request, response);
+            } else {
+
+                UserAccessManager manager = new UserAccessManager();
+                if (manager.isUserExist(username)) {
+                    request.setAttribute("signup_msg", "Username Exists, Signup Fails");
+                    RequestDispatcher rd = request.getRequestDispatcher("/user_login.jsp");
+                    rd.forward(request, response);
+                } else {
+                    manager.signup(username, password, email, phone);
+                    request.setAttribute("signup_msg", "Signup Succeeds");
+                    RequestDispatcher rd = request.getRequestDispatcher("/user_login.jsp");
+                    rd.forward(request, response);
+                }
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

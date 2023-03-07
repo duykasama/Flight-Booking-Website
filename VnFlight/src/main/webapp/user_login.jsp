@@ -61,15 +61,18 @@
 
 
             <!--<h2 class ="gold-color">VNFLIGHT: Sign in/up Form</h2>-->
+            <h4 class="gold-color">${signup_msg}</h4>
             <div class="container" id="container">
                 <div class="form-container sign-up-container">
-                    <form action="#">
+                    <c:url var="signUpLink" value="${request.contextPath}/UserAccessController/signup"/>
+                    <form action="${signUpLink}" name="" method="POST">
                         <h1>Create Account</h1>
-                        <input type="text" placeholder="Username" />
-                        <input type="email" placeholder="Email" />
-                        <input type="number" placeholder="Phone" />
-                        <input type="password" placeholder="Password" />
-                        <button>Sign Up</button>
+                        <input type="text" placeholder="Username" name="username"  />
+                        <input type="email" placeholder="Email" name="email"/>
+                        <input type="number" placeholder="Phone" name="phone" />
+                        <input type="password" placeholder="Password" name="password"/>
+                        <p class="text-danger">${signup_msg}</p>
+                        <button type="submit">Sign Up</button>
                     </form>
                 </div>
                 <div class="form-container sign-in-container">
@@ -78,7 +81,7 @@
                         <h1>User Login</h1>
                         <input type=text" placeholder="Username" name="username"/>
                         <input type="password" placeholder="Password" name="password"/>
-                        <p class="text-danger">${login_msg}</p>
+                        <p class="text-danger">${login_msg}</p>                        
                         <button type="submit">Login</button>
                         <a href="${pageContext.request.contextPath}/admin_login.jsp">Login as admin</a>
                     </form>
@@ -91,7 +94,7 @@
                             <button class="ghost" id="signIn">Log In</button>
                         </div>
                         <div class="overlay-panel overlay-right">
-                            <h1>Hello, Friend!</h1>
+                            <h1>Hello!</h1>
                             <p>Enter your personal details and start journey with us</p>
                             <button class="ghost" id="signUp">Sign Up</button>
                         </div>

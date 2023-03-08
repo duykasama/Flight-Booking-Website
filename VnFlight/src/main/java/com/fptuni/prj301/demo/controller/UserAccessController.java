@@ -51,6 +51,7 @@ public class UserAccessController extends HttpServlet {
                 //success
                 if (us != null) {
                     ss.setAttribute("usersession", us);
+                    ss.setAttribute("username", us.getUsername());
                     response.sendRedirect(request.getContextPath() + "/user_home.jsp");
                 } else {
                     //unsuccessful
@@ -64,6 +65,7 @@ public class UserAccessController extends HttpServlet {
         } else if (path.equals("/logout")) {
             HttpSession ss = request.getSession();
             ss.removeAttribute("usersession");
+            ss.removeAttribute("username");
             request.setAttribute("login-msg", "Log out");
             response.sendRedirect(request.getContextPath() + "/user_home.jsp");
         } else if (path.equals("/signup")) {
@@ -91,6 +93,21 @@ public class UserAccessController extends HttpServlet {
                     rd.forward(request, response);
                 }
             }
+        } else if (path.equals("/change")) {
+            HttpSession session = request.getSession();
+            String username = (String) session.getAttribute("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            if (username == null || password == null || email == null || phone == null) {
+                response.sendRedirect(request.getContextPath() + "/user_account.jsp");
+
+            }
+
+            UserAccessManager manager = new UserAccessManager();
+            manager.updateUser(password, email, phone, username);
+            RequestDispatcher rd = request.getRequestDispatcher("/user_home.jsp");
+            rd.forward(request, response);
         }
     }
 
@@ -107,6 +124,7 @@ public class UserAccessController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**

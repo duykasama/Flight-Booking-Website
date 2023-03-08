@@ -83,7 +83,7 @@
 
                                             <div class="tab-content">
                                                 <div class="tab-content-inner active" data-content="signup">
-                                                    <h3>UserName:  ${sessionScope.usersession} </h3>
+                                                    <h3>UserName:  ${sessionScope.usersession.get} </h3>
                                                     <c:url var="changeUserLink" value="${request.contextPath}/UserAccessController/change"/>
                                                     <form  action="${changeUserLink}" name="" method="POST">
                                                         <div class="row form-group">

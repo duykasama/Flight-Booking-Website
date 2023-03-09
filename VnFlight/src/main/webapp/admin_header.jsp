@@ -12,7 +12,7 @@
                         <a href="#">MANAGE</a>
                         <ul class="dropdown">
 
-                            <li><a href="${pageContext.request.contextPath}/UserHomeController">USER</a></li>
+                            <li><a href="${pageContext.request.contextPath}/AdminUserListController">USER</a></li>
                             <li><a href="${pageContext.request.contextPath}/AdminInvoiceController">INVOICE</a></li>
                         </ul>
                     </li>

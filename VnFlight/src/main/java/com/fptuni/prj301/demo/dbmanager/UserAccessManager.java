@@ -1,5 +1,6 @@
 package com.fptuni.prj301.demo.dbmanager;
 
+import com.fptuni.prj301.demo.model.User;
 import com.fptuni.prj301.demo.model.UserSession;
 import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;
@@ -93,4 +94,48 @@ public class UserAccessManager {
 
     }
 
+    public static void updateUser(String password, String email, String phone, String username) {
+
+        String sql = "UPDATE [user]  \n"
+                + "SET [password] = ?, [email] = ?, [phone] =? \n"
+                + "where [name] = ? \n";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, password);
+            ps.setString(2, email);
+            ps.setString(3, phone);
+            ps.setString(4, username);
+            ResultSet rs = ps.executeQuery();
+            rs.close();          
+            ps.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Query Student error!" + ex.getMessage());
+        }
+
+    }
+
+//    public static User searchByName(String username) {
+//        User user = null;
+//        String sql = "select * from [user] "
+//                + " where [name] ";
+//        try (Connection conn = DBUtils.getConnection();
+//             PreparedStatement ps = conn.prepareStatement(sql)) {
+//            ps.setString(1, username);
+//            try (ResultSet rs = ps.executeQuery()) {
+//                if (rs.next()) {
+//                    user = new User();
+//                    user.setUserName(rs.getString("username"));
+//                    user.setEmail(rs.getString("email"));
+//                    user.setPhone(rs.getString("phone"));
+//                    // add more fields as needed
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println("Error finding user by name: " + ex.getMessage());
+//        }
+//        return user;
+//    }
 }

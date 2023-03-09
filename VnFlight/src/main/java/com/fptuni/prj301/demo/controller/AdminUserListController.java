@@ -13,8 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.fptuni.prj301.demo.dbmanager.AdminFlightListManager;
 import com.fptuni.prj301.demo.dbmanager.UserAccessManager;
 import com.fptuni.prj301.demo.dbmanager.AdminUserListManager;
-
-
+import com.fptuni.prj301.demo.model.UserSession;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,11 +34,7 @@ public class AdminUserListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        if(request.getSession().getAttribute("uList") == null){
-            request.getSession().setAttribute("uList", new AdminUserListManager());
-        }
-        response.sendRedirect("admin_user_list.jsp");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -83,49 +83,48 @@
 
                                             <div class="tab-content">
                                                 <div class="tab-content-inner active" data-content="signup">
-                                                    <h3>UserName: </h3>
-                                                    <form action="#">
+                                                    <h3>UserName:  ${usersession.getUsername()} </h3>
+                                                    <c:url var="changeUserLink" value="${request.contextPath}/UserAccessController/change"/>
+                                                    <form  action="${changeUserLink}" name="" method="POST">
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <label for="fullname">Email</label>
-                                                                <input type="email" id="fullname" class="form-control">
+                                                                <label for="email">Email</label>
+                                                                <input type="email" class="form-control" id="email" name="email" >
                                                             </div>
                                                         </div>
 
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <label for="fullname">Phone</label>
-                                                                <input type="number" id="fullname" class="form-control">
+                                                                <label for="phone">Phone</label>
+                                                                <input type="number" class="form-control" id="phone" name="phone">
                                                             </div>
                                                         </div>
-
-
-
-
+<!--                                                        <div class="row form-group">
+                                                            <div class="col-md-12">
+                                                                <label for="old-password">Current password</label>
+                                                                <input type="password" class="form-control" id="old-password" name="old-password"   >
+                                                            </div>
+                                                        </div>-->
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <label for="date-start">Current password</label>
-                                                                <input type="password"  class="form-control">
+                                                                <label for="password">New password</label>
+                                                                <input type="password" class="form-control" id="password" name="password" >
                                                             </div>
                                                         </div>
-                                                        <div class="row form-group">
+<!--                                                        <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <label for="date-start">New password</label>
-                                                                <input type="password"  class="form-control">
+                                                                <label for="repassword">Confirm new password</label>
+                                                                <input type="password" class="form-control" id="repassword" name="repassword" >
                                                             </div>
-                                                        </div>
-                                                        <div class="row form-group">
-                                                            <div class="col-md-12">
-                                                                <label for="date-start">Confirm new password</label>
-                                                                <input type="password"  class="form-control">
-                                                            </div>
-                                                        </div>
+                                                        </div>-->
 
-                                                        <div class="row form-group">
+<!--                                                        <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <input type="submit" class="btn btn-primary btn-block" value="Save">
                                                             </div>
-                                                        </div>
+                                                        </div>-->
+                                                        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                                                        <a href="${pageContext.request.contextPath}/user_account.jsp" class="btn btn-primary btn-block">Cancel</a>
                                                     </form>	
                                                 </div>
 

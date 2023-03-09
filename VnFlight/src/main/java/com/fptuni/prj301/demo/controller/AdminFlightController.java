@@ -31,7 +31,9 @@ public class AdminFlightController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getSession().setAttribute("fList", new AdminFlightListManager());
+        if (request.getSession().getAttribute("fList") == null) {
+            request.getSession().setAttribute("fList", new AdminFlightListManager());
+        }
         RequestDispatcher rd = request.getRequestDispatcher("/admin_flight.jsp");
         rd.forward(request, response);
     }

@@ -22,7 +22,7 @@ public class UserAccessManager {
 
     public static UserSession login(String username, String password) {
         UserSession us = null;
-        String sql = "select [name] from [user] "
+        String sql = "select [name], [email], [phone] from [user] "
                 + " where [name] = ? and [password] = ?";
         try {
             Connection conn = DBUtils.getConnection();
@@ -37,6 +37,8 @@ public class UserAccessManager {
                 us = new UserSession();
 
                 us.setUsername(rs.getString("name"));
+                us.setEmail(rs.getString("email"));
+                us.setPhone(rs.getString("phone"));
                 us.setLoginDate(new Date());
                 us.setAccessRight("User");
 
@@ -94,19 +96,39 @@ public class UserAccessManager {
 
     }
 
-    public static void updateUser(String password, String email, String phone, String username) {
+    public static void updateUser(String email, String phone, String username) {
 
         String sql = "UPDATE [user]  \n"
-                + "SET [password] = ?, [email] = ?, [phone] =? \n"
+                + "SET [email] = ?, [phone] =? \n"
+                + "where [name] = ? \n";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, email);
+            ps.setString(2, phone);
+            ps.setString(3, username);
+            ResultSet rs = ps.executeQuery();
+            rs.close();          
+            ps.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Query Student error!" + ex.getMessage());
+        }
+
+    }
+    
+       public static void updateUserPassword(String password, String username) {
+
+        String sql = "UPDATE [user]  \n"
+                + "SET [password] = ? \n"
                 + "where [name] = ? \n";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, password);
-            ps.setString(2, email);
-            ps.setString(3, phone);
-            ps.setString(4, username);
+            ps.setString(2, username);
             ResultSet rs = ps.executeQuery();
             rs.close();          
             ps.close();

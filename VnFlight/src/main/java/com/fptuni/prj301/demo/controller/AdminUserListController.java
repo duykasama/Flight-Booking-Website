@@ -20,7 +20,7 @@ import com.fptuni.prj301.demo.dbmanager.AdminUserListManager;
  *
  * @author MSI GF63
  */
-public class UserHomeController extends HttpServlet {
+public class AdminUserListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

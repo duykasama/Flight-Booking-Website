@@ -34,7 +34,12 @@ public class AdminUserListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
+        if (request.getSession().getAttribute("uList") == null) {
+            request.getSession().setAttribute("uList", new AdminUserListManager());
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("/admin_user_list.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

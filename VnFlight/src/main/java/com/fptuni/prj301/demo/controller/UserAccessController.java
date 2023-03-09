@@ -51,7 +51,6 @@ public class UserAccessController extends HttpServlet {
                 //success
                 if (us != null) {
                     ss.setAttribute("usersession", us);
-                    ss.setAttribute("username", us.getUsername());
                     response.sendRedirect(request.getContextPath() + "/user_home.jsp");
                 } else {
                     //unsuccessful

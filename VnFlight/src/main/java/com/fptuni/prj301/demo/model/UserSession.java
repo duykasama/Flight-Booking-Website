@@ -11,9 +11,11 @@ import java.util.Date;
  * @author DUNGHUYNH
  */
 public class UserSession {
-    
+
     private String username;
     private String accessRight;
+    private String phone;
+    private String email;
 
     public Date getLoginDate() {
         return loginDate;
@@ -41,6 +43,14 @@ public class UserSession {
         return username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
     /**
      * Set the value of username
      *
@@ -50,6 +60,12 @@ public class UserSession {
         this.username = username;
     }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 }

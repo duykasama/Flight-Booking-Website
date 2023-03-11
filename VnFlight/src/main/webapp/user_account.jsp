@@ -88,47 +88,27 @@
                                                     <form  action="${changeUserLink}" name="" method="POST">
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <label for="email">Email</label>
+                                                                <label for="email">Email:</label>
+                                                                <span>${usersession.getEmail()}</span>  
                                                                 <input type="email" class="form-control" id="email" name="email" >
                                                             </div>
                                                         </div>
 
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <label for="phone">Phone</label>
-                                                                <input type="number" class="form-control" id="phone" name="phone">
+                                                                <label for="phone">Phone:</label>
+                                                                <span>${usersession.getPhone()}</span>  
+                                                                <input type="number" class="form-control" id="phone" name="phone" >
                                                             </div>
                                                         </div>
-<!--                                                        <div class="row form-group">
-                                                            <div class="col-md-12">
-                                                                <label for="old-password">Current password</label>
-                                                                <input type="password" class="form-control" id="old-password" name="old-password"   >
-                                                            </div>
-                                                        </div>-->
-                                                        <div class="row form-group">
-                                                            <div class="col-md-12">
-                                                                <label for="password">New password</label>
-                                                                <input type="password" class="form-control" id="password" name="password" >
-                                                            </div>
-                                                        </div>
-<!--                                                        <div class="row form-group">
-                                                            <div class="col-md-12">
-                                                                <label for="repassword">Confirm new password</label>
-                                                                <input type="password" class="form-control" id="repassword" name="repassword" >
-                                                            </div>
-                                                        </div>-->
-
-<!--                                                        <div class="row form-group">
-                                                            <div class="col-md-12">
-                                                                <input type="submit" class="btn btn-primary btn-block" value="Save">
-                                                            </div>
-                                                        </div>-->
                                                         <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-                                                        <a href="${pageContext.request.contextPath}/user_account.jsp" class="btn btn-primary btn-block">Cancel</a>
+                                                        <a href="${pageContext.request.contextPath}/user_account.jsp" >Cancel</a>
+                                                        <br><a href="${pageContext.request.contextPath}/user_account_password.jsp" >Password</a></br>
+                                                        <c:if test="${not empty Profile_msg}">
+                                                            <p style="color: ${Profile_msg_color};">${Profile_msg}</p>
+                                                        </c:if>
                                                     </form>	
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>

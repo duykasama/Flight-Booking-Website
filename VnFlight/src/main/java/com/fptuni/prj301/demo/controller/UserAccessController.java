@@ -51,11 +51,13 @@ public class UserAccessController extends HttpServlet {
                 //success
                 if (us != null) {
                     ss.setAttribute("usersession", us);
+                    ss.setAttribute("password", password);
                     response.sendRedirect(request.getContextPath() + "/user_home.jsp");
                 } else {
                     //unsuccessful
                     request.setAttribute("login_msg", "Wrong username or password");
                     ss.removeAttribute("usersession");
+                    ss.removeAttribute("password");
                     RequestDispatcher rd = request.getRequestDispatcher("/user_login.jsp");
                     rd.forward(request, response);
                 }
@@ -64,7 +66,7 @@ public class UserAccessController extends HttpServlet {
         } else if (path.equals("/logout")) {
             HttpSession ss = request.getSession();
             ss.removeAttribute("usersession");
-            ss.removeAttribute("username");
+            ss.removeAttribute("password");
             request.setAttribute("login-msg", "Log out");
             response.sendRedirect(request.getContextPath() + "/user_home.jsp");
         } else if (path.equals("/signup")) {
@@ -94,19 +96,67 @@ public class UserAccessController extends HttpServlet {
             }
         } else if (path.equals("/change")) {
             HttpSession session = request.getSession();
-            String username = (String) session.getAttribute("username");
-            String password = request.getParameter("password");
+            UserSession us = (UserSession) session.getAttribute("usersession");
+            String username = us.getUsername();
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
-            if (username == null || password == null || email == null || phone == null) {
-                response.sendRedirect(request.getContextPath() + "/user_account.jsp");
+            // check if the entered null
+            if (username == null || email == null || phone == null || email.trim().isEmpty() || phone.trim().isEmpty()) {
+                request.setAttribute("Profile_msg", "please enter email and phone");
+                request.setAttribute("Profile_msg_color", "red");
+                RequestDispatcher rd = request.getRequestDispatcher("/user_account.jsp");
+                rd.forward(request, response);
+                return;
+            }
+            // update  in the database
+            UserAccessManager manager = new UserAccessManager();
+            manager.updateUser(email, phone, username);
+            //   redirect the user to the success page
+            request.setAttribute("Profile_msg", "Changed Successfully");
+            request.setAttribute("Profile_msg_color", "green");
+            RequestDispatcher rd = request.getRequestDispatcher("/user_account.jsp");
+            rd.forward(request, response);
 
+        } else if (path.equals("/editPassword")) {
+            HttpSession session = request.getSession();
+            UserSession us = (UserSession) session.getAttribute("usersession");
+            String username = us.getUsername();
+            String currentPassword = request.getParameter("old-password"); // changed variable name to currentPassword
+            String oldPassword = (String) session.getAttribute("password");
+            String password = request.getParameter("newpassword");
+            String repassword = request.getParameter("repassword");
+
+            // check if the entered current password is correct
+            if (!currentPassword.equals(oldPassword)) {
+                request.setAttribute("password_msg", "Wrong Password");
+                request.setAttribute("password_msg_color", "red");
+                RequestDispatcher rd = request.getRequestDispatcher("/user_account_password.jsp");
+                rd.forward(request, response);
+                return;
             }
 
+            // check if the new password and confirm password match
+            if (!password.equals(repassword)) {
+                request.setAttribute("password_msg", "Confirm Password is not match");
+                request.setAttribute("password_msg_color", "red");
+                RequestDispatcher rd = request.getRequestDispatcher("/user_account_password.jsp");
+                rd.forward(request, response);
+                return;
+            }
+
+            // update the password in the database
             UserAccessManager manager = new UserAccessManager();
-            manager.updateUser(password, email, phone, username);
-            RequestDispatcher rd = request.getRequestDispatcher("/user_home.jsp");
+            manager.updateUserPassword(password, username);
+
+            // set the new password in the session
+            session.setAttribute("password", password);
+
+            // redirect the user to the success page
+            request.setAttribute("password_msg", "Password Changed Successfully");
+            request.setAttribute("password_msg_color", "green");
+            RequestDispatcher rd = request.getRequestDispatcher("/user_account_password.jsp");
             rd.forward(request, response);
+
         }
     }
 

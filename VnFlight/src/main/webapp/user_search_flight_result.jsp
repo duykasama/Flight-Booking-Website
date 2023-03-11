@@ -61,7 +61,7 @@
     </head>
     <body>
         <c:choose>
-            <c:when test="${param.page != null && param.page > 0}">
+            <c:when test="${param.page != null}">
                 <c:set var="pageNumb" value="${param.page}"></c:set>
             </c:when>
             <c:otherwise>
@@ -69,22 +69,55 @@
             </c:otherwise>
         </c:choose>
         <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
-        <c:if test="${begin >= flightList.size()}">
-            <c:set var="pageNumb" value="${pageNumb-1}"></c:set>
-            <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
-        </c:if>
         <c:set var="end" value="${pageNumb*10-1}"></c:set>
-        <c:if test="${end >= flightList.size()}">
+        <c:if test="${pageNumb >= Math.ceil(flightList.size()/10)}">
+            <c:set var="pageNumb" value="${Math.round(flightList.size()/10)}"></c:set>
             <c:set var="end" value="${flightList.size()-1}"></c:set>
         </c:if>
-        
+        <c:if test="${flightList.size() == 0}">
+            <c:set var="pageNumb" value="1"></c:set>
+            <c:set var="begin" value="0"></c:set>
+            <c:set var="end" value="0"></c:set>
+        </c:if>
+
+        <c:url var="urlNext" value="/user_search_flight_result.jsp">
+            <c:choose>
+                <c:when test="${Math.ceil(flightList.size()/10) == pageNumb || flightList.size()==0}">
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb+1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlPrev" value="/user_search_flight_result.jsp">
+            <c:choose>
+                <c:when test="${pageNumb == 1}">
+                    <c:param name="page" value="1"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb-1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlDoubleNext" value="/user_search_flight_result.jsp">
+            <c:choose>
+                <c:when test="${pageNumb <= Math.ceil(flightList.size()/10)-2}">
+                    <c:param name="page" value="${pageNumb+2}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+
         <div class="gtco-loader"></div>
         <div id="page">
 
 
             <!-- <div class="page-inner"> -->
             <%@include file="/user_header.jsp" %>                
-    
+
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
                 <div class="product-status mgtop mg-b-30">
                     <div class="container-fluid">
@@ -107,36 +140,29 @@
                                             <th>Status</th>
                                             <th>Purchase</th>
                                         </tr>
-                                        <c:forEach var="i" begin="${begin}" end="${end}">
-                                            <tr><td>${flightList.get(i).getId()}</td>
-                                                <td>${flightList.get(i).getAirlineName()}</td>
-                                                <td>${flightList.get(i).getDeparture()}</td>
-                                                <td>${flightList.get(i).getDestination()}</td>
-                                                <td>${flightList.get(i).getDepartureDate()}</td>
-                                                <td>${flightList.get(i).getTakeOffTime()}</td>
-                                                <td>${flightList.get(i).getNoOfSeats()}</td>
-                                                <c:choose>
-                                                    <c:when test="${flightList.get(i).getStatus().equals('Up Coming')}">
-                                                        <td><button class="pd-setting">${flightList.get(i).getStatus()}</button></td>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <td><button class="ds-setting">${flightList.get(i).getStatus()}</button></td>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                <td><a href="${pageContext.request.contextPath}/UserFlightController/purchase">Purchase</a></td>
-                                            </tr>
-                                        </c:forEach>
+                                        <c:if test="${flightList.size() > 0}">
+                                            <c:forEach var="i" begin="${begin}" end="${end}">
+                                                <tr><td>${flightList.get(i).getId()}</td>
+                                                    <td>${flightList.get(i).getAirlineName()}</td>
+                                                    <td>${flightList.get(i).getDeparture()}</td>
+                                                    <td>${flightList.get(i).getDestination()}</td>
+                                                    <td>${flightList.get(i).getDepartureDate()}</td>
+                                                    <td>${flightList.get(i).getTakeOffTime()}</td>
+                                                    <td>${flightList.get(i).getNoOfSeats()}</td>
+                                                    <c:choose>
+                                                        <c:when test="${flightList.get(i).getStatus().equals('Up Coming')}">
+                                                            <td><button class="pd-setting">${flightList.get(i).getStatus()}</button></td>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            <td><button class="ds-setting">${flightList.get(i).getStatus()}</button></td>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    <td><a href="${pageContext.request.contextPath}/UserFlightController/purchase">Purchase</a></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
                                     </table>
-                                    <c:url var="urlNext" value="/user_search_flight_result.jsp">
-                                        <c:param name="page" value="${pageNumb+1}"/>
-                                    </c:url>
-                                    <c:url var="urlPrev" value="/user_search_flight_result.jsp">
-                                        <c:param name="page" value="${pageNumb-1}"/>
-                                    </c:url>
-                                    <c:url var="urlDoubleNext" value="/user_search_flight_result.jsp">
-                                        <c:param name="page" value="${pageNumb+2}"/>
-                                    </c:url>
-                                    
+
                                     <div class="custom-pagination">
                                         <ul class="pagination">
                                             <li class="page-item"><a class="page-link" href="${urlPrev}">Previous</a></li>
@@ -155,7 +181,7 @@
         </div>
 
     </header>
-            
+
 
     <footer id="gtco-footer" role="contentinfo">
         <div class="gtco-container">

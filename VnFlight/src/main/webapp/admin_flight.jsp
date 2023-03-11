@@ -61,7 +61,7 @@
     </head>
     <body>
         <c:choose>
-            <c:when test="${param.page != null && param.page > 0}">
+            <c:when test="${param.page != null}">
                 <c:set var="pageNumb" value="${param.page}"></c:set>
             </c:when>
             <c:otherwise>
@@ -69,22 +69,55 @@
             </c:otherwise>
         </c:choose>
         <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
-        <c:if test="${begin >= fList.size()}">
-            <c:set var="pageNumb" value="${pageNumb-1}"></c:set>
-            <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
-        </c:if>
         <c:set var="end" value="${pageNumb*10-1}"></c:set>
-        <c:if test="${end >= fList.size()}">
+        <c:if test="${pageNumb >= Math.ceil(fList.size()/10)}">
+            <c:set var="pageNumb" value="${Math.round(fList.size()/10)}"></c:set>
             <c:set var="end" value="${fList.size()-1}"></c:set>
         </c:if>
+        <c:if test="${fList.size() == 0}">
+            <c:set var="pageNumb" value="1"></c:set>
+            <c:set var="begin" value="0"></c:set>
+            <c:set var="end" value="0"></c:set>
+        </c:if>
         
+        <c:url var="urlNext" value="/admin_flight.jsp">
+            <c:choose>
+                <c:when test="${Math.ceil(fList.size()/10) == pageNumb || fList.size()==0}">
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb+1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlPrev" value="/admin_flight.jsp">
+            <c:choose>
+                <c:when test="${pageNumb == 1}">
+                    <c:param name="page" value="1"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb-1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlDoubleNext" value="/admin_flight.jsp">
+            <c:choose>
+                <c:when test="${pageNumb <= Math.ceil(fList.size()/10)-2}">
+                    <c:param name="page" value="${pageNumb+2}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+
         <div class="gtco-loader"></div>
         <div id="page">
 
 
             <!-- <div class="page-inner"> -->
             <%@include file="/admin_header.jsp" %>                
-    
+
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
                 <div class="product-status mgtop mg-b-30">
                     <div class="container-fluid">
@@ -108,6 +141,7 @@
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
+                                        <c:if test="${fList.size() > 0}">
                                         <c:forEach var="i" begin="${begin}" end="${end}">
                                             <tr><td>${fList.get(i).getId()}</td>
                                                 <td>${fList.get(i).getAirlineName()}</td>
@@ -119,26 +153,17 @@
                                                 <c:choose>
                                                     <c:when test="${fList.get(i).getStatus().equals('Up Coming')}">
                                                         <td><button class="pd-setting">${fList.get(i).getStatus()}</button></td>
-                                                    </c:when>
-                                                    <c:otherwise>
+                                                        </c:when>
+                                                        <c:otherwise>
                                                         <td><button class="ds-setting">${fList.get(i).getStatus()}</button></td>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 <td><a href="">edit</a></td>
                                                 <td><a href=""><i class="icon-delete"></i></a></td>
                                             </tr>
                                         </c:forEach>
+                                    </c:if>
                                     </table>
-                                    <c:url var="urlNext" value="/admin_flight.jsp">
-                                        <c:param name="page" value="${pageNumb+1}"/>
-                                    </c:url>
-                                    <c:url var="urlPrev" value="/admin_flight.jsp">
-                                        <c:param name="page" value="${pageNumb-1}"/>
-                                    </c:url>
-                                    <c:url var="urlDoubleNext" value="/admin_flight.jsp">
-                                        <c:param name="page" value="${pageNumb+2}"/>
-                                    </c:url>
-                                    
                                     <div class="custom-pagination">
                                         <ul class="pagination">
                                             <li class="page-item"><a class="page-link" href="${urlPrev}">Previous</a></li>
@@ -157,7 +182,7 @@
         </div>
 
     </header>
-            
+
 
     <footer id="gtco-footer" role="contentinfo">
         <div class="gtco-container">

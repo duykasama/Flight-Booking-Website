@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author MSI GF63
  */
-public class UserHomeController extends HttpServlet {
+public class AdminUserListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,8 +38,7 @@ public class UserHomeController extends HttpServlet {
         if (request.getSession().getAttribute("uList") == null) {
             request.getSession().setAttribute("uList", new AdminUserListManager());
         }
-        RequestDispatcher rd = request.getRequestDispatcher("/admin_user_list.jsp");
-        rd.forward(request, response);
+        response.sendRedirect("admin_user_list.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

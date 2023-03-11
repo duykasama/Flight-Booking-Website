@@ -34,8 +34,7 @@ public class AdminFlightController extends HttpServlet {
         if (request.getSession().getAttribute("fList") == null) {
             request.getSession().setAttribute("fList", new AdminFlightListManager());
         }
-        RequestDispatcher rd = request.getRequestDispatcher("/admin_flight.jsp");
-        rd.forward(request, response);
+        response.sendRedirect("admin_flight.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

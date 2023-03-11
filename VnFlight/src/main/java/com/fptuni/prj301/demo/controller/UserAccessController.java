@@ -109,13 +109,18 @@ public class UserAccessController extends HttpServlet {
                 return;
             }
             // update  in the database
+            else{
             UserAccessManager manager = new UserAccessManager();
             manager.updateUser(email, phone, username);
+            us.setEmail(email);
+            us.setPhone(phone);
+
             //   redirect the user to the success page
             request.setAttribute("Profile_msg", "Changed Successfully");
             request.setAttribute("Profile_msg_color", "green");
             RequestDispatcher rd = request.getRequestDispatcher("/user_account.jsp");
             rd.forward(request, response);
+            }
 
         } else if (path.equals("/editPassword")) {
             HttpSession session = request.getSession();

@@ -63,7 +63,7 @@
     <body>
 
         <c:choose>
-            <c:when test="${param.page != null && param.page > 0}">
+            <c:when test="${param.page != null}">
                 <c:set var="pageNumb" value="${param.page}"></c:set>
             </c:when>
             <c:otherwise>
@@ -71,14 +71,47 @@
             </c:otherwise>
         </c:choose>
         <c:set var="begin" value="${(pageNumb-1)*6}"></c:set>
-        <c:if test="${begin >= iList.size()}">
-            <c:set var="pageNumb" value="${pageNumb-1}"></c:set>
-            <c:set var="begin" value="${(pageNumb-1)*6}"></c:set>
-        </c:if>
         <c:set var="end" value="${pageNumb*6-1}"></c:set>
-        <c:if test="${end >= iList.size()}">
+        <c:if test="${pageNumb >= Math.ceil(iList.size()/6)}">
+            <c:set var="pageNumb" value="${Math.round(iList.size()/6)}"></c:set>
             <c:set var="end" value="${iList.size()-1}"></c:set>
         </c:if>
+        <c:if test="${iList.size() == 0}">
+            <c:set var="pageNumb" value="1"></c:set>
+            <c:set var="begin" value="0"></c:set>
+            <c:set var="end" value="0"></c:set>
+        </c:if>
+        
+        <c:url var="urlNext" value="/admin_invoice.jsp">
+            <c:choose>
+                <c:when test="${Math.ceil(iList.size()/6) == pageNumb || iList.size()==0}">
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb+1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlPrev" value="/admin_invoice.jsp">
+            <c:choose>
+                <c:when test="${pageNumb == 1}">
+                    <c:param name="page" value="1"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb-1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlDoubleNext" value="/admin_invoice.jsp">
+            <c:choose>
+                <c:when test="${pageNumb <= Math.ceil(iList.size()/6)-2}">
+                    <c:param name="page" value="${pageNumb+2}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
         
         <div class="gtco-loader"></div>
 
@@ -172,6 +205,7 @@
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
+                                        <c:if test="${iList.size() > 0}">
                                         <c:forEach var="i" begin="${begin}" end="${end}">
                                             <tr>
 
@@ -192,18 +226,8 @@
                                                 <td><a href=""><i class="icon-delete"></i></a></td>
                                             </tr>
                                         </c:forEach>
+                                            </c:if>
                                     </table>
-                                    
-                                    <c:url var="urlNext" value="/admin_invoice.jsp">
-                                        <c:param name="page" value="${pageNumb+1}"/>
-                                    </c:url>
-                                    <c:url var="urlPrev" value="/admin_invoice.jsp">
-                                        <c:param name="page" value="${pageNumb-1}"/>
-                                    </c:url>
-                                    <c:url var="urlDoubleNext" value="/admin_invoice.jsp">
-                                        <c:param name="page" value="${pageNumb+2}"/>
-                                    </c:url>
-                                    
                                     <div class="custom-pagination">
                                         <ul class="pagination">
                                             <li class="page-item"><a class="page-link" href="${urlPrev}">Previous</a></li>

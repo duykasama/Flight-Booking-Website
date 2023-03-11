@@ -38,8 +38,7 @@ public class AdminUserListController extends HttpServlet {
         if (request.getSession().getAttribute("uList") == null) {
             request.getSession().setAttribute("uList", new AdminUserListManager());
         }
-        RequestDispatcher rd = request.getRequestDispatcher("/admin_user_list.jsp");
-        rd.forward(request, response);
+        response.sendRedirect("admin_user_list.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

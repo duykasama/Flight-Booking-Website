@@ -62,7 +62,7 @@
     <body>
         
         <c:choose>
-            <c:when test="${param.page != null && param.page > 0}">
+            <c:when test="${param.page != null}">
                 <c:set var="pageNumb" value="${param.page}"></c:set>
             </c:when>
             <c:otherwise>
@@ -70,14 +70,47 @@
             </c:otherwise>
         </c:choose>
         <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
-        <c:if test="${begin >= uList.size()}">
-            <c:set var="pageNumb" value="${pageNumb-1}"></c:set>
-            <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
-        </c:if>
         <c:set var="end" value="${pageNumb*10-1}"></c:set>
-        <c:if test="${end >= uList.size()}">
+        <c:if test="${pageNumb >= Math.ceil(uList.size()/10)}">
+            <c:set var="pageNumb" value="${Math.round(uList.size()/10)}"></c:set>
             <c:set var="end" value="${uList.size()-1}"></c:set>
         </c:if>
+        <c:if test="${uList.size() == 0}">
+            <c:set var="pageNumb" value="1"></c:set>
+            <c:set var="begin" value="0"></c:set>
+            <c:set var="end" value="0"></c:set>
+        </c:if>
+        
+        <c:url var="urlNext" value="/admin_user_list.jsp">
+            <c:choose>
+                <c:when test="${Math.ceil(uList.size()/10) == pageNumb || uList.size()==0}">
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb+1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlPrev" value="/admin_user_list.jsp">
+            <c:choose>
+                <c:when test="${pageNumb == 1}">
+                    <c:param name="page" value="1"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb-1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlDoubleNext" value="/admin_user_list.jsp">
+            <c:choose>
+                <c:when test="${pageNumb <= Math.ceil(uList.size()/10)-2}">
+                    <c:param name="page" value="${pageNumb+2}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
 
         <div class="gtco-loader"></div>
 
@@ -106,6 +139,7 @@
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
+                                        <c:if test="${uList.size() > 0}">
                                         <c:forEach var="i" begin="${begin}" end="${end}">
                                             <tr>
                                                 <td>${uList.get(i).getUserId()}</td>
@@ -116,17 +150,9 @@
                                                 <td><a href=""><i class="icon-delete"></i></a></td></tr>
                                             </tr>
                                         </c:forEach>
+                                        </c:if>
                                         </tr>
                                     </table>
-                                    <c:url var="urlNext" value="/admin_user_list.jsp">
-                                        <c:param name="page" value="${pageNumb+1}"/>
-                                    </c:url>
-                                    <c:url var="urlPrev" value="/admin_user_list.jsp">
-                                        <c:param name="page" value="${pageNumb-1}"/>
-                                    </c:url>
-                                    <c:url var="urlDoubleNext" value="/admin_user_list.jsp">
-                                        <c:param name="page" value="${pageNumb+2}"/>
-                                    </c:url>
                                     <div class="custom-pagination">
                                         <ul class="pagination">
                                             <li class="page-item"><a class="page-link" href="${urlPrev}">Previous</a></li>

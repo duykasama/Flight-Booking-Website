@@ -25,6 +25,21 @@ public class Flight {
     private String destination;
     private int status;
 
+    public Flight() {
+    }
+
+    public Flight(Time takeOffTime, Time landingTime, Date departureDate, int price, String airlineName, int noOfSeats, String departure, String destination, int status) {
+        this.takeOffTime = takeOffTime;
+        this.landingTime = landingTime;
+        this.departureDate = departureDate;
+        this.price = price;
+        this.airlineName = airlineName;
+        this.noOfSeats = noOfSeats;
+        this.departure = departure;
+        this.destination = destination;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }
@@ -98,7 +113,7 @@ public class Flight {
     }
 
     public String getStatus() {
-        return (this.status == 0) ? "Up Coming":"Taken Off";
+        return (this.status == 0) ? "Up Coming" : "Taken Off";
     }
 
     public void setStatus(int status) {

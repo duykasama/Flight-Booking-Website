@@ -75,9 +75,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="product-status-wrap">
                                     <h4>Flight List</h4>
-                                    <div class="add-product">
-                                        <a href="#">Add Flight</a>
-                                    </div>
+                                   
                                     <table>
                                         <tr>
                                             <th>Flight ID</th>
@@ -88,8 +86,7 @@
                                             <th>Dep.Time</th>
                                             <th>Seat</th>
                                             <th>Status</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
+                                            
                                         </tr>
                                         <tr>
 
@@ -104,8 +101,7 @@
                                             <td>
                                                 <button class="pd-setting">On Going</button>
                                             </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
+                                            
 
 
                                         </tr>
@@ -121,8 +117,7 @@
                                             <td>
                                                 <button class="ps-setting">Up Coming</button>
                                             </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
+                                            
 
                                         </tr>
                                         <tr>
@@ -138,8 +133,7 @@
                                             <td>
                                                 <button class="ds-setting">Taken off</button>
                                             </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
+                                            
                                         </tr>
                                         <tr>
 
@@ -154,8 +148,7 @@
                                             <td>
                                                 <button class="pd-setting">On Going</button>
                                             </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
+                                            
 
                                         </tr>
                                         <tr>
@@ -171,8 +164,7 @@
                                             <td>
                                                 <button class="pd-setting">On Going</button>
                                             </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
+                                            
 
                                         </tr>
                                         <tr>
@@ -188,8 +180,7 @@
                                             <td>
                                                 <button class="ps-setting">Up Coming</button>
                                             </td>
-                                            <td><a href="">edit</a></td>
-                                            <td><a href=""><i class="icon-delete"></i></a></td>
+                                            
                                         </tr>
                                     </table>
                                     <div class="custom-pagination">

@@ -90,7 +90,7 @@
                                                             <div class="col-md-12">
                                                                 <label for="email">Email:</label>
                                                                 <span>${usersession.getEmail()}</span>  
-                                                                <input type="email" class="form-control" id="email" name="email" >
+                                                                <input type="email" class="form-control" id="email" name="email"  >
                                                             </div>
                                                         </div>
 
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
 
-
+ 
                         </div>
                     </div>
                 </div>

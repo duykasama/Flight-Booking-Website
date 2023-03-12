@@ -5,13 +5,13 @@
  */
 package com.fptuni.prj301.demo.controller;
 
+import com.fptuni.prj301.demo.dbmanager.AdminFlightListManager;
+import com.fptuni.prj301.demo.dbmanager.UserAirportListManager;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fptuni.prj301.demo.dbmanager.AdminFlightListManager;
-import javax.servlet.RequestDispatcher;
 
 /**
  *
@@ -31,6 +31,8 @@ public class AdminFlightController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        UserAirportListManager aManager = new UserAirportListManager();
+        request.getSession().setAttribute("airportList", aManager.loadAirport());
         if (request.getSession().getAttribute("fList") == null) {
             request.getSession().setAttribute("fList", new AdminFlightListManager());
         }

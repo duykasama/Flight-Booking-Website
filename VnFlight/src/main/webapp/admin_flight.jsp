@@ -51,13 +51,51 @@
         <!-- Theme style  -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productlist.css">
+
         <!-- Modernizr JS -->
         <script src="${pageContext.request.contextPath}/js/modernizr-2.6.2.min.js"></script>
         <!-- FOR IE9 below -->
         <!--[if lt IE 9]>
         <script src="${pageContext.request.contextPath}/js/respond.min.js"></script>
         <![endif]-->
-
+        <style>    
+            body{
+                position: relative;
+            }
+            .add-product a{
+                cursor: pointer;
+            }
+            .form {
+                position: absolute;
+                top: 20%;
+                left: 25%;
+                transition: transform 0.3s ease 0s;
+                display: none;
+                z-index: 2;
+               background-color:grey; 
+                width: 50%; 
+                padding: 20px 30px;
+              
+                
+            }
+            .form-show {
+                display: block; /* this class is added when the form button is clicked, making the form appear */
+            }
+           
+            .open-form-button:hover {
+                cursor: pointer;
+            }
+            .form-background {
+                display: none; /* starts out with display of none so it can be changed to block on click */
+                position: fixed; /* stays on screen despite scroll */
+                width: 100%; /* covers entire width of screen */
+                height: 100%; /* covers entire height of screen */
+                z-index: 1; /* will be displayed behind background */
+            }
+            label,.form-title{
+                color: goldenrod;
+            }
+        </style>
     </head>
     <body>
         <c:choose>
@@ -79,7 +117,7 @@
             <c:set var="begin" value="0"></c:set>
             <c:set var="end" value="0"></c:set>
         </c:if>
-        
+
         <c:url var="urlNext" value="/admin_flight.jsp">
             <c:choose>
                 <c:when test="${Math.ceil(fList.size()/10) == pageNumb || fList.size()==0}">
@@ -117,16 +155,104 @@
 
             <!-- <div class="page-inner"> -->
             <%@include file="/admin_header.jsp" %>                
+            <!--<form id="form" class="form" action="" method="post">-->
+           
+            <!-- Form starts here -->
+            <form id="form" class="form" action="" method="post">
+                <h2 class="form-title">ADD FLIGHT </h2>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label >TAKE OFF TIME</label>
+                        <input name="takeOffTime" type="time" class="form-control" required="" value="00:00">
+                    </div>
+                    <div class="col-md-6">
+                        <label >LANDING TIME</label>
+                        <input name="landingTime" type="time" class="form-control" required="" value="00:00">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label>DEPARTURE TIME</label>
+                        <input name="depTime" type="date" id="fullname" class="form-control" placeholder="departure_date">
+                    </div>
+                    <div class="col-md-6">
+                        <label>STATUS</label>
+                        <select name="status" class="form-control" id="from" placeholder="status" >
+                            <option value="0">Up Coming</option>
+                            <option value="1">Taken off</option>
+                            
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label >PRICE</label>
+                        <input name="price" type="number" id="fullname" class="form-control" placeholder="PRICE" >
+                    </div>
+                    <div class="col-md-4">
+                        <label >AIRLINE NAME</label>
+                        <select class="form-control" id="from" placeholder="departure" name="airlineName">
+                            <option value="Vietnam Airline">Vietnam Airline</option>
+                            <option value="Vietjet Air">Vietjet Air</option>
+                            <option value="Bamboo Airways">Bamboo Airways</option>
+                            
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label >NUMBER OF SEAT</label>
+                        <select class="form-control" id="from" placeholder="departure" name="numOfSeats">
+                            <option value="80">80 seats</option>
+                            <option value="100">100 seats</option>
+                            <option value="120">120 seats</option>
+                            
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="from">FROM</label>
+                        <select class="form-control" id="from" placeholder="departure" name="depID">
+                            <c:forEach var="i" begin="0" end="22">
+                                <option value="${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
+                            </c:forEach>/option>
+                        </select>
+                    </div>
+                     <div class="col-md-6">
+                        <label for="to">TO</label>
+                        <select class="form-control" id="to" placeholder="destination" name="desID">
+                            <c:forEach var="i" begin="0" end="22">
+                                <option value="${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+
+                
+                
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-block" value="ADDFLIGHT">ADD FLIGHT</button>
+                    </div>
+                </div>
+            </form>
+
+               
+
+            <div id="form-bg" class="form-background" onclick="closeForm()"></div>
 
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
                 <div class="product-status mgtop mg-b-30">
+                    
                     <div class="container-fluid">
+                      
+                      
                         <div class="row">
+                            
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="product-status-wrap">
                                     <h4>Flight List</h4>
                                     <div class="add-product">
-                                        <a href="#">Add Flight</a>
+                                        <a id="button" class="open-form-button" onclick="openForm()">Add Flight</a>
                                     </div>
                                     <table>
                                         <tr>
@@ -142,27 +268,27 @@
                                             <th>Delete</th>
                                         </tr>
                                         <c:if test="${fList.size() > 0}">
-                                        <c:forEach var="i" begin="${begin}" end="${end}">
-                                            <tr><td>${fList.get(i).getId()}</td>
-                                                <td>${fList.get(i).getAirlineName()}</td>
-                                                <td>${fList.get(i).getDeparture()}</td>
-                                                <td>${fList.get(i).getDestination()}</td>
-                                                <td>${fList.get(i).getDepartureDate()}</td>
-                                                <td>${fList.get(i).getTakeOffTime()}</td>
-                                                <td>${fList.get(i).getNoOfSeats()}</td>
-                                                <c:choose>
-                                                    <c:when test="${fList.get(i).getStatus().equals('Up Coming')}">
-                                                        <td><button class="pd-setting">${fList.get(i).getStatus()}</button></td>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                        <td><button class="ds-setting">${fList.get(i).getStatus()}</button></td>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                <td><a href="">edit</a></td>
-                                                <td><a href=""><i class="icon-delete"></i></a></td>
-                                            </tr>
-                                        </c:forEach>
-                                    </c:if>
+                                            <c:forEach var="i" begin="${begin}" end="${end}">
+                                                <tr><td>${fList.get(i).getId()}</td>
+                                                    <td>${fList.get(i).getAirlineName()}</td>
+                                                    <td>${fList.get(i).getDeparture()}</td>
+                                                    <td>${fList.get(i).getDestination()}</td>
+                                                    <td>${fList.get(i).getDepartureDate()}</td>
+                                                    <td>${fList.get(i).getTakeOffTime()}</td>
+                                                    <td>${fList.get(i).getNoOfSeats()}</td>
+                                                    <c:choose>
+                                                        <c:when test="${fList.get(i).getStatus().equals('Up Coming')}">
+                                                            <td><button class="pd-setting">${fList.get(i).getStatus()}</button></td>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            <td><button class="ds-setting">${fList.get(i).getStatus()}</button></td>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    <td><a href="">edit</a></td>
+                                                    <td><a href=""><i class="icon-delete"></i></a></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
                                     </table>
                                     <div class="custom-pagination">
                                         <ul class="pagination">
@@ -269,4 +395,15 @@
 
 </body>
 </html>
+<script>
+                                            function openForm() {
+                                                document.getElementById("form").classList.toggle("form-show");
+                                                document.getElementById("form-bg").style.display = "block";
+                                            }
+
+                                            function closeForm() {
+                                                document.getElementById("form").classList.toggle("form-show");
+                                                document.getElementById("form-bg").style.display = "none";
+                                            }
+</script>
 

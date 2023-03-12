@@ -91,7 +91,7 @@ h3.sub-heading-agileits {
 
 /*-- form --*/
 
-.booking-form-w3layouts input[type="text"],
+.booking-form-w3layouts input[type="text"],.booking-form-w3layouts input[type="time"],.booking-form-w3layouts input[type="date"],
 .booking-form-w3layouts input[type="email"],
 .booking-form-w3layouts textarea,
 select.form-control,

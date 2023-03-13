@@ -139,25 +139,22 @@ public class UserAccessManager {
 
     }
 
-//    public static User searchByName(String username) {
-//        User user = null;
-//        String sql = "select * from [user] "
-//                + " where [name] ";
-//        try (Connection conn = DBUtils.getConnection();
-//             PreparedStatement ps = conn.prepareStatement(sql)) {
-//            ps.setString(1, username);
-//            try (ResultSet rs = ps.executeQuery()) {
-//                if (rs.next()) {
-//                    user = new User();
-//                    user.setUserName(rs.getString("username"));
-//                    user.setEmail(rs.getString("email"));
-//                    user.setPhone(rs.getString("phone"));
-//                    // add more fields as needed
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            System.out.println("Error finding user by name: " + ex.getMessage());
-//        }
-//        return user;
-//    }
+    public  int searchByName(String username) {
+        int userID = -1;
+        String sql = "select id from [user] "
+                + " where [name] ";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    userID = rs.getInt("id");
+                 
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("Error finding user by name: " + ex.getMessage());
+        }
+        return userID;
+    }
 }

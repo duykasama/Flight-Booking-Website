@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -47,8 +48,8 @@ public class InvoiceListManager extends ArrayList<Invoice> {
         } catch (Exception ex) {
         }
     }
-    
-    public String getRevenue(){
+
+    public String getRevenue() {
         String sql = "select sum(total_price) as 'revenue' from invoice";
         int revenue = 0;
         try {
@@ -66,8 +67,8 @@ public class InvoiceListManager extends ArrayList<Invoice> {
         String output = NumberFormat.getCurrencyInstance(new Locale("jp", "JP")).format(revenue);
         return output.substring(4) + " vnd";
     }
-    
-    public int getTotalFlights(){
+
+    public int getTotalFlights() {
         int quantity = 0;
         String sql = "select count(id) as 'quantity' from flight";
         try {
@@ -84,4 +85,55 @@ public class InvoiceListManager extends ArrayList<Invoice> {
         }
         return quantity;
     }
+
+    public void insertInvoice(int userId, int flightId, Date bookingDate) {
+        String sql = "INSERT INTO invoice(user_id, flight_id, booking_date) "
+                + "VALUES (?, ?, ?)";
+
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ps.setInt(2, flightId);
+            ps.setDate(3, new java.sql.Date(bookingDate.getTime()));
+
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println("Insert invoice error: " + ex.getMessage());
+        }
+    }
+
+    public int search(int userId, int flightId) {
+        int invoiceId = -1;
+        String sql = "SELECT id FROM invoice WHERE user_id=? AND flight_id=?";
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, flightId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    invoiceId = rs.getInt("id");
+
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("Error finding user by name: " + ex.getMessage());
+        }
+        return invoiceId;
+    }
+
+    public void updateInvoice(int id, Date bookingDate, long totalPrice, int purchaseStatus) {
+        String sql = "UPDATE invoice SET booking_date=?, total_price=?, purchase_status=? WHERE id=?";
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setDate(1, new java.sql.Date(bookingDate.getTime()));
+            ps.setLong(2, totalPrice);
+            ps.setInt(3, purchaseStatus);
+            ps.setInt(4, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

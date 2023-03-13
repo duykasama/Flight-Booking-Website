@@ -10,10 +10,10 @@
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/user_home.jsp">Home</a></li>
                     <li><a href="${pageContext.request.contextPath}/UserFlightController/search">Search Flight</a></li>
-                    <li><a href="${pageContext.request.contextPath}/user_account.jsp">Account</a></li>
-                    <li><a href="${pageContext.request.contextPath}/user_booking_history.jsp">Booking History</a></li>
                     <c:choose>
                         <c:when test="${usersession != null}">
+                            <li><a href="${pageContext.request.contextPath}/user_account.jsp">Account</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user_booking_history.jsp">Booking History</a></li>
                             <li><a href="${pageContext.request.contextPath}/UserAccessController/logout">Logout</a></li>
                         </c:when>
                         <c:otherwise>

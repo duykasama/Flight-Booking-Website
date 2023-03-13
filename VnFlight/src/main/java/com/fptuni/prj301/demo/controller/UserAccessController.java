@@ -52,6 +52,7 @@ public class UserAccessController extends HttpServlet {
                 if (us != null) {
                     ss.setAttribute("usersession", us);
                     ss.setAttribute("password", password);
+                    ss.setAttribute("userID", manager.searchByName(us.getUsername()));
                     response.sendRedirect(request.getContextPath() + "/user_home.jsp");
                 } else {
                     //unsuccessful
@@ -65,8 +66,7 @@ public class UserAccessController extends HttpServlet {
 
         } else if (path.equals("/logout")) {
             HttpSession ss = request.getSession();
-            ss.removeAttribute("usersession");
-            ss.removeAttribute("password");
+            ss.invalidate();
             request.setAttribute("login-msg", "Log out");
             response.sendRedirect(request.getContextPath() + "/user_home.jsp");
         } else if (path.equals("/signup")) {

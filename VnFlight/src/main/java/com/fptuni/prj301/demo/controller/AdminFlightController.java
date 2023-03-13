@@ -56,9 +56,9 @@ public class AdminFlightController extends HttpServlet {
                 AdminFlightListManager adManager = new AdminFlightListManager();
                 Boolean check = adManager.addFlight(takeOffTimeStr, landingTimeStr, depDate, price, airlineName, numOfSeat, depID, desID);
                 if (check) {
-                    request.setAttribute("response", "added successfull ");
+                    request.getSession().setAttribute("response", "added successfull");
                 } else {
-                    request.setAttribute("response", "added failed");
+                    request.getSession().setAttribute("response", "added failed");
                 }
                 response.sendRedirect("admin_flight.jsp");
 

@@ -59,9 +59,4 @@ public class UserFlightListManager extends ArrayList<Flight> {
         return m;
 
     }
-
-    public static void main(String[] args) {
-//        "2:20:00", "6:25:00", "06/05/2022", "4400000", "Jetstar Pacific Airlines", "1", "1", "8"
-        System.out.println(searchFlight("1", "1", "05/06/2022"));
-    }
 }

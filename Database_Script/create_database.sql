@@ -60,12 +60,12 @@ create table passenger_ticket(
 	invoice_id int foreign key references invoice(id),
 	firstname nvarchar(15) not null,
 	lastname nvarchar(15) not null,
-	luggage_weight float not null,
-	luggage_price bigint not null,
-	card_id varchar(15),
-	gender varchar(10),
-	nationality varchar(50),
-	dob date
+	luggage_weight float,
+	luggage_price bigint,
+	card_id varchar(15) not null,
+	gender varchar(10) not null,
+	nationality varchar(50) not null,
+	dob date not null
 )
 
 create table seat(

@@ -78,28 +78,4 @@ public class AdminFlightListManager extends ArrayList<Flight> {
             Logger.getLogger(AdminFlightListManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public static void main(String[] args) throws ParseException {
-//        '2:20:00','6:25:00','6-5-2022',4400000,N'Jetstar Pacific Airlines',100,6,8,0
-//        Flight a = new Flight();
-//        a.setTakeOffTime(new Time(2, 20, 00));
-//        a.setLandingTime(new Time(6, 25, 00));
-//        String dateString = "2022-03-13";
-//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        Date date = (Date) format.parse(dateString);
-//        a.setDepartureDate(date);
-//        a.setPrice(3000000);
-//        a.setAirlineName("Jetstar Pacific Airlines");
-//        a.setNoOfSeats(80);
-//        a.setDeparture("1");
-//        a.setDestination("4");
-//        a.setStatus(0);
-
-//        LocalTime x = LocalTime.now();
-//        System.out.println(x);
-//        System.out.println(new AdminFlightListManager().addFlight(a));
-//        System.out.println(a.getDepartureDate());
-        System.out.println(new AdminFlightListManager().addFlight("2:20:00", "6:30:00", "05/05/2024", "4400000", "Jetstar Pacific Airlines", "100", "1", "1"));
-
-    }
 }

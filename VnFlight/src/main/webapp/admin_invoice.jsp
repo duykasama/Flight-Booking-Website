@@ -73,7 +73,8 @@
         <c:set var="begin" value="${(pageNumb-1)*6}"></c:set>
         <c:set var="end" value="${pageNumb*6-1}"></c:set>
         <c:if test="${pageNumb >= Math.ceil(iList.size()/6)}">
-            <c:set var="pageNumb" value="${Math.round(iList.size()/6)}"></c:set>
+            <c:set property="double" var="temp" value="${iList.size()}"></c:set>
+            <c:set var="pageNumb" value="${Math.round(Double.parseDouble(Math.ceil(temp/6)))}"></c:set>
             <c:set var="end" value="${iList.size()-1}"></c:set>
         </c:if>
         <c:if test="${iList.size() == 0}">

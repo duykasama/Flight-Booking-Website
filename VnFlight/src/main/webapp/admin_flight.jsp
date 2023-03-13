@@ -72,7 +72,8 @@
         <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
         <c:set var="end" value="${pageNumb*10-1}"></c:set>
         <c:if test="${pageNumb >= Math.ceil(fList.size()/10)}">
-            <c:set var="pageNumb" value="${Math.round(fList.size()/10)}"></c:set>
+            <c:set property="double" var="temp" value="${fList.size()}"></c:set>
+            <c:set var="pageNumb" value="${Math.round(Double.parseDouble(Math.ceil(temp/10)))}"></c:set>
             <c:set var="end" value="${fList.size()-1}"></c:set>
         </c:if>
         <c:if test="${fList.size() == 0}">

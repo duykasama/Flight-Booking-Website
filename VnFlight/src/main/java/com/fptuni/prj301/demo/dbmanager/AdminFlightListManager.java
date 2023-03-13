@@ -8,10 +8,9 @@ package com.fptuni.prj301.demo.dbmanager;
 import com.fptuni.prj301.demo.model.Flight;
 import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Time;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,25 +25,20 @@ public class AdminFlightListManager extends ArrayList<Flight> {
         loadFlight();
     }
 
-    public boolean addFlight(Flight flight) {
-        String sql = "insert into flight values (?,?,?,?,?,?,?,?,?)";
+    public boolean addFlight(String takeOffTime, String landingTime, String depDate, String price, String airlineName, String numOfSeat, String depID, String desID) {
+        String sql = "insert into flight values (Parse( ? as Time),Parse( ? as Time),Parse( ? as Date),?,?,?,?,?,0)";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setTime(1, flight.getTakeOffTime());
-            ps.setTime(2, flight.getLandingTime());
-            ps.setDate(3, (Date) flight.getDepartureDate());
-            ps.setInt(4, flight.getPrice());
-            ps.setString(5, flight.getAirlineName());
-            ps.setInt(6, flight.getNoOfSeats());
-            ps.setString(7, flight.getDeparture());
-            ps.setString(8, flight.getDestination());
-            ps.setString(9, flight.getStatus());
-            if (flight.getStatus().equalsIgnoreCase("Up Coming")) {
-                ps.setInt(9, 0);
-            } else {
-                ps.setInt(9, 1);
-            }
+            ps.setString(1, takeOffTime);
+            ps.setString(2, landingTime);
+            ps.setString(3, depDate);
+            ps.setString(4, price);
+            ps.setString(5, airlineName);
+            ps.setString(6, numOfSeat);
+            ps.setString(7, depID);
+            ps.setString(8, desID);
+
             if (ps.executeUpdate() > 0) {
                 return true;
             }
@@ -85,21 +79,27 @@ public class AdminFlightListManager extends ArrayList<Flight> {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 //        '2:20:00','6:25:00','6-5-2022',4400000,N'Jetstar Pacific Airlines',100,6,8,0
-        Flight a = new Flight();
-        a.setTakeOffTime(new Time(2, 20, 00));
-        a.setLandingTime(new Time(6, 25, 00));
-        a.setDepartureDate(new Date(2022, 6, 6));
-        a.setPrice(3000000);
-        a.setAirlineName("Jetstar Pacific Airlines");
-        a.setNoOfSeats(100);
-        a.setDeparture("2");
-        a.setDestination("10");
-        a.setStatus(0);
+//        Flight a = new Flight();
+//        a.setTakeOffTime(new Time(2, 20, 00));
+//        a.setLandingTime(new Time(6, 25, 00));
+//        String dateString = "2022-03-13";
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        Date date = (Date) format.parse(dateString);
+//        a.setDepartureDate(date);
+//        a.setPrice(3000000);
+//        a.setAirlineName("Jetstar Pacific Airlines");
+//        a.setNoOfSeats(80);
+//        a.setDeparture("1");
+//        a.setDestination("4");
+//        a.setStatus(0);
 
 //        LocalTime x = LocalTime.now();
 //        System.out.println(x);
-        System.out.println(new AdminFlightListManager().addFlight(a));
+//        System.out.println(new AdminFlightListManager().addFlight(a));
+//        System.out.println(a.getDepartureDate());
+        System.out.println(new AdminFlightListManager().addFlight("2:20:00", "6:30:00", "05/05/2024", "4400000", "Jetstar Pacific Airlines", "100", "1", "1"));
+
     }
 }

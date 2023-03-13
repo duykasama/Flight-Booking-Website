@@ -8,6 +8,7 @@ package com.fptuni.prj301.demo.controller;
 import com.fptuni.prj301.demo.dbmanager.AdminFlightListManager;
 import com.fptuni.prj301.demo.dbmanager.UserAirportListManager;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,13 +31,42 @@ public class AdminFlightController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out;
+        out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-        UserAirportListManager aManager = new UserAirportListManager();
-        request.getSession().setAttribute("airportList", aManager.loadAirport());
-        if (request.getSession().getAttribute("fList") == null) {
-            request.getSession().setAttribute("fList", new AdminFlightListManager());
+        String action = request.getParameter("action");
+        if (action.equalsIgnoreCase("view")) {
+            UserAirportListManager aManager = new UserAirportListManager();
+            request.getSession().setAttribute("airportList", aManager.loadAirport());
+            if (request.getSession().getAttribute("fList") == null) {
+                request.getSession().setAttribute("fList", new AdminFlightListManager());
+            }
+            response.sendRedirect("admin_flight.jsp");
+        } else if (action.equalsIgnoreCase("addflight")) {
+            out.print(action);
+            String takeOffTimeStr = request.getParameter("takeOffTime");
+            String landingTimeStr = request.getParameter("landingTime");
+            String depDate = request.getParameter("depDate");
+            String numOfSeat = request.getParameter("numOfSeat");
+            String depID = request.getParameter("depID");
+            String desID = request.getParameter("desID");
+            String airlineName = request.getParameter("airlineName");
+            String price = request.getParameter("price");
+            try {
+                AdminFlightListManager adManager = new AdminFlightListManager();
+                Boolean check = adManager.addFlight(takeOffTimeStr, landingTimeStr, depDate, price, airlineName, numOfSeat, depID, desID);
+                if (check) {
+                    request.setAttribute("response", "added successfull ");
+                } else {
+                    request.setAttribute("response", "added failed");
+                }
+                response.sendRedirect("admin_flight.jsp");
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
         }
-        response.sendRedirect("admin_flight.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

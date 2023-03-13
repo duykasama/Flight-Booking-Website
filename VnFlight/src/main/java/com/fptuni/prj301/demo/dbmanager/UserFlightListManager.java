@@ -5,10 +5,8 @@
  */
 package com.fptuni.prj301.demo.dbmanager;
 
-import com.fptuni.prj301.demo.model.Airport;
 import com.fptuni.prj301.demo.model.Flight;
 import com.fptuni.prj301.demo.utils.DBUtils;
-import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,5 +57,11 @@ public class UserFlightListManager extends ArrayList<Flight> {
             Logger.getLogger(UserFlightListManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return m;
+
+    }
+
+    public static void main(String[] args) {
+//        "2:20:00", "6:25:00", "06/05/2022", "4400000", "Jetstar Pacific Airlines", "1", "1", "8"
+        System.out.println(searchFlight("1", "1", "05/06/2022"));
     }
 }

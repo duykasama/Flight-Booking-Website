@@ -157,8 +157,10 @@
             <%@include file="/admin_header.jsp" %>                
             <!--<form id="form" class="form" action="" method="post">-->
            
+           <c:url var = "addFlightLink" value="${request.contextPath}/AdminFlightController" />
             <!-- Form starts here -->
-            <form id="form" class="form" action="" method="post">
+            <form id="form" class="form" action="${addFlightLink}" method="post">
+                <input type="hidden" name="action" value="addflight">
                 <h2 class="form-title">ADD FLIGHT </h2>
                 <div class="row form-group">
                     <div class="col-md-6">
@@ -172,8 +174,8 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-md-6">
-                        <label>DEPARTURE TIME</label>
-                        <input name="depTime" type="date" id="fullname" class="form-control" placeholder="departure_date">
+                        <label>DEPARTURE Date</label>
+                        <input name="depDate" type="date" id="fullname" class="form-control" placeholder="departure_date">
                     </div>
                     <div class="col-md-6">
                         <label>STATUS</label>
@@ -200,7 +202,7 @@
                     </div>
                     <div class="col-md-4">
                         <label >NUMBER OF SEAT</label>
-                        <select class="form-control" id="from" placeholder="departure" name="numOfSeats">
+                        <select class="form-control" id="from" placeholder="departure" name="numOfSeat">
                             <option value="80">80 seats</option>
                             <option value="100">100 seats</option>
                             <option value="120">120 seats</option>
@@ -234,17 +236,18 @@
                         <button type="submit" class="btn btn-primary btn-block" value="ADDFLIGHT">ADD FLIGHT</button>
                     </div>
                 </div>
+               
             </form>
 
                
 
             <div id="form-bg" class="form-background" onclick="closeForm()"></div>
-
+            
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
                 <div class="product-status mgtop mg-b-30">
                     
                     <div class="container-fluid">
-                      
+                        <p class="text-danger">${response}</p>
                       
                         <div class="row">
                             

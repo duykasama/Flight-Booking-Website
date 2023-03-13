@@ -7,7 +7,7 @@
             </div>
             <div class="col-xs-8 text-right menu-1">
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/AdminFlightController">FLIGHT</a></li>
+                    <li><a href="${pageContext.request.contextPath}/AdminFlightController?action=view">FLIGHT</a></li>
                     <li class="has-dropdown">
                         <a href="#">MANAGE</a>
                         <ul class="dropdown">

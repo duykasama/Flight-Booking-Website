@@ -22,7 +22,7 @@ public class UserAccessManager {
 
     public static UserSession login(String username, String password) {
         UserSession us = null;
-        String sql = "select [name], [email], [phone] from [user] "
+        String sql = "select [id], [name], [email], [phone] from [user] "
                 + " where [name] = ? and [password] = ?";
         try {
             Connection conn = DBUtils.getConnection();
@@ -36,6 +36,7 @@ public class UserAccessManager {
 
                 us = new UserSession();
 
+                us.setId(rs.getInt("id"));
                 us.setUsername(rs.getString("name"));
                 us.setEmail(rs.getString("email"));
                 us.setPhone(rs.getString("phone"));

@@ -85,36 +85,36 @@
                                             <div class="tab-content">
                                                 <div class="tab-content-inner active" data-content="signup">
                                                     <h3>Ticket Passenger Information</h3>
-                                                    <c:url var="searchFlightLink" value="${request.contextPath}/UserFlightController/searchResult"/>
-                                                    <form action="${searchFlightLink}" name="" method="GET">
+                                                    <c:url var="saveLink" value="${request.contextPath}/UserFlightController/save"/>
+                                                    <form action="${saveLink}" name="" method="GET">
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="firstname">First Name</label>
-                                                                <input class="form-control" id="firstname" name="firstname" type="text">
+                                                                <input class="form-control" id="firstname" name="firstname" type="text" required>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="lastname">Last Name</label>
-                                                                <input class="form-control" id="lastname" name="lastname" type="text">
+                                                                <input class="form-control" id="lastname" name="lastname" type="text" required>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="dob">Date of Birth</label>
-                                                                <input class="form-control" id="dob" name="dob" type="date">
+                                                                <input class="form-control" id="dob" name="dob" type="date" required>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <label for="gender">Gender</label>
+                                                                <label for="gender" required>Gender</label>
                                                                 <ul style="list-style:none">
                                                                     <li>
-                                                                        <input type="radio" id="a-option" name="gender">
+                                                                        <input type="radio" id="a-option" name="gender" value="Male">
                                                                         <label for="a-option">Male</label>
                                                                     </li>
                                                                     <li>
-                                                                        <input type="radio" id="b-option" name="gender">
+                                                                        <input type="radio" id="b-option" name="gender" value="Female">
                                                                         <label for="b-option">Female</label>
                                                                     </li>
                                                                 </ul>
@@ -123,13 +123,13 @@
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="nationality">Nationality</label>
-                                                                <input class="form-control" id="nationality" name="nationality" type="text">
+                                                                <input class="form-control" id="nationality" name="nationality" type="text" required>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="card_id">Card ID</label>
-                                                                <input class="form-control" id="card_id" name="card_id">
+                                                                <input class="form-control" id="card_id" name="cardId" required>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
@@ -137,18 +137,29 @@
                                                                 <label for="luggage">Luggage</label>
                                                                 <ul style="list-style:none">
                                                                     <li>
-                                                                        <input type="checkbox" id="a-option" name="luggage_weight" value="15">
-                                                                        <input type="hidden" name="luggage_price" value="200000">
+                                                                        <input type="checkbox" id="a-option" name="luggageWeight" value="15">
                                                                         <label for="a-option">15kg (200,000 VND)</label>
                                                                     </li>
                                                                     <li>
-                                                                        <input type="checkbox" id="b-option" name="luggage_weight" value="25">
-                                                                        <input type="hidden" name="luggage_price" value="300000">
+                                                                        <input type="checkbox" id="b-option" name="luggageWeight" value="25">
                                                                         <label for="b-option">25kg (300,000 VND)</label>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                        <script>
+                                                            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+                                                            checkboxes.forEach((checkbox) => {
+                                                                checkbox.addEventListener('click', () => {
+                                                                    checkboxes.forEach((otherCheckbox) => {
+                                                                        if (otherCheckbox !== checkbox) {
+                                                                            otherCheckbox.checked = false;
+                                                                        }
+                                                                    });
+                                                                });
+                                                            });
+                                                        </script>
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="seat">Select Seat</label>
@@ -158,7 +169,10 @@
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <div class="col-md-10"></div>
-                                                                <div class="col-md-2"><button type="submit" class="btn btn-primary btn-block" value="save">SAVE</button></div>
+                                                                <div class="col-md-2">
+                                                                    <button type="submit" class="btn btn-primary btn-block" value="save">SAVE</button>
+
+                                                                </div>
                                                             </div>
                                                         </div>                                                        
                                                     </form>	
@@ -269,20 +283,6 @@
 
         <!-- Main -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
-        <script>
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-            checkboxes.forEach((checkbox) => {
-                checkbox.addEventListener('click', () => {
-                    checkboxes.forEach((otherCheckbox) => {
-                        if (otherCheckbox !== checkbox) {
-                            otherCheckbox.checked = false;
-                        }
-                    });
-                });
-            });
-        </script>
-
     </body>
 </html>
 

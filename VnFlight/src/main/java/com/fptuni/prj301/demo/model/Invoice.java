@@ -61,8 +61,11 @@ public class Invoice {
         this.totalPrice = totalPrice;
     }
 
-    public String getPurchaseStatus() {
+    public String getPurchaseStatusString() {
         return (purchaseStatus == 0) ? "Purchasing" : "Purchased";
+    }
+    public int getPurchaseStatus() {
+        return purchaseStatus;
     }
 
     public void setPurchaseStatus(int purchaseStatus) {

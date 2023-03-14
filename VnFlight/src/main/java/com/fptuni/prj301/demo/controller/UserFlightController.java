@@ -10,8 +10,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fptuni.prj301.demo.dbmanager.UserFlightListManager;
-import com.fptuni.prj301.demo.dbmanager.UserAirportListManager;
+import com.fptuni.prj301.demo.dbmanager.UserFlightManager;
+import com.fptuni.prj301.demo.dbmanager.UserAirportManager;
+import com.fptuni.prj301.demo.dbmanager.UserInvoiceManager;
+import com.fptuni.prj301.demo.dbmanager.UserTicketManager;
+import com.fptuni.prj301.demo.model.Invoice;
+import com.fptuni.prj301.demo.model.Ticket;
 
 /**
  *
@@ -34,18 +38,51 @@ public class UserFlightController extends HttpServlet {
         String path = request.getPathInfo();
         System.out.println(path);
         if (path.equals("/search")) {
-            UserAirportListManager aManager = new UserAirportListManager();
+            UserAirportManager aManager = new UserAirportManager();
             request.getSession().setAttribute("airportList", aManager.loadAirport());
             response.sendRedirect(request.getContextPath() + "/user_search_flight.jsp");
         } else if (path.equals("/searchResult")) {
             String departure = request.getParameter("departure");
             String destination = request.getParameter("destination");
             String departure_date = request.getParameter("departure_date");
-            UserFlightListManager fManager = new UserFlightListManager();
+            UserFlightManager fManager = new UserFlightManager();
             request.getSession().setAttribute("flightList", fManager.searchFlight(departure, destination, departure_date));
             response.sendRedirect(request.getContextPath() + "/user_search_flight_result.jsp");
-        } else if (path.equals("/purchase")) {
+        } else if (path.equals("/createInvoice")) {
+            
+            String userID = request.getParameter("userID");
+            String flightID = request.getParameter("flightID");
+            String bookingDate = request.getParameter("bookingDate");
+            String purchaseStatus = request.getParameter("purchaseStatus");
+            
+            UserInvoiceManager iManager = new UserInvoiceManager();
+            Invoice iTem = iManager.createInvoiceTemp(userID, flightID, bookingDate, purchaseStatus);
+            request.getSession().setAttribute("tempInvoice", iTem);
+
             response.sendRedirect(request.getContextPath() + "/user_search_flight_detail.jsp");
+            
+        } else if (path.equals("/save")) {
+            
+            int invoiceID = UserInvoiceManager.insertReturnInvoiceID((Invoice) request.getSession().getAttribute("tempInvoice"));
+            
+            String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
+            String luggageWeight = request.getParameter("luggageWeight");
+            String cardID = request.getParameter("cardID");
+            String gender = request.getParameter("gender");
+            String nationality = request.getParameter("nationality");
+            String dob = request.getParameter("dob");
+            
+            UserTicketManager tManager = new UserTicketManager();
+            Ticket tTem = tManager.createTicketTemp(invoiceID, firstname, lastname, luggageWeight, cardID, gender, nationality, dob);
+            request.getSession().setAttribute("tempTicket", tTem);
+            
+            UserTicketManager.insertTicket((Ticket) request.getSession().getAttribute("tempTicket"));
+            
+            response.sendRedirect(request.getContextPath() + "/user_search_flight_detail.jsp");
+        } else if (path.equals("/addToCart")) {
+            
+            response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

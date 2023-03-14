@@ -83,12 +83,12 @@
                                             <div class="tab-content">
                                                 <div class="tab-content-inner active" data-content="signup">
                                                     <h3>FLIGHT SEARCH </h3>
-                                                    <c:url var="searchFlightLink" value="${request.contextPath}/UserFlightController/searchResult"/>
-                                                    <form action="${searchFlightLink}" name="" method="GET">
+                                                    <c:url var="searchFlightLink" value="${request.contextPath}/UserFlightController/searchResult" />
+                                                    <form action="${searchFlightLink}" name="" method="GET" onsubmit="this.target = '_blank';">
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="from">FROM</label>
-                                                                <select class="form-control" id="from" placeholder="departure" name="departure">
+                                                                <select class="form-control" id="from" placeholder="departure" name="departure" >
                                                                     <option></option>
                                                                     <c:forEach var="i" begin="0" end="22">
                                                                         <option value="${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
@@ -110,8 +110,12 @@
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <label for="fullname">DEPARTURE TIME</label>
-                                                                <input type="date" id="fullname" class="form-control" placeholder="departure_date" name="departure_date">
+                                                                <label for="departure_date">DEPARTURE TIME</label>
+                                                                <input type="date" id="departure_date" class="form-control" placeholder="departure_date" name="departure_date">
+                                                                <script>
+                                                                    var today = new Date().toISOString().substr(0, 10);
+                                                                    document.getElementById("departure_date").value = today;
+                                                                </script>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">

@@ -19,9 +19,9 @@ import java.util.logging.Logger;
  *
  * @author MSI GF63
  */
-public class AdminFlightListManager extends ArrayList<Flight> {
+public class AdminFlightManager extends ArrayList<Flight> {
 
-    public AdminFlightListManager() {
+    public AdminFlightManager() {
         loadFlight();
     }
 
@@ -42,6 +42,8 @@ public class AdminFlightListManager extends ArrayList<Flight> {
             if (ps.executeUpdate() > 0) {
                 return true;
             }
+            ps.close();
+            conn.close();
 
         } catch (Exception e) {
             System.out.println(e);
@@ -75,7 +77,7 @@ public class AdminFlightListManager extends ArrayList<Flight> {
             stm.close();
             conn.close();
         } catch (Exception ex) {
-            Logger.getLogger(AdminFlightListManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminFlightManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

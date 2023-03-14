@@ -12,10 +12,20 @@ import java.util.Date;
  */
 public class UserSession {
 
+    private int id;
     private String username;
     private String accessRight;
     private String phone;
     private String email;
+    private Date loginDate;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Date getLoginDate() {
         return loginDate;
@@ -32,7 +42,6 @@ public class UserSession {
     public void setLoginDate(Date loginDate) {
         this.loginDate = loginDate;
     }
-    private Date loginDate;
 
     /**
      * Get the value of username

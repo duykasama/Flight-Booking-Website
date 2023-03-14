@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fptuni.prj301.demo.dbmanager.AdminFlightListManager;
+import com.fptuni.prj301.demo.dbmanager.AdminFlightManager;
 import com.fptuni.prj301.demo.dbmanager.UserAccessManager;
 import com.fptuni.prj301.demo.dbmanager.AdminUserListManager;
 import com.fptuni.prj301.demo.model.UserSession;

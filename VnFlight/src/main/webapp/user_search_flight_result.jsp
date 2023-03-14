@@ -51,6 +51,8 @@
         <!-- Theme style  -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productlist.css">
+        <!--<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login_popup_form.css">-->
+        <!--<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleLogin.css">-->
         <!-- Modernizr JS -->
         <script src="${pageContext.request.contextPath}/js/modernizr-2.6.2.min.js"></script>
         <!-- FOR IE9 below -->
@@ -117,8 +119,9 @@
 
 
             <!-- <div class="page-inner"> -->
-            <%@include file="/user_header.jsp" %>                
-
+            <%@include file="/user_header.jsp" %>   
+            <!--loginpop-->
+            <%--<%@include file="/login_popup_form.jsp" %>--%>  
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
                 <div class="product-status mgtop mg-b-30">
                     <div class="container-fluid">
@@ -126,9 +129,6 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="product-status-wrap">
                                     <h4>Flight List</h4>
-                                    <div class="add-product">
-                                        <a href="#">Add Flight</a>
-                                    </div>
                                     <table>
                                         <tr>
                                             <th>Flight ID</th>
@@ -150,15 +150,36 @@
                                                     <td>${flightList.get(i).getDepartureDate()}</td>
                                                     <td>${flightList.get(i).getTakeOffTime()}</td>
                                                     <td>${flightList.get(i).getNoOfSeats()}</td>
+
                                                     <c:choose>
                                                         <c:when test="${flightList.get(i).getStatus().equals('Up Coming')}">
-                                                            <td><button class="pd-setting">${flightList.get(i).getStatus()}</button></td>
+                                                            <td><button class="pd-setting" style="cursor: text">${flightList.get(i).getStatus()}</button></td>
                                                             </c:when>
                                                             <c:otherwise>
-                                                            <td><button class="ds-setting">${flightList.get(i).getStatus()}</button></td>
+                                                            <td><button class="ds-setting" style="cursor: text">${flightList.get(i).getStatus()}</button></td>
                                                             </c:otherwise>
                                                         </c:choose>
-                                                    <td><a href="${pageContext.request.contextPath}/UserFlightController/purchase">Purchase</a></td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${usersession != null}">
+                                                                <c:url var="detailLink" value="${request.contextPath}/UserFlightController/createInvoice"/>
+                                                                <form action="${detailLink}" name="" method="POST">
+                                                                    <input type="hidden" name="userID" value="${usersession.getId()}"/>
+                                                                    <input type="hidden" name="flightID" value="${flightList.get(i).getId()}"/>
+                                                                    <input type="hidden" name="bookingDate" id="bookingDate" value=""/>
+                                                                    <script>
+                                                                        var today = new Date().toISOString().substr(0, 10);
+                                                                        document.getElementById("bookingDate").value = today;
+                                                                    </script>
+                                                                    <input type="hidden" name="purchaseStatus" value="0"/>
+                                                                    <button class="pd-setting" type="submit">Purchase</button>
+                                                                </form>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${pageContext.request.contextPath}/user_login_popup.jsp">Login and Purchase</a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                         </c:if>
@@ -266,6 +287,7 @@
 
 <!-- Main -->
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
+<!--<script src="${pageContext.request.contextPath}/js/login_popup_form.js"></script>-->
 
 </body>
 </html>

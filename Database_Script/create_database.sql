@@ -51,8 +51,13 @@ create table invoice(
 	[user_id] int not null foreign key references [user](id),
 	flight_id int not null foreign key references flight(id),
 	booking_date date not null,
-	total_price bigint not null,
+	total_price bigint,
 	purchase_status int not null
+)
+
+create table luggage(
+	[weight] float primary key,
+	[price] bigint not null,
 )
 
 create table passenger_ticket(
@@ -60,8 +65,7 @@ create table passenger_ticket(
 	invoice_id int foreign key references invoice(id),
 	firstname nvarchar(15) not null,
 	lastname nvarchar(15) not null,
-	luggage_weight float,
-	luggage_price bigint,
+	luggage_weight float foreign key references luggage([weight]),
 	card_id varchar(15) not null,
 	gender varchar(10) not null,
 	nationality varchar(50) not null,

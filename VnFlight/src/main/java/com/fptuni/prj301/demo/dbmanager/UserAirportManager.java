@@ -18,17 +18,17 @@ import java.util.logging.Logger;
  *
  * @author MSI GF63
  */
-public class UserAirportListManager extends ArrayList<Airport> {
+public class UserAirportManager extends ArrayList<Airport> {
 
-        public static UserAirportListManager loadAirport() {
-        UserAirportListManager a = null;
+        public static UserAirportManager loadAirport() {
+        UserAirportManager a = null;
         String sql = "select id, name \n"
                 + "from airport \n";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            a = new UserAirportListManager();
+            a = new UserAirportManager();
             while (rs.next()) {
                 Airport airport = new Airport();
                 airport.setId(rs.getInt(1));
@@ -39,7 +39,7 @@ public class UserAirportListManager extends ArrayList<Airport> {
             stm.close();
             conn.close();
         } catch (Exception ex) {
-            Logger.getLogger(UserAirportListManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserAirportManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return a;
     }

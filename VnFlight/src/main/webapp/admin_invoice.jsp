@@ -216,11 +216,11 @@
                                                 <td>${iList.get(i).getBookingDate()}</td>
                                                 <td>${iList.get(i).getTotalPrice()}</td>
                                                 <c:choose>
-                                                    <c:when test="${iList.get(i).getPurchaseStatus().equals('Purchasing')}">
-                                                        <td><button class="pd-setting">${iList.get(i).getPurchaseStatus()}</button></td>
+                                                    <c:when test="${iList.get(i).getPurchaseStatusString().equals('Purchasing')}">
+                                                        <td><button class="pd-setting">${iList.get(i).getPurchaseStatusString()}</button></td>
                                                     </c:when>
-                                                    <c:when test="${iList.get(i).getPurchaseStatus().equals('Purchased')}">
-                                                        <td><button class="ds-setting">${iList.get(i).getPurchaseStatus()}</button></td>
+                                                    <c:when test="${iList.get(i).getPurchaseStatusString().equals('Purchased')}">
+                                                        <td><button class="ds-setting">${iList.get(i).getPurchaseStatusString()}</button></td>
                                                     </c:when>
                                                 </c:choose>
                                                 <td><a href="">edit</a></td>

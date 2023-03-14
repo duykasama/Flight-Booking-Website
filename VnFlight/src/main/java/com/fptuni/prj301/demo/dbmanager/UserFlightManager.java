@@ -18,10 +18,10 @@ import java.util.logging.Logger;
  *
  * @author MSI GF63
  */
-public class UserFlightListManager extends ArrayList<Flight> {
+public class UserFlightManager extends ArrayList<Flight> {
 
-    public static UserFlightListManager searchFlight(String departure, String destination, String departure_date) {
-        UserFlightListManager m = null;
+    public static UserFlightManager searchFlight(String departure, String destination, String departure_date) {
+        UserFlightManager m = null;
         String sql = "select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status \n"
                 + "from flight fl join airport ap1 on fl.departure_id = ap1.id \n"
                 + "join airport ap2 on fl.destination_id = ap2.id \n"
@@ -35,7 +35,7 @@ public class UserFlightListManager extends ArrayList<Flight> {
             stm.setString(3, departure_date);
 
             ResultSet rs = stm.executeQuery();
-            m = new UserFlightListManager();
+            m = new UserFlightManager();
             while (rs.next()) {
                 Flight flight = new Flight();
                 flight.setId(rs.getInt(1));
@@ -54,7 +54,7 @@ public class UserFlightListManager extends ArrayList<Flight> {
             stm.close();
             conn.close();
         } catch (Exception ex) {
-            Logger.getLogger(UserFlightListManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserFlightManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return m;
 

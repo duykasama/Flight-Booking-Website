@@ -18,7 +18,6 @@ public class Ticket {
     private String firstName;
     private String lastName;
     private float luggageWeight;
-    private long luggagePrice;
     private String cardId;
     private String gender;
     private String nationality;
@@ -63,14 +62,6 @@ public class Ticket {
 
     public void setLuggageWeight(float luggageWeight) {
         this.luggageWeight = luggageWeight;
-    }
-
-    public long getLuggagePrice() {
-        return luggagePrice;
-    }
-
-    public void setLuggagePrice(long luggagePrice) {
-        this.luggagePrice = luggagePrice;
     }
 
     public String getCardId() {

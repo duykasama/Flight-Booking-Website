@@ -107,19 +107,18 @@ public class UserAccessController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/user_account.jsp");
                 rd.forward(request, response);
                 return;
-            }
-            // update  in the database
-            else{
-            UserAccessManager manager = new UserAccessManager();
-            manager.updateUser(email, phone, username);
-            us.setEmail(email);
-            us.setPhone(phone);
+            } // update  in the database
+            else {
+                UserAccessManager manager = new UserAccessManager();
+                manager.updateUser(email, phone, username);
+                us.setEmail(email);
+                us.setPhone(phone);
 
-            //   redirect the user to the success page
-            request.setAttribute("Profile_msg", "Changed Successfully");
-            request.setAttribute("Profile_msg_color", "green");
-            RequestDispatcher rd = request.getRequestDispatcher("/user_account.jsp");
-            rd.forward(request, response);
+                //   redirect the user to the success page
+                request.setAttribute("Profile_msg", "Changed Successfully");
+                request.setAttribute("Profile_msg_color", "green");
+                RequestDispatcher rd = request.getRequestDispatcher("/user_account.jsp");
+                rd.forward(request, response);
             }
 
         } else if (path.equals("/editPassword")) {
@@ -162,6 +161,60 @@ public class UserAccessController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/user_account_password.jsp");
             rd.forward(request, response);
 
+        } else if (path.equals("/loginPopup")) {
+
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            if (username == null || password == null) {
+                request.setAttribute("login_msg", "Please Enter Username and Password");
+                RequestDispatcher rd = request.getRequestDispatcher("/user_login_popup.jsp");
+                rd.forward(request, response);
+            } else {
+                UserAccessManager manager = new UserAccessManager();
+                UserSession us = manager.login(username, password);
+                HttpSession ss = request.getSession(true);
+                //success
+                if (us != null) {
+                    ss.setAttribute("usersession", us);
+                    ss.setAttribute("password", password);
+                    ss.setAttribute("userID", manager.searchByName(us.getUsername()));
+                    response.sendRedirect(request.getContextPath() + "/user_search_flight_result.jsp");
+                } else {
+                    //unsuccessful
+                    request.setAttribute("login_msg", "Wrong username or password");
+                    ss.removeAttribute("usersession");
+                    ss.removeAttribute("password");
+                    RequestDispatcher rd = request.getRequestDispatcher("/user_login_popup.jsp");
+                    rd.forward(request, response);
+                }
+            }
+
+        } else if (path.equals("/signupPopup")) {
+
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+
+            if (username == null || password == null) {
+                request.setAttribute("signup_msg", "Please Enter Username and Password");
+                RequestDispatcher rd = request.getRequestDispatcher("/user_login_popup.jsp");
+                rd.forward(request, response);
+            } else {
+
+                UserAccessManager manager = new UserAccessManager();
+                if (manager.isUserExist(username)) {
+                    request.setAttribute("signup_msg", "Username Exists, Signup Fails");
+                    RequestDispatcher rd = request.getRequestDispatcher("/user_login_popup.jsp");
+                    rd.forward(request, response);
+                } else {
+                    manager.signup(username, password, email, phone);
+                    request.setAttribute("signup_msg", "Signup Succeeds");
+                    RequestDispatcher rd = request.getRequestDispatcher("/user_login_popup.jsp");
+                    rd.forward(request, response);
+                }
+            }
         }
     }
 

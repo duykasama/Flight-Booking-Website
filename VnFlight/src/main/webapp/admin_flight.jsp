@@ -127,7 +127,7 @@
                 <div class="product-status mgtop mg-b-30">
                     
                     <div class="container-fluid">
-                        <p class="text-danger">${response}</p>
+                        <h4 class="gold-color">${flight_msg}</h4>
                         <div class="row">
                             
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

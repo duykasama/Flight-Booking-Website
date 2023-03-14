@@ -5,8 +5,8 @@
  */
 package com.fptuni.prj301.demo.controller;
 
-import com.fptuni.prj301.demo.dbmanager.AdminFlightListManager;
-import com.fptuni.prj301.demo.dbmanager.UserAirportListManager;
+import com.fptuni.prj301.demo.dbmanager.AdminFlightManager;
+import com.fptuni.prj301.demo.dbmanager.UserAirportManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,10 +36,10 @@ public class AdminFlightController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         if (action.equalsIgnoreCase("view")) {
-            UserAirportListManager aManager = new UserAirportListManager();
+            UserAirportManager aManager = new UserAirportManager();
             request.getSession().setAttribute("airportList", aManager.loadAirport());
             if (request.getSession().getAttribute("fList") == null) {
-                request.getSession().setAttribute("fList", new AdminFlightListManager());
+                request.getSession().setAttribute("fList", new AdminFlightManager());
             }
             response.sendRedirect("admin_flight.jsp");
         } else if (action.equalsIgnoreCase("addflight")) {
@@ -53,12 +53,12 @@ public class AdminFlightController extends HttpServlet {
             String airlineName = request.getParameter("airlineName");
             String price = request.getParameter("price");
             try {
-                AdminFlightListManager adManager = new AdminFlightListManager();
+                AdminFlightManager adManager = new AdminFlightManager();
                 Boolean check = adManager.addFlight(takeOffTimeStr, landingTimeStr, depDate, price, airlineName, numOfSeat, depID, desID);
                 if (check) {
-                    request.getSession().setAttribute("response", "added successfull");
+                    request.getSession().setAttribute("flight_msg", "Added Successfully");
                 } else {
-                    request.getSession().setAttribute("response", "added failed");
+                    request.getSession().setAttribute("flight_msg", "Added Failed");
                 }
                 response.sendRedirect("admin_flight.jsp");
 

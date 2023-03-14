@@ -19,9 +19,9 @@ import java.util.Locale;
  *
  * @author MSI GF63
  */
-public class InvoiceListManager extends ArrayList<Invoice> {
+public class AdminInvoiceManager extends ArrayList<Invoice> {
 
-    public InvoiceListManager() {
+    public AdminInvoiceManager() {
         loadInvoice();
     }
 

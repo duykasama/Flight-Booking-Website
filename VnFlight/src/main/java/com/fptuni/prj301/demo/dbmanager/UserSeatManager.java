@@ -20,11 +20,11 @@ import java.util.List;
  *
  * @author Administrator
  */
-public class SeatManager  {
+public class UserSeatManager extends ArrayList<Seat>  {
 
-    public List<Seat> loadSeat(int flightID) {
+    public UserSeatManager loadSeat(int flightID) {
         String sql = "SELECT seat_id, seat_number, passenger_ticket_id, seat_status FROM [seat] WHERE flightID = ?";
-       List<Seat> seats = new ArrayList<>();
+       UserSeatManager seats = new UserSeatManager();
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement stm = conn.prepareStatement(sql)) {
             stm.setInt(1, flightID);

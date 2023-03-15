@@ -41,7 +41,7 @@ VALUES
 INSERT INTO invoice ([user_id], flight_id, booking_date, total_price, purchase_status)
 VALUES 
     (1, 1, '2023-03-15', 500000, 1),
-	(1, 2, '2023-03-15', 500000, 1),
+	(1, 2, '2023-03-15', 500000, 0),
     (2, 2, '2023-03-18', 300000, 1),
     (1, 3, '2023-03-20', 800000, 0);
 

@@ -126,7 +126,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="product-status-wrap">
-                                    <h4>Flight List</h4>
+                                    <h4>Invoice List</h4>
                                     <table>
                                         <tr>
                                             <th>Invoice ID</th>
@@ -152,19 +152,21 @@
                                                     <td>${BookingHistory.get(i).getSeatNumber()}</td>
                                                     <td>${BookingHistory.get(i).getTotalPrice()}</td>
 
-                                                    <c:choose>
-                                                        <c:when test="${BookingHistory.get(i).getPurchaseStatus()==1}">
-                                                            <td>Done</td>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <td>
-                                                                <form method="POST" action="${pageContext.request.contextPath}/BookingController">
-                                                                    <input type="hidden" name="bookingID" value="${BookingHistory.get(i).getBookingID()}"/>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${BookingHistory.get(i).getPurchaseStatus()==1}">
+                                                                Done
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <form method="POST" action="${pageContext.request.contextPath}/BookingHistoryController/finish">
+                                                                    <input type="hidden" name="seatNumber" value="${BookingHistory.get(i).getSeatNumber()}"/>
+                                                                    <input type="hidden" name="invoiceID" value="${BookingHistory.get(i).getInvoiceId()}"/>
+                                                                    <input type="hidden" name="flightID" value="${BookingHistory.get(i).getFlightId()}"/>
                                                                     <button class="btn btn-success" type="submit">Finish Booking</button>
                                                                 </form>
-                                                            </td>
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                         </c:if>

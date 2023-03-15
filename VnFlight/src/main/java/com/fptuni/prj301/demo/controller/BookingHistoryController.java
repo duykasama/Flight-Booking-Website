@@ -32,12 +32,23 @@ public class BookingHistoryController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");  response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         String path = request.getPathInfo();
         System.out.println(path);
         if (path.equals("/history")) {
-           BookingHistoryManager fManager = new BookingHistoryManager();
+            BookingHistoryManager fManager = new BookingHistoryManager();
             request.getSession().setAttribute("BookingHistory", fManager.getBookingHistory((int) request.getSession().getAttribute("userID")));
+            response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
+
+        } else if (path.equals("/finish")) {
+            BookingHistoryManager fManager = new BookingHistoryManager();
+            int invoiceId = Integer.parseInt(request.getParameter("invoiceID"));
+            int flightId = Integer.parseInt(request.getParameter("flightID"));
+            String seatNumber = request.getParameter("seatNumber");
+            
+            fManager.updateInvoicePurchaseStatus((int) request.getSession().getAttribute("userID"), invoiceId, flightId, seatNumber);
+             request.getSession().setAttribute("BookingHistory", fManager.getBookingHistory((int) request.getSession().getAttribute("userID")));
             response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
 
         }

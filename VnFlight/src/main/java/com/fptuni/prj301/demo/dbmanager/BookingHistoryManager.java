@@ -10,6 +10,7 @@ import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,29 +19,30 @@ import java.util.List;
  * @author Administrator
  */
 public class BookingHistoryManager {
-     public List<BookingHistory> getBookingHistory(int userId) {
+
+    public List<BookingHistory> getBookingHistory(int userId) {
         List<BookingHistory> bookings = new ArrayList<>();
-        String sql = "SELECT i.id AS invoice_id, " +
-                "f.id AS flight_id, " +
-                "f.airline_name AS airline_name, " +
-                "dep.name AS departure, " +
-                "dest.name AS destination, " +
-                "f.takeoff_time, " +
-                "f.departure_date, " +
-                "s.seat_number, " +
-                "i.total_price, " +
-                "i.purchase_status " +
-                "FROM [user] u "+
-                "JOIN invoice i ON u.id = i.user_id " +
-                "JOIN flight f ON i.flight_id = f.id " +
-                "JOIN airport dep ON f.departure_id = dep.id " +
-                "JOIN airport dest ON f.destination_id = dest.id " +
-                "JOIN passenger_ticket pt ON i.id = pt.invoice_id " +
-                "JOIN seat s ON pt.id = s.passenger_ticket_id " +
-                "WHERE u.id = ?";
+        String sql = "SELECT i.id AS invoice_id, "
+                + "f.id AS flight_id, "
+                + "f.airline_name AS airline_name, "
+                + "dep.name AS departure, "
+                + "dest.name AS destination, "
+                + "f.takeoff_time, "
+                + "f.departure_date, "
+                + "s.seat_number, "
+                + "i.total_price, "
+                + "i.purchase_status "
+                + "FROM [user] u "
+                + "JOIN invoice i ON u.id = i.user_id "
+                + "JOIN flight f ON i.flight_id = f.id "
+                + "JOIN airport dep ON f.departure_id = dep.id "
+                + "JOIN airport dest ON f.destination_id = dest.id "
+                + "JOIN passenger_ticket pt ON i.id = pt.invoice_id "
+                + "JOIN seat s ON pt.id = s.passenger_ticket_id "
+                + "WHERE u.id = ?";
 
         try (Connection conn = DBUtils.getConnection();
-             PreparedStatement statement = conn.prepareStatement(sql)) {
+                PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
 
@@ -54,13 +56,38 @@ public class BookingHistoryManager {
                 booking.setTakeOffTime(resultSet.getTime(6));
                 booking.setDepartureDate(resultSet.getDate(7));
                 booking.setSeatNumber(resultSet.getString(8));
-                booking.setTotalPrice( resultSet.getLong(9));
+                booking.setTotalPrice(resultSet.getLong(9));
                 booking.setPurchaseStatus(resultSet.getInt(10));
                 bookings.add(booking);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return bookings;
+    }
+
+    public void updateInvoicePurchaseStatus(int userId, int invoiceId, int flightId, String seatNumber) {
+        String query = "UPDATE [invoice] " +
+                     "SET purchase_status = 1 " +
+                     "FROM [invoice] i " +
+                     "JOIN passenger_ticket pt ON i.id = pt.invoice_id " +
+                     "JOIN seat s ON pt.id = s.passenger_ticket_id " +
+                     "WHERE i.user_id = ? AND i.purchase_status = 0 AND i.id = ? AND i.flight_id = ? AND s.seat_number = ?";
+
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setInt(1, userId);
+            ps.setInt(2, invoiceId);
+            ps.setInt(3, flightId);
+            ps.setString(4, seatNumber);
+            ResultSet rs = ps.executeQuery();
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

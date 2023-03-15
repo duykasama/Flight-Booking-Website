@@ -59,15 +59,67 @@
 
     </head>
     <body>
+        <c:choose>
+            <c:when test="${param.page != null}">
+                <c:set var="pageNumb" value="${param.page}"></c:set>
+            </c:when>
+            <c:otherwise>
+                <c:set var="pageNumb" value="1"></c:set>
+            </c:otherwise>
+        </c:choose>
+        <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
+        <c:set var="end" value="${pageNumb*10-1}"></c:set>
+        <c:if test="${pageNumb >= Math.ceil(BookingHistory.size()/10)}">
+            <c:set property="double" var="temp" value="${BookingHistory.size()}"></c:set>
+            <c:set var="pageNumb" value="${Math.round(Double.parseDouble(Math.ceil(temp/10)))}"></c:set>
+            <c:set var="end" value="${BookingHistory.size()-1}"></c:set>
+        </c:if>
+        <c:if test="${BookingHistory.size() == 0}">
+            <c:set var="pageNumb" value="1"></c:set>
+            <c:set var="begin" value="0"></c:set>
+            <c:set var="end" value="0"></c:set>
+        </c:if>
+
+        <c:url var="urlNext" value="/user_booking_history.jsp">
+            <c:choose>
+                <c:when test="${Math.ceil(BookingHistory.size()/10) == pageNumb || BookingHistory.size()==0}">
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb+1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlPrev" value="/user_booking_history.jsp">
+            <c:choose>
+                <c:when test="${pageNumb == 1}">
+                    <c:param name="page" value="1"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb-1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlDoubleNext" value="/user_booking_history.jsp">
+            <c:choose>
+                <c:when test="${pageNumb <= Math.ceil(BookingHistory.size()/10)-2}">
+                    <c:param name="page" value="${pageNumb+2}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:otherwise>
+            </c:choose>
+
+        </c:url>
 
         <div class="gtco-loader"></div>
-
         <div id="page">
 
 
             <!-- <div class="page-inner"> -->
-            <%@include file="/user_header.jsp" %>
-
+            <%@include file="/user_header.jsp" %>   
+            <!--loginpop-->
+            <%--<%@include file="/login_popup_form.jsp" %>--%>  
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
                 <div class="product-status mgtop mg-b-30">
                     <div class="container-fluid">
@@ -75,218 +127,151 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="product-status-wrap">
                                     <h4>Flight List</h4>
-                                   
                                     <table>
                                         <tr>
+                                            <th>Invoice ID</th>
                                             <th>Flight ID</th>
                                             <th>Airline</th>
                                             <th>From</th>
                                             <th>To</th>
+                                            <th>Time</th>
                                             <th>Date</th>
-                                            <th>Dep.Time</th>
                                             <th>Seat</th>
-                                            <th>Status</th>
-                                            
+                                            <th>Price</th>
+                                            <th>Purchase</th>
                                         </tr>
-                                        <tr>
+                                        <c:if test="${BookingHistory.size() > 0}">
+                                            <c:forEach var="i" begin="${begin}" end="${end}">
+                                                <tr><td>${BookingHistory.get(i).getInvoiceId()}</td>
+                                                    <td>${BookingHistory.get(i).getFlightId()}</td>
+                                                    <td>${BookingHistory.get(i).getAirlineName()}</td>
+                                                    <td>${BookingHistory.get(i).getDeparture()}</td>
+                                                    <td>${BookingHistory.get(i).getDestination()}</td>
+                                                    <td>${BookingHistory.get(i).getTakeOffTime()}</td>
+                                                    <td>${BookingHistory.get(i).getDepartureDate()}</td>
+                                                    <td>${BookingHistory.get(i).getSeatNumber()}</td>
+                                                    <td>${BookingHistory.get(i).getTotalPrice()}</td>
 
-                                            <td>VNF001</td>
-
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="pd-setting">On Going</button>
-                                            </td>
-                                            
-
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="ps-setting">Up Coming</button>
-                                            </td>
-                                            
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="ds-setting">Taken off</button>
-                                            </td>
-                                            
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="pd-setting">On Going</button>
-                                            </td>
-                                            
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="pd-setting">On Going</button>
-                                            </td>
-                                            
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>VNF001</td>
-
-                                            <td>Vietnam Airlines</td>
-                                            <td>HCM</td>
-                                            <td>HAN</td>
-                                            <td>1/1/2022</td>
-                                            <td>05:00</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button class="ps-setting">Up Coming</button>
-                                            </td>
-                                            
-                                        </tr>
+                                                    <c:choose>
+                                                        <c:when test="${BookingHistory.get(i).getPurchaseStatus()==1}">
+                                                            <td>Done</td>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <td>
+                                                                <form method="POST" action="${pageContext.request.contextPath}/BookingController">
+                                                                    <input type="hidden" name="bookingID" value="${BookingHistory.get(i).getBookingID()}"/>
+                                                                    <button class="btn btn-success" type="submit">Finish Booking</button>
+                                                                </form>
+                                                            </td>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
                                     </table>
                                     <div class="custom-pagination">
                                         <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlPrev}">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">${pageNumb}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlNext}">${pageNumb+1}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlDoubleNext}">${pageNumb+2}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlNext}">Next</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
+
+            </header>
+
+
+
+            <footer id="gtco-footer" role="contentinfo">
+                <div class="gtco-container">
+                    <div class="row row-p	b-md">
+
+                        <div class="col-md-3">
+                            <div class="gtco-widget">
+                                <h3>About Us</h3>
+                                <p>VnFlight is a website that provides the service for booking domestic flight tickets.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-md-push-1">
+                            <h3>Member</h3>
+                            <ul class="gtco-footer-links">
+                                <li><a href="#">Nguyen Hung Hai</a></li>
+                                <li><a href="#">Nguyen Ba Huy</a></li>
+                                <li><a href="#">Nguyen Thanh Duy</a></li>
+                                <li><a href="#">Le Trung Duc</a></li>
+                            </ul>
+                        </div>
+
+
+
+                        <div class="col-md-3 col-md-push-1">
+                            <div class="gtco-widget">
+                                <h3>Get In Touch</h3>
+                                <ul class="gtco-quick-contact">
+                                    <li><a href="#"><i class="icon-phone"></i> +01 234 567 89</a></li>
+                                    <li><a href="#"><i class="icon-mail2"></i> vnflight@prj301.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-md-push-1">
+                            <div class="gtco-widget">
+                                <h3>Media</h3>
+                                <ul class="gtco-quick-contact">
+                                    <li><a href="#"><i class="icon-facebook"></i> vnflight.fb.com</a></li>
+                                    <li><a href="#"><i class="icon-twitter"></i> vnflight@twt.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </footer>
+            <!-- </div> -->
 
         </div>
 
-    </header>
-
-
-
-    <footer id="gtco-footer" role="contentinfo">
-        <div class="gtco-container">
-            <div class="row row-p	b-md">
-
-                <div class="col-md-3">
-                    <div class="gtco-widget">
-                        <h3>About Us</h3>
-                        <p>VnFlight is a website that provides the service for booking domestic flight tickets.</p>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-md-push-1">
-                    <h3>Member</h3>
-                    <ul class="gtco-footer-links">
-                        <li><a href="#">Nguyen Hung Hai</a></li>
-                        <li><a href="#">Nguyen Ba Huy</a></li>
-                        <li><a href="#">Nguyen Thanh Duy</a></li>
-                        <li><a href="#">Le Trung Duc</a></li>
-                    </ul>
-                </div>
-
-
-
-                <div class="col-md-3 col-md-push-1">
-                    <div class="gtco-widget">
-                        <h3>Get In Touch</h3>
-                        <ul class="gtco-quick-contact">
-                            <li><a href="#"><i class="icon-phone"></i> +01 234 567 89</a></li>
-                            <li><a href="#"><i class="icon-mail2"></i> vnflight@prj301.com</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-3 col-md-push-1">
-                    <div class="gtco-widget">
-                        <h3>Media</h3>
-                        <ul class="gtco-quick-contact">
-                            <li><a href="#"><i class="icon-facebook"></i> vnflight.fb.com</a></li>
-                            <li><a href="#"><i class="icon-twitter"></i> vnflight@twt.com</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-
-
-
+        <div class="gototop js-top">
+            <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
         </div>
-    </footer>
-    <!-- </div> -->
 
-</div>
+        <!-- jQuery -->
+        <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+        <!-- jQuery Easing -->
+        <script src="${pageContext.request.contextPath}/js/jquery.easing.1.3.js"></script>
+        <!-- Bootstrap -->
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <!-- Waypoints -->
+        <script src="${pageContext.request.contextPath}/js/jquery.waypoints.min.js"></script>
+        <!-- Carousel -->
+        <script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+        <!-- countTo -->
+        <script src="${pageContext.request.contextPath}/js/jquery.countTo.js"></script>
 
-<div class="gototop js-top">
-    <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-</div>
+        <!-- Stellar Parallax -->
+        <script src="${pageContext.request.contextPath}/js/jquery.stellar.min.js"></script>
 
-<!-- jQuery -->
-<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<!-- jQuery Easing -->
-<script src="${pageContext.request.contextPath}/js/jquery.easing.1.3.js"></script>
-<!-- Bootstrap -->
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<!-- Waypoints -->
-<script src="${pageContext.request.contextPath}/js/jquery.waypoints.min.js"></script>
-<!-- Carousel -->
-<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-<!-- countTo -->
-<script src="${pageContext.request.contextPath}/js/jquery.countTo.js"></script>
+        <!-- Magnific Popup -->
+        <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/magnific-popup-options.js"></script>
 
-<!-- Stellar Parallax -->
-<script src="${pageContext.request.contextPath}/js/jquery.stellar.min.js"></script>
-
-<!-- Magnific Popup -->
-<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/magnific-popup-options.js"></script>
-
-<!-- Datepicker -->
-<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
+        <!-- Datepicker -->
+        <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
 
 
-<!-- Main -->
-<script src="${pageContext.request.contextPath}/js/main.js"></script>
+        <!-- Main -->
+        <script src="${pageContext.request.contextPath}/js/main.js"></script>
 
-</body>
+    </body>
 </html>
 

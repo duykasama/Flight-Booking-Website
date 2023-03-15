@@ -143,7 +143,7 @@ public class UserAccessManager {
     public  int searchByName(String username) {
         int userID = -1;
         String sql = "select id from [user] "
-                + " where [name] ";
+                + " where [name] = ? ";
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, username);

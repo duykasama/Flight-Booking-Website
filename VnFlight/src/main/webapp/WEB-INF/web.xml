@@ -43,6 +43,16 @@
         <servlet-name>UserFlightController</servlet-name>
         <url-pattern>/UserFlightController/*</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>BookingHistoryController</servlet-name>
+        <servlet-class>com.fptuni.prj301.demo.controller.BookingHistoryController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookingHistoryController</servlet-name>
+        <url-pattern>/BookingHistoryController/*</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>AdminUserListController</servlet-name>
         <servlet-class>com.fptuni.prj301.demo.controller.AdminUserListController</servlet-class>

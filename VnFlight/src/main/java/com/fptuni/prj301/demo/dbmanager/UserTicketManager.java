@@ -72,7 +72,7 @@ public class UserTicketManager {
             System.out.println(e);
         }
     }
-
+}
 //    public int findPassengerID(int invoiceID, String cardID) {
 //        int passengerID = 0;
 //        String sql = "SELECT id FROM passenger WHERE invoice_id = ? and card_id = ?";
@@ -91,23 +91,5 @@ public class UserTicketManager {
 //        return passengerID;
 //    }
 
-    public static void main(String[] args) {
-        Ticket ticket = new Ticket();
-        ticket.setInvoiceId(1);
-        ticket.setFirstName("a");
-        ticket.setLastName("a");
-        ticket.setLuggageWeight(15);
-        ticket.setCardId("1");
-        ticket.setGender("Male");
-        ticket.setNationality("a");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            ticket.setDob(dateFormat.parse("2023-03-14"));
-        } catch (ParseException ex) {
-            Logger.getLogger(UserTicketManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-//        System.out.println(createTicketTemp(1, "b", "b", "15", "b", "b", "b", "2022-04-12"));
-//        insertTicket(ticket);
-//        System.out.println(insertTicket(createTicketTemp(1, "b", "b", "15", "b", "b", "b", "2022-04-12")));
-    }
-}
+
+

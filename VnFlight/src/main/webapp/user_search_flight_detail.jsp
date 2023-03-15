@@ -69,7 +69,7 @@
 
             <%@include file="/user_header.jsp" %>
 
-            <header id="gtco-header" class="gtco-cover-special gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
+            <header id="gtco-header" class="gtco-cover-special gtco-cover-md" role="banner" style="background-image: url(${pageContext.request.contextPath}/images/img_bg_2.jpg)">
                 <div class="overlay"></div>
                 <div class="gtco-container">
                     <div class="row">
@@ -81,8 +81,11 @@
                                 <div class="col-md-10 col-md-push-1 animate-box" data-animate-effect="fadeInRight" style="margin-bottom: 50px">
                                     <div class="form-wrap">
                                         <div class="tab">
-
                                             <div class="tab-content">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-10"></div>
+                                                    <div class="col-md-2" style="color: red">${ticket_msg}</div>
+                                                </div>
                                                 <div class="tab-content-inner active" data-content="signup">
                                                     <h3>Ticket Passenger Information</h3>
                                                     <c:url var="saveLink" value="${request.contextPath}/UserFlightController/save"/>

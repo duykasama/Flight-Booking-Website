@@ -16,6 +16,8 @@ import com.fptuni.prj301.demo.dbmanager.UserInvoiceManager;
 import com.fptuni.prj301.demo.dbmanager.UserTicketManager;
 import com.fptuni.prj301.demo.model.Invoice;
 import com.fptuni.prj301.demo.model.Ticket;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 
 /**
  *
@@ -49,39 +51,49 @@ public class UserFlightController extends HttpServlet {
             request.getSession().setAttribute("flightList", fManager.searchFlight(departure, destination, departure_date));
             response.sendRedirect(request.getContextPath() + "/user_search_flight_result.jsp");
         } else if (path.equals("/createInvoice")) {
-            
+
             String userID = request.getParameter("userID");
             String flightID = request.getParameter("flightID");
             String bookingDate = request.getParameter("bookingDate");
             String purchaseStatus = request.getParameter("purchaseStatus");
-            
+
             UserInvoiceManager iManager = new UserInvoiceManager();
             Invoice iTem = iManager.createInvoiceTemp(userID, flightID, bookingDate, purchaseStatus);
             request.getSession().setAttribute("tempInvoice", iTem);
 
             response.sendRedirect(request.getContextPath() + "/user_search_flight_detail.jsp");
-            
+
         } else if (path.equals("/save")) {
-            
+
             int invoiceID = UserInvoiceManager.insertReturnInvoiceID((Invoice) request.getSession().getAttribute("tempInvoice"));
-            
+
             String firstname = request.getParameter("firstname");
             String lastname = request.getParameter("lastname");
             String luggageWeight = request.getParameter("luggageWeight");
-            String cardID = request.getParameter("cardID");
+            String cardID = request.getParameter("cardId");
             String gender = request.getParameter("gender");
             String nationality = request.getParameter("nationality");
             String dob = request.getParameter("dob");
-            
+
             UserTicketManager tManager = new UserTicketManager();
             Ticket tTem = tManager.createTicketTemp(invoiceID, firstname, lastname, luggageWeight, cardID, gender, nationality, dob);
             request.getSession().setAttribute("tempTicket", tTem);
-            
+
             UserTicketManager.insertTicket((Ticket) request.getSession().getAttribute("tempTicket"));
-            
-            response.sendRedirect(request.getContextPath() + "/user_search_flight_detail.jsp");
+//            PrintWriter out = response.getWriter();
+//            out.print(firstname);
+//            out.print(lastname);
+//            out.print(luggageWeight);
+//            out.print(cardID);
+//            out.print(gender);
+//            out.print(nationality);
+//            out.print(dob);
+            request.setAttribute("ticket_msg", "Ticket Added");
+            RequestDispatcher rd = request.getRequestDispatcher("/user_search_flight_detail.jsp");
+            rd.forward(request, response);
+//            response.sendRedirect(request.getContextPath() + "/user_search_flight_detail.jsp");
         } else if (path.equals("/addToCart")) {
-            
+
             response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
         }
     }

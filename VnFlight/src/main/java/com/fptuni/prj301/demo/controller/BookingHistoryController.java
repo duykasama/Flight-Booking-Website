@@ -7,6 +7,7 @@ package com.fptuni.prj301.demo.controller;
 
 import com.fptuni.prj301.demo.dbmanager.BookingHistoryManager;
 import com.fptuni.prj301.demo.dbmanager.UserInvoiceManager;
+import com.fptuni.prj301.demo.dbmanager.UserTicketManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -42,11 +43,18 @@ public class BookingHistoryController extends HttpServlet {
             request.getSession().setAttribute("BookingHistory", usm.getInvoiceHistory((int) request.getSession().getAttribute("userID")));
             response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
 
-        } else if (path.equals("/finish")) {
+        }else if (path.equals("/details")) {
+            UserTicketManager  tsm= new UserTicketManager();
+            int invoiceId = Integer.parseInt(request.getParameter("invoiceID"));
+            
+            request.getSession().setAttribute("flight", tsm.getDetailFlight(invoiceId));
+            request.getSession().setAttribute("ticket", tsm.getTicketsForInvoice(invoiceId));
+            response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
+
+        } 
+        else if (path.equals("/finish")) {
             UserInvoiceManager    usm= new UserInvoiceManager();
             int invoiceId = Integer.parseInt(request.getParameter("invoiceID"));
-
-            
             usm.updateInvoicePurchaseStatus(invoiceId);
             request.getSession().setAttribute("BookingHistory", usm.getInvoiceHistory((int) request.getSession().getAttribute("userID")));
             response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");

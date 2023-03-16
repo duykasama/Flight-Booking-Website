@@ -138,6 +138,7 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
     }
 
     public List sortInvoice(String cate, String value) {
+        this.clear();
         String sql = "select i.id, u.id as \'user_id\', f.id as \'flight_id\', i.booking_date, i.total_price, i.purchase_status\n"
                 + "from invoice i join [user] u on i.[user_id] = u.id join flight f on i.flight_id = f.id ";
         String orderBySql = "";
@@ -174,7 +175,10 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
     }
 
     public static void main(String[] args) {
-        System.out.println(new AdminInvoiceManager().sortInvoice("bookingDate", "asc"));
+        List<Invoice> list = new AdminInvoiceManager().sortInvoice("amount", "asc");
+        for (Invoice x : list) {
+            System.out.println(x.getFlightId() + "," + x.getTotalPrice());
+        }
     }
 
 }

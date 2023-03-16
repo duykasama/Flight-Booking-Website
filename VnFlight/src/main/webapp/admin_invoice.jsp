@@ -199,7 +199,7 @@
                                             <th>Invoice ID</th>
                                             <th>UserName</th>
                                             <th>FLightID</th>
-                                            <th>Booking Date</th>
+                                            <th>Booking Date
                                             <th>
                                                  <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px) translateX(-50px);width:10px;display: inline">
                                                     <option value="" disabled selected hidden><i class="ti-arrow-down"></i></option>
@@ -207,13 +207,15 @@
                                                     <option value="./AdminInvoiceController?action=sort&cate=bookingDate&value=asc">asc</option>
                                                 </select>
                                             </th>
-                                            <th>Amount</th>
+                                            </th>
+                                            <th>Amount
                                             <th>
                                                  <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px) translateX(-30px);width:20px;display: inline">
                                                     <option value="" disabled selected hidden><i class="ti-arrow-down"></i></option>
                                                     <option value="./AdminInvoiceController?action=sort&cate=amount&value=desc">high to low price</option>
                                                     <option value="./AdminInvoiceController?action=sort&cate=amount&value=asc">low to high price</option>
                                                 </select>
+                                            </th>
                                             </th>
                                             <th>Purchase Status</th>
 

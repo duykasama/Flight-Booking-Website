@@ -13,7 +13,7 @@
                         <ul class="dropdown">
 
                             <li><a href="${pageContext.request.contextPath}/AdminUserListController">USER</a></li>
-                            <li><a href="${pageContext.request.contextPath}/AdminInvoiceController">INVOICE</a></li>
+                            <li><a href="${pageContext.request.contextPath}/AdminInvoiceController?action=view">INVOICE</a></li>
                         </ul>
                     </li>
                     <li><a href="${pageContext.request.contextPath}/AdminAccessController/logout">LOG OUT</a></li>

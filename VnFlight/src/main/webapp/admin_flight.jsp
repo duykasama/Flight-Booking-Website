@@ -142,7 +142,7 @@
 
                                             <th>Flight ID</th>
                                             <th>
-                                                <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px) translateX(-20px);width:2px;display: inline">
+                                                <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px) translateX(-20px);width:2px;display: inline ">
                                                     <option value="" disabled selected hidden><i class="ti-arrow-down"></i></option>
                                                     <option value="./AdminFlightController?action=sort&cate=flightID&value=desc">desc</option>
                                                     <option value="./AdminFlightController?action=sort&cate=flightID&value=asc">asc</option>
@@ -171,17 +171,17 @@
                                                     <option value="" disabled selected hidden>From</option>
                                                     <c:forEach var="i" begin="0" end="22">
                                                         <option value="./AdminFlightController?action=filter&cate=depID&value=${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
-                                                    </c:forEach>/option>
+                                                    </c:forEach>
                                                 </select>
 
                                             </th>
                                             <th>
 
-                                                <select onchange="location = this.value" class="form-control" style="transform: translateY(7px);width:250px" id="from" placeholder="departure">
+                                                <select onchange="location = this.value" class="form-control" style="transform: translateY(7px);width:250px;" id="from" placeholder="departure">
                                                     <option value="" disabled selected hidden>To</option>
                                                     <c:forEach var="i" begin="0" end="22">
                                                         <option value="./AdminFlightController?action=filter&cate=desID&value=${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
-                                                    </c:forEach>/option>
+                                                    </c:forEach>
                                                 </select>
 
 

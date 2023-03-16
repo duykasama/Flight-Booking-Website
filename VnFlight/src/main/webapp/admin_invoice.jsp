@@ -200,7 +200,21 @@
                                             <th>UserName</th>
                                             <th>FLightID</th>
                                             <th>Booking Date</th>
+                                            <th>
+                                                 <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px) translateX(-50px);width:10px;display: inline">
+                                                    <option value="" disabled selected hidden><i class="ti-arrow-down"></i></option>
+                                                    <option value="./AdminInvoiceController?action=sort&cate=bookingDate&value=desc">desc</option>
+                                                    <option value="./AdminInvoiceController?action=sort&cate=bookingDate&value=asc">asc</option>
+                                                </select>
+                                            </th>
                                             <th>Amount</th>
+                                            <th>
+                                                 <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px) translateX(-30px);width:20px;display: inline">
+                                                    <option value="" disabled selected hidden><i class="ti-arrow-down"></i></option>
+                                                    <option value="./AdminInvoiceController?action=sort&cate=amount&value=desc">high to low price</option>
+                                                    <option value="./AdminInvoiceController?action=sort&cate=amount&value=asc">low to high price</option>
+                                                </select>
+                                            </th>
                                             <th>Purchase Status</th>
 
                                             <th>Edit</th>
@@ -213,8 +227,8 @@
                                                 <td>${iList.get(i).getId()}</td>
                                                 <td>${iList.get(i).getUserId()}</td>
                                                 <td>${iList.get(i).getFlightId()}</td>
-                                                <td>${iList.get(i).getBookingDate()}</td>
-                                                <td>${iList.get(i).getTotalPrice()}</td>
+                                                <td colspan="2">${iList.get(i).getBookingDate()}</td>
+                                                <td colspan="2">${iList.get(i).getTotalPrice()}</td>
                                                 <c:choose>
                                                     <c:when test="${iList.get(i).getPurchaseStatusString().equals('Purchasing')}">
                                                         <td><button class="pd-setting">${iList.get(i).getPurchaseStatusString()}</button></td>

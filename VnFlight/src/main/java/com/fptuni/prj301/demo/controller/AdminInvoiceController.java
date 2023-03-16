@@ -30,11 +30,26 @@ public class AdminInvoiceController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-        if(request.getSession().getAttribute("iList") == null){
-            request.getSession().setAttribute("iList", new AdminInvoiceManager());
+        String action = request.getParameter("action");
+        if (action.equalsIgnoreCase("view")) {
+            if (request.getSession().getAttribute("iList") == null) {
+                request.getSession().setAttribute("iList", new AdminInvoiceManager());
+            }
+            response.sendRedirect("admin_invoice.jsp");
+        } else if (action.equalsIgnoreCase("sort")) {
+            request.getSession().removeAttribute("iList");
+
+            String cate = request.getParameter("cate");
+            String value = request.getParameter("value");
+            if (request.getSession().getAttribute("iList") == null) {
+                request.getSession().setAttribute("iList", new AdminInvoiceManager().sortInvoice(cate, value));
+            }
+            out.print(cate);
+            out.print(value);
+            response.sendRedirect("admin_invoice.jsp");
         }
-        response.sendRedirect("admin_invoice.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

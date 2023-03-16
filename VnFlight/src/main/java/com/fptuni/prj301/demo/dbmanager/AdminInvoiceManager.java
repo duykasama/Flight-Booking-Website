@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -134,6 +135,46 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List sortInvoice(String cate, String value) {
+        String sql = "select i.id, u.id as \'user_id\', f.id as \'flight_id\', i.booking_date, i.total_price, i.purchase_status\n"
+                + "from invoice i join [user] u on i.[user_id] = u.id join flight f on i.flight_id = f.id ";
+        String orderBySql = "";
+        switch (cate) {
+            case "bookingDate":
+                orderBySql = "order by i.booking_date " + value;
+                break;
+            case "amount":
+                orderBySql = "order by i.total_price " + value;
+                break;
+        }
+        sql += orderBySql;
+        System.out.println(sql);
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Invoice invoice = new Invoice();
+                invoice.setId(rs.getInt("id"));
+                invoice.setUserId(rs.getInt("user_id"));
+                invoice.setFlightId(rs.getInt("flight_id"));
+                invoice.setBookingDate(rs.getDate("booking_date"));
+                invoice.setTotalPrice(rs.getInt("total_price"));
+                invoice.setPurchaseStatus(rs.getInt("purchase_status"));
+                this.add(invoice);
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (Exception ex) {
+        }
+        return this;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new AdminInvoiceManager().sortInvoice("bookingDate", "asc"));
     }
 
 }

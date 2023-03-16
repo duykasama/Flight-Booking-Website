@@ -33,6 +33,7 @@ public class AdminInvoiceController extends HttpServlet {
         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
+        out.print(action);
         if (action.equalsIgnoreCase("view")) {
             if (request.getSession().getAttribute("iList") == null) {
                 request.getSession().setAttribute("iList", new AdminInvoiceManager());
@@ -49,6 +50,8 @@ public class AdminInvoiceController extends HttpServlet {
             out.print(cate);
             out.print(value);
             response.sendRedirect("admin_invoice.jsp");
+        } else if (action.equalsIgnoreCase("delete")) {
+
         }
     }
 

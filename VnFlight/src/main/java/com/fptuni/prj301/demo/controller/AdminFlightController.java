@@ -37,7 +37,7 @@ public class AdminFlightController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
 
-        if (action.equalsIgnoreCase("view")) {
+        if (action.equalsIgnoreCase("view") || action == null) {
             UserAirportManager aManager = new UserAirportManager();
             request.getSession().setAttribute("airportList", aManager.loadAirport());
             if (request.getSession().getAttribute("fList") == null) {
@@ -94,6 +94,15 @@ public class AdminFlightController extends HttpServlet {
             }
 //            out.print(((List) request.getSession().getAttribute("fList")).size());
             response.sendRedirect("admin_flight.jsp");
+        } else if (action.equalsIgnoreCase("delete")) {
+            String flightID = request.getParameter("flightID");
+            out.print(flightID);
+            out.print(action);
+            new AdminFlightManager().deleteFlight(flightID);
+            request.getSession().setAttribute("fList", new AdminFlightManager().loadFlight());
+//            RequestDispatcher rd = request.getRequestDispatcher("./AdminFlightController?action=view");
+//            rd.forward(request, response);
+            response.sendRedirect("./AdminFlightController?action=view");
         }
     }
 

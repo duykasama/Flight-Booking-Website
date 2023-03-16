@@ -216,7 +216,6 @@
                                                     <option value="./AdminInvoiceController?action=sort&cate=amount&value=asc">low to high price</option>
                                                 </select>
                                             </th>
-                                            </th>
                                             <th>Purchase Status</th>
 
                                             <th>Edit</th>

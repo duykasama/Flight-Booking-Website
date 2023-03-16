@@ -243,7 +243,7 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                     <td><a href="">edit</a></td>
-                                                    <td><a href=""><i class="icon-delete"></i></a></td>
+                                                    <td><a href="./AdminFlightController?action=delete&flightID=${fList.get(i).getId()}"><i class="icon-delete"></i></a></td>
                                                 </tr>
                                             </c:forEach>
                                         </c:if>

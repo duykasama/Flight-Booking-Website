@@ -47,7 +47,22 @@ public class AdminFlightManager extends ArrayList<Flight> {
         return false;
     }
 
+    public void deleteFlight(String flightID) {
+        String spSql = "{ call DeleteFlightRecord(?) }";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(spSql);
+            ps.setString(1, flightID);
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public List loadFlight() {
+        this.clear();
         String sql = "select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status \n"
                 + "from flight fl join airport ap1 on fl.departure_id = ap1.id "
                 + "join airport ap2 on fl.destination_id = ap2.id";
@@ -79,6 +94,7 @@ public class AdminFlightManager extends ArrayList<Flight> {
     }
 
     public List loadFlight(String cate, String value) {
+        this.clear();
         String sql = "select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status \n"
                 + "from flight fl join airport ap1 on fl.departure_id = ap1.id "
                 + "join airport ap2 on fl.destination_id = ap2.id ";
@@ -132,6 +148,7 @@ public class AdminFlightManager extends ArrayList<Flight> {
     }
 
     public List sortFlight(String cate, String value) {
+        this.clear();
         String sql = "select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status \n"
                 + "from flight fl join airport ap1 on fl.departure_id = ap1.id "
                 + "join airport ap2 on fl.destination_id = ap2.id ";
@@ -181,6 +198,6 @@ public class AdminFlightManager extends ArrayList<Flight> {
     }
 
     public static void main(String[] args) {
-        System.out.println(new AdminFlightManager().sortFlight("flightID", "asc"));
+        new AdminFlightManager().deleteFlight("5");
     }
 }

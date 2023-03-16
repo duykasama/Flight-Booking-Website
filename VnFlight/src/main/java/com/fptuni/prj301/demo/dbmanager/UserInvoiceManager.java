@@ -5,7 +5,6 @@
  */
 package com.fptuni.prj301.demo.dbmanager;
 
-import com.fptuni.prj301.demo.model.BookingHistory;
 import com.fptuni.prj301.demo.model.Invoice;
 import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;
@@ -122,11 +121,37 @@ public class UserInvoiceManager {
         return invoice;
     }
 
+    public Invoice getDetailInvoice(int invoiceId) {
+        Invoice i = new Invoice();
+        String sql = "SELECT id, flight_id, booking_date, total_price,purchase_status "
+                + " from invoice "
+                + " WHERE id = ?";
+
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, invoiceId);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                i.setId(rs.getInt(1));
+                i.setFlightId(rs.getInt(2));
+                i.setBookingDate(rs.getDate(3));
+                i.setTotalPrice(rs.getInt(4));
+                i.setPurchaseStatus(rs.getInt(5));
+            }
+            rs.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+
     public void updateInvoicePurchaseStatus(int invoiceId) {
-        String query = "UPDATE [invoice] "
-                + "SET purchase_status = 1 "
-                + "FROM [invoice]  "
-                + "WHERE id = ?";
+        String query = " UPDATE [invoice] "
+                + " SET purchase_status = 1 "
+                + " FROM [invoice]  "
+                + " WHERE id = ? ";
 
         try {
             Connection conn = DBUtils.getConnection();
@@ -141,7 +166,6 @@ public class UserInvoiceManager {
             e.printStackTrace();
         }
     }
- 
 
 //    public static void main(String[] args) {
 //        Invoice invoice = new Invoice();

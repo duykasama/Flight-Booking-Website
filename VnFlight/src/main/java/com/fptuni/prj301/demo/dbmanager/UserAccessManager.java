@@ -1,6 +1,5 @@
 package com.fptuni.prj301.demo.dbmanager;
 
-import com.fptuni.prj301.demo.model.User;
 import com.fptuni.prj301.demo.model.UserSession;
 import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;

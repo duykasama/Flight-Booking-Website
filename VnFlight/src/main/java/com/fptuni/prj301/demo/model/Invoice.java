@@ -5,6 +5,7 @@
  */
 package com.fptuni.prj301.demo.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**

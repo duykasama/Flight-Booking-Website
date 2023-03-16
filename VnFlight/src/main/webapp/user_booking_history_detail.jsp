@@ -60,119 +60,81 @@
 
     </head>
     <body>
-        <c:choose>
-            <c:when test="${param.page != null}">
-                <c:set var="pageNumb" value="${param.page}"></c:set>
-            </c:when>
-            <c:otherwise>
-                <c:set var="pageNumb" value="1"></c:set>
-            </c:otherwise>
-        </c:choose>
-        <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
-        <c:set var="end" value="${pageNumb*10-1}"></c:set>
-        <c:if test="${pageNumb >= Math.ceil(BookingHistory.size()/10)}">
-            <c:set property="double" var="temp" value="${BookingHistory.size()}"></c:set>
-            <c:set var="pageNumb" value="${Math.round(Double.parseDouble(Math.ceil(temp/10)))}"></c:set>
-            <c:set var="end" value="${BookingHistory.size()-1}"></c:set>
-        </c:if>
-        <c:if test="${BookingHistory.size() == 0}">
-            <c:set var="pageNumb" value="1"></c:set>
-            <c:set var="begin" value="0"></c:set>
-            <c:set var="end" value="0"></c:set>
-        </c:if>
-
-        <c:url var="urlNext" value="/user_booking_history.jsp">
-            <c:choose>
-                <c:when test="${Math.ceil(BookingHistory.size()/10) == pageNumb || BookingHistory.size()==0}">
-                    <c:param name="page" value="${pageNumb}"/>
-                </c:when>
-                <c:otherwise>
-                    <c:param name="page" value="${pageNumb+1}"/>
-                </c:otherwise>
-            </c:choose>
-        </c:url>
-        <c:url var="urlPrev" value="/user_booking_history.jsp">
-            <c:choose>
-                <c:when test="${pageNumb == 1}">
-                    <c:param name="page" value="1"/>
-                </c:when>
-                <c:otherwise>
-                    <c:param name="page" value="${pageNumb-1}"/>
-                </c:otherwise>
-            </c:choose>
-        </c:url>
-        <c:url var="urlDoubleNext" value="/user_booking_history.jsp">
-            <c:choose>
-                <c:when test="${pageNumb <= Math.ceil(BookingHistory.size()/10)-2}">
-                    <c:param name="page" value="${pageNumb+2}"/>
-                </c:when>
-                <c:otherwise>
-                    <c:param name="page" value="${pageNumb}"/>
-                </c:otherwise>
-            </c:choose>
-
-        </c:url>
-
         <div class="gtco-loader"></div>
         <div id="page">
-
-
-            <!-- <div class="page-inner"> -->
             <%@include file="/user_header.jsp" %>   
-            <!--loginpop-->
-            <%--<%@include file="/login_popup_form.jsp" %>--%>  
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
                 <div class="product-status mgtop mg-b-30">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="product-status-wrap">
-                                    <h4>Invoice List</h4>
+                                    <h4>Flight Information</h4>
                                     <table>
                                         <tr>
-                                            <th>Invoice ID</th>
                                             <th>Flight ID</th>
-                                            <th>Booking Date</th>
-                                            <th>Price</th>
-                                            <th>Detail</th>
-                                            <th>Purchase Status</th>
+                                            <th>Airline</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Date</th>
+                                            <th>Take-off Time</th>
+                                            <th>Landing Time</th>
                                         </tr>
-                                        <c:if test="${BookingHistory.size() > 0}">
+                                        <tr><td>${flight.getId()}</td>
+                                            <td>${flight.getAirlineName()}</td>
+                                            <td>${flight.getDeparture()}</td>
+                                            <td>${flight.getDestination()}</td>
+                                            <td>${flight.getDepartureDate()}</td>
+                                            <td>${flight.getTakeOffTime()}</td>
+                                            <td>${flight.getLandingTime()}</td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <h4>Passenger Ticket Information</h4>
+                                    <table>
+                                        <tr>
+                                            <th>Ticket ID</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Card ID</th>
+                                            <th>Gender</th>
+                                            <th>Nationality</th>
+                                            <th>Luggage Weight</th>
+                                            <th>Date of Birth</th>
+                                            <!--<th>Seat Number</th>-->
+                                        </tr>
+
+                                        <c:if test="${ticket.size() > 0}">
                                             <c:forEach var="i" begin="${begin}" end="${end}">
-                                                <tr><td>${BookingHistory.get(i).getId()}</td>
-                                                    <td>${BookingHistory.get(i).getFlightId()}</td>
-                                                    <td>${BookingHistory.get(i).getBookingDate()}</td>
-                                                    <td>${BookingHistory.get(i).getTotalPrice()}</td>
-                                                    <td><form method="POST" action="${pageContext.request.contextPath}/BookingHistoryController/detail">
-                                                            <input type="hidden" name="invoiceId" value="${BookingHistory.get(i).getId()}"/>
-                                                            <button class="btn btn-success" type="submit" style = "padding: 2px 5px">Detail</button>
-                                                        </form></td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${BookingHistory.get(i).getPurchaseStatus()==1}">
-                                                                Done
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <form method="POST" action="${pageContext.request.contextPath}/BookingHistoryController/finish">                                                                 
-                                                                    <input type="hidden" name="invoiceId" value="${BookingHistory.get(i).getId()}"/>
-                                                                    <button class="btn btn-success" type="submit" style = "padding: 2px 5px">Purchase</button>
-                                                                </form>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </td>
+                                                <tr>
+                                                    <td>${ticket.get(i).getId()}</td>
+                                                    <td>${ticket.get(i).getFirstName()}</td>
+                                                    <td>${ticket.get(i).getLastName()}</td>
+                                                    <td>${ticket.get(i).getCardId()}</td>
+                                                    <td>${ticket.get(i).getGender()}</td>
+                                                    <td>${ticket.get(i).getNationality()}</td>
+                                                    <td>${ticket.get(i).getLuggageWeight()}</td>
+                                                    <td>${ticket.get(i).getDob()}</td>
+                                                    <!--<td>${ticket.get(i).getSeatNumber()}</td>-->
                                                 </tr>
                                             </c:forEach>
                                         </c:if>
+
                                     </table>
-                                    <div class="custom-pagination">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="${urlPrev}">Previous</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">${pageNumb}</a></li>
-                                            <li class="page-item"><a class="page-link" href="${urlNext}">${pageNumb+1}</a></li>
-                                            <li class="page-item"><a class="page-link" href="${urlDoubleNext}">${pageNumb+2}</a></li>
-                                            <li class="page-item"><a class="page-link" href="${urlNext}">Next</a></li>
-                                        </ul>
-                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>
+                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                    <c:choose>
+                                        <c:when test="${invoice.getPurchaseStatus()==1}">
+                                            <button class="btn btn-success" style = "padding: 10px 20px; margin-top: 20px">Purchase Completed</button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <form method="POST" action="${pageContext.request.contextPath}/BookingHistoryController/finish">
+                                                <input type="hidden" name="invoiceId" value="${invoice.getId()}"/>
+                                                <button class="btn btn-success" type="submit" style = "padding: 10px 20px; margin-top: 20px">Click to Purchase</button>
+                                            </form>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>

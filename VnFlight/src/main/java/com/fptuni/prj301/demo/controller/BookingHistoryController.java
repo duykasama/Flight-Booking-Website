@@ -5,11 +5,13 @@
  */
 package com.fptuni.prj301.demo.controller;
 
-import com.fptuni.prj301.demo.dbmanager.BookingHistoryManager;
 import com.fptuni.prj301.demo.dbmanager.UserInvoiceManager;
 import com.fptuni.prj301.demo.dbmanager.UserTicketManager;
+import com.fptuni.prj301.demo.model.Ticket;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Administrator
  */
-@WebServlet(name = "BookingHistoryController", urlPatterns = {"/BookingHistoryController"})
 public class BookingHistoryController extends HttpServlet {
 
     /**
@@ -39,22 +40,27 @@ public class BookingHistoryController extends HttpServlet {
         String path = request.getPathInfo();
         System.out.println(path);
         if (path.equals("/history")) {
-            UserInvoiceManager    usm= new UserInvoiceManager();
+            UserInvoiceManager usm = new UserInvoiceManager();
             request.getSession().setAttribute("BookingHistory", usm.getInvoiceHistory((int) request.getSession().getAttribute("userID")));
             response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
 
-        }else if (path.equals("/details")) {
-            UserTicketManager  tsm= new UserTicketManager();
-            int invoiceId = Integer.parseInt(request.getParameter("invoiceID"));
-            
+        } else if (path.equals("/detail")) {
+            UserTicketManager tsm = new UserTicketManager();
+            UserInvoiceManager ism = new UserInvoiceManager();
+            int invoiceId = Integer.parseInt(request.getParameter("invoiceId"));
+            PrintWriter out = response.getWriter();
+            out.print(invoiceId);
+            request.getSession().setAttribute("invoice", ism.getDetailInvoice(invoiceId));
             request.getSession().setAttribute("flight", tsm.getDetailFlight(invoiceId));
             request.getSession().setAttribute("ticket", tsm.getTicketsForInvoice(invoiceId));
-            response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
+//            ArrayList<Ticket> ticket = (ArrayList<Ticket>) request.getSession().getAttribute("ticket");
+//            PrintWriter out2 = response.getWriter();
+//            out2.print(ticket.get(0).getId());
+            response.sendRedirect(request.getContextPath() + "/user_booking_history_detail.jsp");
 
-        } 
-        else if (path.equals("/finish")) {
-            UserInvoiceManager    usm= new UserInvoiceManager();
-            int invoiceId = Integer.parseInt(request.getParameter("invoiceID"));
+        } else if (path.equals("/finish")) {
+            UserInvoiceManager usm = new UserInvoiceManager();
+            int invoiceId = Integer.parseInt(request.getParameter("invoiceId"));
             usm.updateInvoicePurchaseStatus(invoiceId);
             request.getSession().setAttribute("BookingHistory", usm.getInvoiceHistory((int) request.getSession().getAttribute("userID")));
             response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");

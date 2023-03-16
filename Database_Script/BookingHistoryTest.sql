@@ -16,6 +16,13 @@ JOIN passenger_ticket pt ON i.id = pt.invoice_id
 JOIN seat s ON pt.id = s.passenger_ticket_id
 WHERE i.user_id = 1
 
+UPDATE [invoice]  
+SET purchase_status = 0 
+FROM [invoice] i 
+JOIN passenger_ticket pt ON i.id = pt.invoice_id 
+JOIN seat s ON pt.id = s.passenger_ticket_id 
+WHERE i.user_id = 1 AND i.purchase_status = 1 AND i.id = 2 AND i.flight_id = 2 AND s.seat_number = 'C1'
+
 -- Insert sample users
 INSERT INTO [user] (name, password, email, phone) 
 VALUES 

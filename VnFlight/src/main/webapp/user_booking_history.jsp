@@ -131,25 +131,17 @@
                                         <tr>
                                             <th>Invoice ID</th>
                                             <th>Flight ID</th>
-                                            <th>Airline</th>
-                                            <th>From</th>
-                                            <th>To</th>
-                                            <th>Time</th>
-                                            <th>Date</th>
-                                            <th>Seat</th>
+                                            <th>Booking Date</th>
                                             <th>Price</th>
-                                            <th>Purchase</th>
+                                            <th>Detail</th>
+                                            <th>Purchase Status</th>
                                         </tr>
                                         <c:if test="${BookingHistory.size() > 0}">
                                             <c:forEach var="i" begin="${begin}" end="${end}">
-                                                <tr><td>${BookingHistory.get(i).getInvoiceId()}</td>
+                                                <tr><td>${BookingHistory.get(i).getId()}</td>
                                                     <td>${BookingHistory.get(i).getFlightId()}</td>
-                                                    <td>${BookingHistory.get(i).getAirlineName()}</td>
-                                                    <td>${BookingHistory.get(i).getDeparture()}</td>
-                                                    <td>${BookingHistory.get(i).getDestination()}</td>
-                                                    <td>${BookingHistory.get(i).getTakeOffTime()}</td>
-                                                    <td>${BookingHistory.get(i).getDepartureDate()}</td>
-                                                    <td>${BookingHistory.get(i).getSeatNumber()}</td>
+                                                    <td>${BookingHistory.get(i).getBookingDate()}</td>
+                                                    <td>${BookingHistory.get(i).getTotalPrice()}</td>
                                                     <td>${BookingHistory.get(i).getTotalPrice()}</td>
 
                                                     <td>
@@ -159,10 +151,8 @@
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <form method="POST" action="${pageContext.request.contextPath}/BookingHistoryController/finish">
-                                                                    <input type="hidden" name="seatNumber" value="${BookingHistory.get(i).getSeatNumber()}"/>
-                                                                    <input type="hidden" name="invoiceID" value="${BookingHistory.get(i).getInvoiceId()}"/>
-                                                                    <input type="hidden" name="flightID" value="${BookingHistory.get(i).getFlightId()}"/>
-                                                                    <button class="btn btn-success" type="submit">Finish Booking</button>
+                                                                    <input type="hidden" name="invoiceID" value="${BookingHistory.get(i).getId()}"/>
+                                                                    <button class="btn btn-success" type="submit" style = "padding: 2px 5px">Purchase</button>
                                                                 </form>
                                                             </c:otherwise>
                                                         </c:choose>

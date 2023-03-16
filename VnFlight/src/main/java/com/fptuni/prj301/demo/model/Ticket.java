@@ -22,6 +22,15 @@ public class Ticket {
     private String gender;
     private String nationality;
     private Date dob;
+    private String SeatNumber;
+
+    public String getSeatNumber() {
+        return SeatNumber;
+    }
+
+    public void setSeatNumber(String SeatNumber) {
+        this.SeatNumber = SeatNumber;
+    }
 
 
     public int getId() {

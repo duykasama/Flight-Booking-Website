@@ -33,13 +33,15 @@ public class AdminFlightController extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out;
         out = response.getWriter();
+
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
+
         if (action.equalsIgnoreCase("view")) {
             UserAirportManager aManager = new UserAirportManager();
             request.getSession().setAttribute("airportList", aManager.loadAirport());
             if (request.getSession().getAttribute("fList") == null) {
-                request.getSession().setAttribute("fList", new AdminFlightManager());
+                request.getSession().setAttribute("fList", new AdminFlightManager().loadFlight());
             }
             response.sendRedirect("admin_flight.jsp");
         } else if (action.equalsIgnoreCase("addflight")) {
@@ -66,6 +68,32 @@ public class AdminFlightController extends HttpServlet {
                 System.out.println(e);
             }
 
+        } else if (action.equalsIgnoreCase("filter")) {
+//            out.print("hello");
+            request.getSession().removeAttribute("fList");
+
+            String cate = request.getParameter("cate");
+            String value = request.getParameter("value");
+            UserAirportManager aManager = new UserAirportManager();
+            request.getSession().setAttribute("airportList", aManager.loadAirport());
+            if (request.getSession().getAttribute("fList") == null) {
+                request.getSession().setAttribute("fList", new AdminFlightManager().loadFlight(cate, value));
+            }
+//            out.print(((List) request.getSession().getAttribute("fList")).size());
+            response.sendRedirect("admin_flight.jsp");
+
+        } else if (action.equalsIgnoreCase("sort")) {
+            request.getSession().removeAttribute("fList");
+
+            String cate = request.getParameter("cate");
+            String value = request.getParameter("value");
+            UserAirportManager aManager = new UserAirportManager();
+            request.getSession().setAttribute("airportList", aManager.loadAirport());
+            if (request.getSession().getAttribute("fList") == null) {
+                request.getSession().setAttribute("fList", new AdminFlightManager().sortFlight(cate, value));
+            }
+//            out.print(((List) request.getSession().getAttribute("fList")).size());
+            response.sendRedirect("admin_flight.jsp");
         }
     }
 

@@ -120,43 +120,119 @@
             <!-- <div class="page-inner"> -->
             <%@include file="/admin_header.jsp" %>                
             <!--<form id="form" class="form" action="" method="post">-->
-           
+
             <%@include file="/add_flight_form.jsp" %>    
-            
+
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
                 <div class="product-status mgtop mg-b-30">
-                    
+
                     <div class="container-fluid">
                         <h4 class="gold-color">${flight_msg}</h4>
                         <div class="row">
-                            
+
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="product-status-wrap">
                                     <h4>Flight List</h4>
+
                                     <div class="add-product">
                                         <a id="button" class="open-form-button" onclick="openForm()">Add Flight</a>
                                     </div>
                                     <table>
                                         <tr>
+
                                             <th>Flight ID</th>
-                                            <th>Airline</th>
-                                            <th>From</th>
-                                            <th>To</th>
-                                            <th>Date</th>
-                                            <th>Dep.Time</th>
-                                            <th>Seat</th>
-                                            <th>Status</th>
+                                            <th>
+                                                <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px) translateX(-20px);width:2px;display: inline">
+                                                    <option value="" disabled selected hidden><i class="ti-arrow-down"></i></option>
+                                                    <option value="./AdminFlightController?action=sort&cate=flightID&value=desc">desc</option>
+                                                    <option value="./AdminFlightController?action=sort&cate=flightID&value=asc">asc</option>
+                                                </select>
+                                            </th>
+
+
+                                            <!--<th>Airline </th>-->
+                                            <th>
+
+                                                <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px);width:200px">
+                                                    <option value="" disabled selected hidden>Airline Name</option>
+
+                                                    <option value="./AdminFlightController?action=filter&cate=airlineName&value=Vietnam Airline">Vietnam Airline</option>
+                                                    <option value="./AdminFlightController?action=filter&cate=airlineName&value=Vietjet Air">Vietjet Air</option>
+                                                    <option value="./AdminFlightController?action=filter&cate=airlineName&value=Bamboo Airways">Bamboo Airways</option>
+                                                </select>
+
+
+
+
+                                            </th>
+                                            <th>
+
+                                                <select onchange="location = this.value" class="form-control" style="transform: translateY(7px);width:250px" id="from" placeholder="departure">
+                                                    <option value="" disabled selected hidden>From</option>
+                                                    <c:forEach var="i" begin="0" end="22">
+                                                        <option value="./AdminFlightController?action=filter&cate=depID&value=${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
+                                                    </c:forEach>/option>
+                                                </select>
+
+                                            </th>
+                                            <th>
+
+                                                <select onchange="location = this.value" class="form-control" style="transform: translateY(7px);width:250px" id="from" placeholder="departure">
+                                                    <option value="" disabled selected hidden>To</option>
+                                                    <c:forEach var="i" begin="0" end="22">
+                                                        <option value="./AdminFlightController?action=filter&cate=desID&value=${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
+                                                    </c:forEach>/option>
+                                                </select>
+
+
+                                            </th>
+                                            <th>Date 
+                                            <th>
+                                                <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px) translateX(-20px);width:2px;display: inline">
+                                                    <option value="" disabled selected hidden><i class="ti-arrow-down"></i></option>
+                                                    <option value="./AdminFlightController?action=sort&cate=date&value=desc">desc</option>
+                                                    <option value="./AdminFlightController?action=sort&cate=date&value=asc">asc</option>
+                                                </select>
+                                            </th>
+                                            </th>
+                                            <th>Dep.Time 
+                                            <th>
+                                                <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px) translateX(-20px);width:20px;display: inline">
+                                                    <option value="" disabled selected hidden><i class="ti-arrow-down"></i></option>
+                                                    <option value="./AdminFlightController?action=sort&cate=depTime&value=desc">desc</option>
+                                                    <option value="./AdminFlightController?action=sort&cate=depTime&value=asc">asc</option>
+                                                </select>
+                                            </th>
+                                            </th>
+                                            <th>
+
+                                                <select onchange="location = this.value" class="form-control " style="transform: translateY(7px);width:100px">
+                                                    <option value="" disabled selected hidden>Seat</option>
+                                                    <option value="./AdminFlightController?action=filter&cate=numOfSeat&value=60">60</option>
+                                                    <option value="./AdminFlightController?action=filter&cate=numOfSeat&value=90">90</option>
+                                                    <option value="./AdminFlightController?action=filter&cate=numOfSeat&value=120">120</option>
+                                                </select>
+
+                                            </th>
+                                            <th>
+                                                <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px);width:150px">
+                                                    <option value="" disabled selected hidden>Status</option>
+
+                                                    <option value="./AdminFlightController?action=filter&cate=status&value=0">Up Coming</option>
+                                                    <option value="./AdminFlightController?action=filter&cate=status&value=1">Taken Off</option>
+                                                </select>
+                                            </th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
                                         <c:if test="${fList.size() > 0}">
                                             <c:forEach var="i" begin="${begin}" end="${end}">
-                                                <tr><td>${fList.get(i).getId()}</td>
+                                                <tr><td colspan="2">${fList.get(i).getId()}</td>
                                                     <td>${fList.get(i).getAirlineName()}</td>
                                                     <td>${fList.get(i).getDeparture()}</td>
                                                     <td>${fList.get(i).getDestination()}</td>
-                                                    <td>${fList.get(i).getDepartureDate()}</td>
-                                                    <td>${fList.get(i).getTakeOffTime()}</td>
+                                                    <td colspan="2">${fList.get(i).getDepartureDate()}</td>
+                                                    <td colspan="2">${fList.get(i).getTakeOffTime()}</td>
                                                     <td>${fList.get(i).getNoOfSeats()}</td>
                                                     <c:choose>
                                                         <c:when test="${fList.get(i).getStatus().equals('Up Coming')}">
@@ -275,7 +351,14 @@
 <!-- Main -->
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/js/add-flight-form.js"></script>
+<script>
+                                                    function changeSort() {
+                                                        document.getElementByID("b").innerHTML = "nsakjanks";
 
+
+
+                                                    }
+</script>
 </body>
 </html>
 

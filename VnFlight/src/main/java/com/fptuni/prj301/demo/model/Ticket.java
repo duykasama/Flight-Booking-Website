@@ -5,7 +5,11 @@
  */
 package com.fptuni.prj301.demo.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +28,63 @@ public class Ticket {
     private Date dob;
     private String seatNumber;
 
+    public Ticket() {
+    }
+
+    public Ticket (String firstName, String lastName, String luggageWeight, String cardId, String gender, String nationality, String dob) {
+        this.setCardId(cardId);
+        this.setFirstName(firstName);
+        this.setGender(gender);
+        this.setLastName(lastName);
+        this.setNationality(nationality);
+        this.setLuggageWeight(Float.parseFloat(luggageWeight));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            this.setDob(dateFormat.parse(dob));
+        } catch (ParseException ex) {
+            Logger.getLogger(Ticket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Ticket (int invoiceId, String firstName, String lastName, String luggageWeight, String cardId, String gender, String nationality, String dob) {
+        this.setInvoiceId(invoiceId);
+        this.setCardId(cardId);
+        this.setFirstName(firstName);
+        this.setGender(gender);
+        this.setLastName(lastName);
+        this.setNationality(nationality);
+        this.setLuggageWeight(Float.parseFloat(luggageWeight));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            this.setDob(dateFormat.parse(dob));
+        } catch (ParseException ex) {
+            Logger.getLogger(Ticket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Ticket(int invoiceId, String firstName, String lastName, float luggageWeight, String cardId, String gender, String nationality, Date dob, String seatNumber) {
+        this.invoiceId = invoiceId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.luggageWeight = luggageWeight;
+        this.cardId = cardId;
+        this.gender = gender;
+        this.nationality = nationality;
+        this.dob = dob;
+        this.seatNumber = seatNumber;
+    }
+
+    public Ticket(String firstName, String lastName, float luggageWeight, String cardId, String gender, String nationality, Date dob, String seatNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.luggageWeight = luggageWeight;
+        this.cardId = cardId;
+        this.gender = gender;
+        this.nationality = nationality;
+        this.dob = dob;
+        this.seatNumber = seatNumber;
+    }
+
     public String getSeatNumber() {
         return seatNumber;
     }
@@ -31,8 +92,6 @@ public class Ticket {
     public void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
     }
-    
-    
 
     public int getId() {
         return id;

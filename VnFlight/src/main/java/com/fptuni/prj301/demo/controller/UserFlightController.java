@@ -17,6 +17,7 @@ import com.fptuni.prj301.demo.dbmanager.UserTicketManager;
 import com.fptuni.prj301.demo.model.Invoice;
 import com.fptuni.prj301.demo.model.Ticket;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 
 /**
@@ -47,26 +48,23 @@ public class UserFlightController extends HttpServlet {
             String departure = request.getParameter("departure");
             String destination = request.getParameter("destination");
             String departure_date = request.getParameter("departure_date");
-            UserFlightManager fManager = new UserFlightManager();
-            request.getSession().setAttribute("flightList", fManager.searchFlight(departure, destination, departure_date));
+            request.getSession().setAttribute("flightList", UserFlightManager.searchFlight(departure, destination, departure_date));
             response.sendRedirect(request.getContextPath() + "/user_search_flight_result.jsp");
         } else if (path.equals("/createInvoice")) {
-
             String userID = request.getParameter("userID");
             String flightID = request.getParameter("flightID");
             String bookingDate = request.getParameter("bookingDate");
             String purchaseStatus = request.getParameter("purchaseStatus");
+            Invoice iTemp = UserInvoiceManager.createInvoiceTemp(userID, flightID, bookingDate, purchaseStatus);
 
-            UserInvoiceManager iManager = new UserInvoiceManager();
-            Invoice iTem = iManager.createInvoiceTemp(userID, flightID, bookingDate, purchaseStatus);
-            request.getSession().setAttribute("tempInvoice", iTem);
+//            request.getSession().setAttribute("tempInvoice", iTemp);
+            request.getSession().setAttribute("invoiceId", UserInvoiceManager.insertReturnInvoiceID(iTemp));
+//            int invoiceID = UserInvoiceManager.insertReturnInvoiceID(iTemp);
+            request.getSession().setAttribute("tempTicketList", new ArrayList<>());
 
             response.sendRedirect(request.getContextPath() + "/user_search_flight_detail.jsp");
 
         } else if (path.equals("/save")) {
-
-            int invoiceID = UserInvoiceManager.insertReturnInvoiceID((Invoice) request.getSession().getAttribute("tempInvoice"));
-
             String firstname = request.getParameter("firstname");
             String lastname = request.getParameter("lastname");
             String luggageWeight = request.getParameter("luggageWeight");
@@ -75,26 +73,25 @@ public class UserFlightController extends HttpServlet {
             String nationality = request.getParameter("nationality");
             String dob = request.getParameter("dob");
 
-            UserTicketManager tManager = new UserTicketManager();
-            Ticket tTem = tManager.createTicketTemp(invoiceID, firstname, lastname, luggageWeight, cardID, gender, nationality, dob);
-            request.getSession().setAttribute("tempTicket", tTem);
+            ArrayList<Ticket> tListTemp = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
+            int invoiceID = (int) request.getSession().getAttribute("invoiceId");
+            tListTemp.add(new Ticket(invoiceID, firstname, lastname, luggageWeight, cardID, gender, nationality, dob));
+            request.getSession().setAttribute("tempTicketList", tListTemp);
 
-            UserTicketManager.insertTicket((Ticket) request.getSession().getAttribute("tempTicket"));
 //            PrintWriter out = response.getWriter();
-//            out.print(firstname);
-//            out.print(lastname);
-//            out.print(luggageWeight);
-//            out.print(cardID);
-//            out.print(gender);
-//            out.print(nationality);
-//            out.print(dob);
-            request.setAttribute("ticket_msg", "Ticket Added");
+//            out.print(tListTemp);
+            request.setAttribute("ticket_msg", "Ticket Saved");
+
             RequestDispatcher rd = request.getRequestDispatcher("/user_search_flight_detail.jsp");
             rd.forward(request, response);
-//            response.sendRedirect(request.getContextPath() + "/user_search_flight_detail.jsp");
         } else if (path.equals("/addToCart")) {
-
-            response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
+            UserTicketManager.insertTicketList((ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList"));
+            response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
+        } else if (path.equals("/purchase")) {
+            UserTicketManager.insertTicketList((ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList"));
+            int invoiceID = (int) request.getSession().getAttribute("invoiceId");
+            UserInvoiceManager.updateInvoicePurchaseStatus(invoiceID);
+            response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -89,7 +89,7 @@
                                                 <div class="tab-content-inner active" data-content="signup">
                                                     <h3>Ticket Passenger Information</h3>
                                                     <c:url var="saveLink" value="${request.contextPath}/UserFlightController/save"/>
-                                                    <form action="${saveLink}" name="" method="GET">
+                                                    <form action="${saveLink}" name="" method="POST">
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="firstname">First Name</label>
@@ -150,19 +150,7 @@
                                                                 </ul>
                                                             </div>
                                                         </div>
-                                                        <script>
-                                                            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-                                                            checkboxes.forEach((checkbox) => {
-                                                                checkbox.addEventListener('click', () => {
-                                                                    checkboxes.forEach((otherCheckbox) => {
-                                                                        if (otherCheckbox !== checkbox) {
-                                                                            otherCheckbox.checked = false;
-                                                                        }
-                                                                    });
-                                                                });
-                                                            });
-                                                        </script>
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="seat">Select Seat</label>
@@ -186,15 +174,19 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-md-11">
-                                        <div class="col-md-9"></div>
-                                        <div class="col-md-3"><button type="submit" class="btn btn-primary btn-block" value="add">ADD TICKET</button></div>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-md-11">
                                         <div class="col-md-6"></div>
-                                        <div class="col-md-3"><button type="submit" class="btn btn-primary btn-block" value="cart">ADD TO CART</button></div>
-                                        <div class="col-md-3"><button type="submit" class="btn btn-primary btn-block" value="purchase">PURCHASE</button></div>
+                                        <c:url var="addToCartLink" value="${request.contextPath}/UserFlightController/addToCart"/>
+                                        <form action="${addToCartLink}" name="" method="POST">
+                                            <div class="col-md-3">
+                                                <button type="submit" class="btn btn-primary btn-block" value="addToCart">ADD TO CART</button>
+                                            </div>
+                                        </form>
+                                        <c:url var="purchaseLink" value="${request.contextPath}/UserFlightController/purchase"/>
+                                        <form action="${purchaseLink}" name="" method="POST">
+                                            <div class="col-md-3">
+                                                <button type="submit" class="btn btn-primary btn-block" value="purchase">PURCHASE</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -286,6 +278,19 @@
 
         <!-- Main -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
+        <script>
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener('click', () => {
+                    checkboxes.forEach((otherCheckbox) => {
+                        if (otherCheckbox !== checkbox) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
 

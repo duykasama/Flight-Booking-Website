@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  */
 public class UserInvoiceManager {
 
-    public Invoice createInvoiceTemp(String user_id, String flight_id, String booking_date, String purchase_status) {
+    public static Invoice createInvoiceTemp(String user_id, String flight_id, String booking_date, String purchase_status) {
         Invoice invoice = new Invoice();
         invoice.setUserId(Integer.parseInt(user_id));
         invoice.setFlightId(Integer.parseInt(flight_id));
@@ -147,7 +147,7 @@ public class UserInvoiceManager {
         return i;
     }
 
-    public void updateInvoicePurchaseStatus(int invoiceId) {
+    public static void updateInvoicePurchaseStatus(int invoiceId) {
         String query = " UPDATE [invoice] "
                 + " SET purchase_status = 1 "
                 + " FROM [invoice]  "

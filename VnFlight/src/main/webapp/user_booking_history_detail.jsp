@@ -60,6 +60,58 @@
 
     </head>
     <body>
+        <c:choose>
+            <c:when test="${param.page != null}">
+                <c:set var="pageNumb" value="${param.page}"></c:set>
+            </c:when>
+            <c:otherwise>
+                <c:set var="pageNumb" value="1"></c:set>
+            </c:otherwise>
+        </c:choose>
+        <c:set var="begin" value="${(pageNumb-1)*10}"></c:set>
+        <c:set var="end" value="${pageNumb*10-1}"></c:set>
+        <c:if test="${pageNumb >= Math.ceil(ticket.size()/10)}">
+            <c:set property="double" var="temp" value="${ticket.size()}"></c:set>
+            <c:set var="pageNumb" value="${Math.round(Double.parseDouble(Math.ceil(temp/10)))}"></c:set>
+            <c:set var="end" value="${ticket.size()-1}"></c:set>
+        </c:if>
+        <c:if test="${ticket.size() == 0}">
+            <c:set var="pageNumb" value="1"></c:set>
+            <c:set var="begin" value="0"></c:set>
+            <c:set var="end" value="0"></c:set>
+        </c:if>
+
+        <c:url var="urlNext" value="/user_booking_history_detail.jsp">
+            <c:choose>
+                <c:when test="${Math.ceil(ticket.size()/10) == pageNumb || ticket.size()==0}">
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb+1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlPrev" value="/user_booking_history_detail.jsp">
+            <c:choose>
+                <c:when test="${pageNumb == 1}">
+                    <c:param name="page" value="1"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb-1}"/>
+                </c:otherwise>
+            </c:choose>
+        </c:url>
+        <c:url var="urlDoubleNext" value="/user_booking_history_detail.jsp">
+            <c:choose>
+                <c:when test="${pageNumb <= Math.ceil(ticket.size()/10)-2}">
+                    <c:param name="page" value="${pageNumb+2}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:param name="page" value="${pageNumb}"/>
+                </c:otherwise>
+            </c:choose>
+
+        </c:url>
         <div class="gtco-loader"></div>
         <div id="page">
             <%@include file="/user_header.jsp" %>   
@@ -121,6 +173,15 @@
                                         </c:if>
 
                                     </table>
+                                    <div class="custom-pagination">
+                                        <ul class="pagination">
+                                            <li class="page-item"><a class="page-link" href="${urlPrev}">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">${pageNumb}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlNext}">${pageNumb+1}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlDoubleNext}">${pageNumb+2}</a></li>
+                                            <li class="page-item"><a class="page-link" href="${urlNext}">Next</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>
                                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">

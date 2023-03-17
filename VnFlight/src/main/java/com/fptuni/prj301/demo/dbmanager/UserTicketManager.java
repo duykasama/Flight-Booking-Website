@@ -36,8 +36,8 @@ public class UserTicketManager extends ArrayList<Ticket> {
             Connection conn = null;
             PreparedStatement ps = null;
 
-            String sql = "INSERT INTO passenger_ticket (invoice_id, firstname, lastname, luggage_weight, card_id, gender, nationality, dob) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = " INSERT INTO passenger_ticket (invoice_id, firstname, lastname, luggage_weight, card_id, gender, nationality, dob, seat_number) "
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 
             try {
                 conn = DBUtils.getConnection();
@@ -51,6 +51,7 @@ public class UserTicketManager extends ArrayList<Ticket> {
                 ps.setString(6, ticket.getGender());
                 ps.setString(7, ticket.getNationality());
                 ps.setDate(8, new java.sql.Date(ticket.getDob().getTime()));
+                ps.setString(9, ticket.getSeatNumber());
 
                 ps.executeUpdate();
                 ps.close();
@@ -65,7 +66,7 @@ public class UserTicketManager extends ArrayList<Ticket> {
     public static List<Ticket> getTicketsForInvoice(int invoiceId) {
         List<Ticket> passengers = new ArrayList<>();
 //        String sql = " SELECT pt.id, pt.firstname, pt.lastname, pt.card_id, pt.gender, pt.nationality, pt.luggage_weight, pt.dob, s.seat_number "
-        String sql = " SELECT pt.id, pt.firstname, pt.lastname, pt.card_id, pt.gender, pt.nationality, pt.luggage_weight, pt.dob "
+        String sql = " SELECT pt.id, pt.firstname, pt.lastname, pt.card_id, pt.gender, pt.nationality, pt.luggage_weight, pt.dob, pt.seat_number "
                 + " FROM passenger_ticket pt "
                 + " JOIN invoice i ON i.id = pt.invoice_id "
                 //                + " JOIN seat s ON pt.id = s.passenger_ticket_id "
@@ -86,7 +87,7 @@ public class UserTicketManager extends ArrayList<Ticket> {
                 passenger.setNationality(rs.getString("nationality"));
                 passenger.setLuggageWeight(rs.getFloat("luggage_weight"));
                 passenger.setDob(rs.getDate("dob"));
-//                passenger.setSeatNumber(rs.getString("seat_number"));
+                passenger.setSeatNumber(rs.getString("seat_number"));
                 passengers.add(passenger);
             }
             rs.close();
@@ -101,10 +102,9 @@ public class UserTicketManager extends ArrayList<Ticket> {
 //    public static void main(String[] args) {
 //        System.out.println(getTicketsForInvoice(19));
 //    }
-
     public Flight getDetailFlight(int invoiceId) {
         Flight flight = null;
-        String sql = " select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.airline_name,ap1.name as 'departure', ap2.name as 'destination' "
+        String sql = " select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.airline_name,ap1.name as 'departure', ap2.name as 'destination', fl.price "
                 + " from invoice i join flight fl on i.flight_id = fl.id "
                 + " join airport ap1 on fl.departure_id = ap1.id "
                 + " join airport ap2 on fl.destination_id = ap2.id "
@@ -124,10 +124,10 @@ public class UserTicketManager extends ArrayList<Ticket> {
                 flight.setAirlineName(rs.getString(5));
                 flight.setDeparture(rs.getNString(6));
                 flight.setDestination(rs.getNString(7));
-
+                flight.setPrice(rs.getInt(8));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
         return flight;
     }

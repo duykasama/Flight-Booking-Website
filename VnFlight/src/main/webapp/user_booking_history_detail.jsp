@@ -129,6 +129,7 @@
                                             <th>From</th>
                                             <th>To</th>
                                             <th>Date</th>
+                                            <th>Price</th>
                                             <th>Take-off Time</th>
                                             <th>Landing Time</th>
                                         </tr>
@@ -137,6 +138,7 @@
                                             <td>${flight.getDeparture()}</td>
                                             <td>${flight.getDestination()}</td>
                                             <td>${flight.getDepartureDate()}</td>
+                                            <td>${flight.getPrice()}</td>
                                             <td>${flight.getTakeOffTime()}</td>
                                             <td>${flight.getLandingTime()}</td>
                                         </tr>
@@ -153,7 +155,7 @@
                                             <th>Nationality</th>
                                             <th>Luggage Weight</th>
                                             <th>Date of Birth</th>
-                                            <!--<th>Seat Number</th>-->
+                                            <th>Seat Number</th>
                                         </tr>
 
                                         <c:if test="${ticket.size() > 0}">
@@ -167,7 +169,7 @@
                                                     <td>${ticket.get(i).getNationality()}</td>
                                                     <td>${ticket.get(i).getLuggageWeight()}</td>
                                                     <td>${ticket.get(i).getDob()}</td>
-                                                    <!--<td>${ticket.get(i).getSeatNumber()}</td>-->
+                                                    <td>${ticket.get(i).getSeatNumber()}</td>
                                                 </tr>
                                             </c:forEach>
                                         </c:if>

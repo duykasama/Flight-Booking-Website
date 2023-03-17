@@ -89,7 +89,7 @@
                                                 <div class="tab-content-inner active" data-content="signup">
                                                     <h3>Ticket Passenger Information</h3>
                                                     <c:url var="saveLink" value="${request.contextPath}/UserFlightController/save"/>
-                                                    <form action="${saveLink}" name="" method="POST">
+                                                    <form id="my-form" action="${saveLink}" name="" method="POST">
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="firstname">First Name</label>
@@ -140,11 +140,15 @@
                                                                 <label for="luggage">Luggage</label>
                                                                 <ul style="list-style:none">
                                                                     <li>
-                                                                        <input type="checkbox" id="a-option" name="luggageWeight" value="15">
+                                                                        <input type="radio" id="c-option" name="luggageWeight" value="0">
+                                                                        <label for="c-option">No Luggage</label>
+                                                                    </li>
+                                                                    <li>
+                                                                        <input type="radio" id="a-option" name="luggageWeight" value="15">
                                                                         <label for="a-option">15kg (200,000 VND)</label>
                                                                     </li>
                                                                     <li>
-                                                                        <input type="checkbox" id="b-option" name="luggageWeight" value="25">
+                                                                        <input type="radio" id="b-option" name="luggageWeight" value="25">
                                                                         <label for="b-option">25kg (300,000 VND)</label>
                                                                     </li>
                                                                 </ul>
@@ -154,7 +158,7 @@
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="seat">Select Seat</label>
-                                                                <%@include file="/plane_60_seats.jsp" %>
+                                                                <%@include file="/user_plane_seats.jsp" %>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
@@ -278,6 +282,44 @@
 
         <!-- Main -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
+        <script>
+            const form = document.getElementById('my-form');
+            const genderRadios = form.querySelectorAll('input[name="gender"]');
+
+            form.addEventListener('submit', (event) => {
+                if (!isChecked(genderRadios)) {
+                    event.preventDefault();
+                    alert('Please select a gender.');
+                }
+            });
+            
+            const luggageRadios = form.querySelectorAll('input[name="luggageWeight"]');
+
+            form.addEventListener('submit', (event) => {
+                if (!isChecked(luggageRadios)) {
+                    event.preventDefault();
+                    alert('Please select a luggage weight.');
+                }
+            });
+            
+            const seatRadios = form.querySelectorAll('input[name="seatNumber"]');
+
+            form.addEventListener('submit', (event) => {
+                if (!isChecked(seatRadios)) {
+                    event.preventDefault();
+                    alert('Please select a seat.');
+                }
+            });
+
+            function isChecked(radios) {
+                for (let i = 0; i < radios.length; i++) {
+                    if (radios[i].checked) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        </script>
         <script>
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 

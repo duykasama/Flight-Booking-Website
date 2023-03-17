@@ -22,10 +22,10 @@ public class UserFlightManager extends ArrayList<Flight> {
 
     public static UserFlightManager searchFlight(String departure, String destination, String departure_date) {
         UserFlightManager m = null;
-        String sql = "select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status \n"
-                + "from flight fl join airport ap1 on fl.departure_id = ap1.id \n"
-                + "join airport ap2 on fl.destination_id = ap2.id \n"
-                + "where fl.departure_id = ? and fl.destination_id = ? and fl.departure_date = parse(? as date) \n";
+        String sql = " select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status "
+                + " from flight fl join airport ap1 on fl.departure_id = ap1.id "
+                + " join airport ap2 on fl.destination_id = ap2.id "
+                + " where fl.departure_id = ? and fl.destination_id = ? and fl.departure_date = parse(? as date) ";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
@@ -58,5 +58,29 @@ public class UserFlightManager extends ArrayList<Flight> {
         }
         return m;
 
+    }
+
+    public static int getQuantityOfSeats(int flightId) {
+        int nS = 0;
+        String sql = " select no_of_seats "
+                + " from [flight]  "
+                + " where id = ?  ";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, flightId);
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                nS = rs.getInt(1);
+            }
+
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (Exception ex) {
+            Logger.getLogger(UserAirportManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nS;
     }
 }

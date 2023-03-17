@@ -57,10 +57,10 @@ public class UserFlightController extends HttpServlet {
             String purchaseStatus = request.getParameter("purchaseStatus");
             Invoice iTemp = UserInvoiceManager.createInvoiceTemp(userID, flightID, bookingDate, purchaseStatus);
 
-//            request.getSession().setAttribute("tempInvoice", iTemp);
             request.getSession().setAttribute("invoiceId", UserInvoiceManager.insertReturnInvoiceID(iTemp));
-//            int invoiceID = UserInvoiceManager.insertReturnInvoiceID(iTemp);
+
             request.getSession().setAttribute("tempTicketList", new ArrayList<>());
+            request.getSession().setAttribute("quantityOfSeats", UserFlightManager.getQuantityOfSeats(Integer.parseInt(flightID)));
 
             response.sendRedirect(request.getContextPath() + "/user_search_flight_detail.jsp");
 
@@ -72,10 +72,11 @@ public class UserFlightController extends HttpServlet {
             String gender = request.getParameter("gender");
             String nationality = request.getParameter("nationality");
             String dob = request.getParameter("dob");
+            String seatNumber = request.getParameter("seatNumber");
 
             ArrayList<Ticket> tListTemp = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
             int invoiceID = (int) request.getSession().getAttribute("invoiceId");
-            tListTemp.add(new Ticket(invoiceID, firstname, lastname, luggageWeight, cardID, gender, nationality, dob));
+            tListTemp.add(new Ticket(invoiceID, firstname, lastname, luggageWeight, cardID, gender, nationality, dob, seatNumber));
             request.getSession().setAttribute("tempTicketList", tListTemp);
 
 //            PrintWriter out = response.getWriter();

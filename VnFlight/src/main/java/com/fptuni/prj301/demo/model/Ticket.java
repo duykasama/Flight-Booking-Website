@@ -31,7 +31,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket (String firstName, String lastName, String luggageWeight, String cardId, String gender, String nationality, String dob) {
+    public Ticket (String firstName, String lastName, String luggageWeight, String cardId, String gender, String nationality, String dob, String seatNumber) {
         this.setCardId(cardId);
         this.setFirstName(firstName);
         this.setGender(gender);
@@ -44,9 +44,10 @@ public class Ticket {
         } catch (ParseException ex) {
             Logger.getLogger(Ticket.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.setSeatNumber(seatNumber);
     }
 
-    public Ticket (int invoiceId, String firstName, String lastName, String luggageWeight, String cardId, String gender, String nationality, String dob) {
+    public Ticket (int invoiceId, String firstName, String lastName, String luggageWeight, String cardId, String gender, String nationality, String dob, String seatNumber) {
         this.setInvoiceId(invoiceId);
         this.setCardId(cardId);
         this.setFirstName(firstName);
@@ -60,6 +61,7 @@ public class Ticket {
         } catch (ParseException ex) {
             Logger.getLogger(Ticket.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.setSeatNumber(seatNumber);
     }
 
     public Ticket(int invoiceId, String firstName, String lastName, float luggageWeight, String cardId, String gender, String nationality, Date dob, String seatNumber) {

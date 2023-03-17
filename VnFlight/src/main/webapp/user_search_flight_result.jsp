@@ -136,7 +136,9 @@
                                             <th>From</th>
                                             <th>To</th>
                                             <th>Date</th>
-                                            <th>Dep.Time</th>
+                                            <th>Price</th>
+                                            <th>Take-off Time</th>
+                                            <th>Landing Time</th>
                                             <th>Seat</th>
                                             <th>Status</th>
                                             <th>Purchase</th>
@@ -148,7 +150,9 @@
                                                     <td>${flightList.get(i).getDeparture()}</td>
                                                     <td>${flightList.get(i).getDestination()}</td>
                                                     <td>${flightList.get(i).getDepartureDate()}</td>
+                                                    <td>${flightList.get(i).getPrice()}</td>
                                                     <td>${flightList.get(i).getTakeOffTime()}</td>
+                                                    <td>${flightList.get(i).getLandingTime()}</td>
                                                     <td>${flightList.get(i).getNoOfSeats()}</td>
 
                                                     <c:choose>

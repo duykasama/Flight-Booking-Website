@@ -22,8 +22,8 @@ public class UserAirportManager extends ArrayList<Airport> {
 
         public static UserAirportManager loadAirport() {
         UserAirportManager a = null;
-        String sql = "select id, name \n"
-                + "from airport \n";
+        String sql = " select id, name "
+                + " from airport  ";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);

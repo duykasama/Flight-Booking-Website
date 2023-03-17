@@ -69,7 +69,8 @@ create table passenger_ticket(
 	card_id varchar(15) not null,
 	gender varchar(10) not null,
 	nationality varchar(50) not null,
-	dob date not null
+	dob date not null,
+	seat_number varchar(10) not null
 )
 
 create table seat(

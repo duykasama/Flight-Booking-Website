@@ -57,7 +57,8 @@ public class UserFlightController extends HttpServlet {
             String purchaseStatus = request.getParameter("purchaseStatus");
             Invoice iTemp = UserInvoiceManager.createInvoiceTemp(userID, flightID, bookingDate, purchaseStatus);
 
-            request.getSession().setAttribute("invoiceId", UserInvoiceManager.insertReturnInvoiceID(iTemp));
+            request.getSession().setAttribute("invoice", iTemp);
+//            request.getSession().setAttribute("invoiceId", UserInvoiceManager.insertReturnInvoiceID(iTemp));
 
             request.getSession().setAttribute("tempTicketList", new ArrayList<>());
             request.getSession().setAttribute("quantityOfSeats", UserFlightManager.getQuantityOfSeats(Integer.parseInt(flightID)));
@@ -75,8 +76,9 @@ public class UserFlightController extends HttpServlet {
             String seatNumber = request.getParameter("seatNumber");
 
             ArrayList<Ticket> tListTemp = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
-            int invoiceID = (int) request.getSession().getAttribute("invoiceId");
-            tListTemp.add(new Ticket(invoiceID, firstname, lastname, luggageWeight, cardID, gender, nationality, dob, seatNumber));
+//            int invoiceID = (int) request.getSession().getAttribute("invoiceId");
+//            tListTemp.add(new Ticket(invoiceID, firstname, lastname, luggageWeight, cardID, gender, nationality, dob, seatNumber));
+            tListTemp.add(new Ticket(firstname, lastname, luggageWeight, cardID, gender, nationality, dob, seatNumber));
             request.getSession().setAttribute("tempTicketList", tListTemp);
 
 //            PrintWriter out = response.getWriter();
@@ -86,12 +88,21 @@ public class UserFlightController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/user_search_flight_detail.jsp");
             rd.forward(request, response);
         } else if (path.equals("/addToCart")) {
-            UserTicketManager.insertTicketList((ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList"));
+            int invoiceId = UserInvoiceManager.insertReturnInvoiceID((Invoice) request.getSession().getAttribute("invoice"));
+            ArrayList<Ticket> tList = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
+            for (Ticket ticket : tList) {
+                ticket.setInvoiceId(invoiceId);
+            }
+            UserTicketManager.insertTicketList(tList);
             response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
         } else if (path.equals("/purchase")) {
-            UserTicketManager.insertTicketList((ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList"));
-            int invoiceID = (int) request.getSession().getAttribute("invoiceId");
-            UserInvoiceManager.updateInvoicePurchaseStatus(invoiceID);
+            int invoiceId = UserInvoiceManager.insertReturnInvoiceID((Invoice) request.getSession().getAttribute("invoice"));
+            ArrayList<Ticket> tList = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
+            for (Ticket ticket : tList) {
+                ticket.setInvoiceId(invoiceId);
+            }
+            UserTicketManager.insertTicketList(tList);
+            UserInvoiceManager.updateInvoicePurchaseStatus(invoiceId);
             response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
         }
     }

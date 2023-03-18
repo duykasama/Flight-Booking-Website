@@ -96,9 +96,9 @@ public class UserInvoiceManager {
 
     public List<Invoice> getInvoiceHistory(int userId) {
         List<Invoice> invoice = new ArrayList<>();
-        String sql = "SELECT id, flight_id, booking_date, total_price,purchase_status "
-                + "from invoice "
-                + "WHERE user_id = ?";
+        String sql = " SELECT id, flight_id, booking_date, total_price,purchase_status "
+                + " from invoice "
+                + " WHERE user_id = ? ";
 
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -120,6 +120,21 @@ public class UserInvoiceManager {
         }
         return invoice;
     }
+
+//    public static void autoDeleteNullInvoice(int invoiceId) {
+//        String sql = " delete"
+//                + " from invoice "
+//                + " WHERE id = ? ";
+//
+//        try (Connection conn = DBUtils.getConnection();
+//                PreparedStatement statement = conn.prepareStatement(sql)) {
+//            statement.setInt(1, invoiceId);
+//            ResultSet rs = statement.executeQuery();
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public Invoice getDetailInvoice(int invoiceId) {
         Invoice i = new Invoice();

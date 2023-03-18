@@ -155,7 +155,7 @@
                                                             <c:otherwise>
                                                                 <form method="POST" action="${pageContext.request.contextPath}/BookingHistoryController/finish">                                                                 
                                                                     <input type="hidden" name="invoiceId" value="${BookingHistory.get(i).getId()}"/>
-                                                                    <button class="btn btn-success" type="submit" style = "padding: 2px 5px">Purchase</button>
+                                                                    <button class="btn btn-success" type="submit" style = "padding: 2px 5px">Click to Purchase</button>
                                                                 </form>
                                                             </c:otherwise>
                                                         </c:choose>

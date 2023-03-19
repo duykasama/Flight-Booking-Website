@@ -52,8 +52,8 @@
                     <div class="col-md-4">
                         <label >NUMBER OF SEAT</label>
                         <select class="form-control" id="from" placeholder="departure" name="numOfSeat">
-                            <option value="80">80 seats</option>
-                            <option value="100">100 seats</option>
+                            <option value="60">60 seats</option>
+                            <option value="90">90 seats</option>
                             <option value="120">120 seats</option>
                             
                         </select>

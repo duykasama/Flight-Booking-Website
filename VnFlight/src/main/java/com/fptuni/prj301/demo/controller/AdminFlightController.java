@@ -7,6 +7,7 @@ package com.fptuni.prj301.demo.controller;
 
 import com.fptuni.prj301.demo.dbmanager.AdminFlightManager;
 import com.fptuni.prj301.demo.dbmanager.UserAirportManager;
+import com.fptuni.prj301.demo.model.Flight;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -45,7 +46,6 @@ public class AdminFlightController extends HttpServlet {
             }
             response.sendRedirect("admin_flight.jsp");
         } else if (action.equalsIgnoreCase("addflight")) {
-            out.print(action);
             String takeOffTimeStr = request.getParameter("takeOffTime");
             String landingTimeStr = request.getParameter("landingTime");
             String depDate = request.getParameter("depDate");
@@ -96,13 +96,40 @@ public class AdminFlightController extends HttpServlet {
             response.sendRedirect("admin_flight.jsp");
         } else if (action.equalsIgnoreCase("delete")) {
             String flightID = request.getParameter("flightID");
-            out.print(flightID);
-            out.print(action);
             new AdminFlightManager().deleteFlight(flightID);
             request.getSession().setAttribute("fList", new AdminFlightManager().loadFlight());
 //            RequestDispatcher rd = request.getRequestDispatcher("./AdminFlightController?action=view");
 //            rd.forward(request, response);
             response.sendRedirect("./AdminFlightController?action=view");
+        } else if(action.equalsIgnoreCase("edit")){
+            String flightID = request.getParameter("flightID");
+            Flight flight = new AdminFlightManager().getFlight(flightID);
+            request.getSession().setAttribute("flight", flight);
+            response.sendRedirect("edit_flight_form.jsp");
+        } else if(action.equalsIgnoreCase("confirmEdit")){
+            
+            String flightID = request.getParameter("flightID");
+            
+            String takeOffTimeStr = request.getParameter("takeOffTime");
+            String landingTimeStr = request.getParameter("landingTime");
+            String depDate = request.getParameter("depDate");
+            String numOfSeat = request.getParameter("numOfSeat");
+            String depID = request.getParameter("depID");
+            String desID = request.getParameter("desID");
+            String airlineName = request.getParameter("airlineName");
+            String price = request.getParameter("price");
+            try {
+                AdminFlightManager adManager = new AdminFlightManager();
+                Boolean check = adManager.editFlight(flightID, takeOffTimeStr, landingTimeStr, depDate, price, airlineName, numOfSeat, depID, desID);
+                request.getSession().removeAttribute("flight_msg");
+                request.getSession().setAttribute("fList", new AdminFlightManager().loadFlight());
+                request.getRequestDispatcher("AdminFlightController?action=view").forward(request, response);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            
+        } else if(action.equalsIgnoreCase("cancelEdit")){
+            response.sendRedirect("admin_flight.jsp");
         }
     }
 

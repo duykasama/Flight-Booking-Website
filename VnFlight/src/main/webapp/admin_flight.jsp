@@ -242,7 +242,7 @@
                                                             <td><button class="ds-setting">${fList.get(i).getStatus()}</button></td>
                                                             </c:otherwise>
                                                         </c:choose>
-                                                    <td><a href="">edit</a></td>
+                                                    <td><a href="./AdminFlightController?action=edit&flightID=${fList.get(i).getId()}">edit</a></td>
                                                     <td><a href="./AdminFlightController?action=delete&flightID=${fList.get(i).getId()}"><i class="icon-delete"></i></a></td>
                                                 </tr>
                                             </c:forEach>

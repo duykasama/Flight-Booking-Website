@@ -5,6 +5,7 @@
  */
 package com.fptuni.prj301.demo.model;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  *
  * @author MSI GF63
  */
-public class Flight {
+public class Flight implements Serializable{
 
     private int id;
     private Time takeOffTime;

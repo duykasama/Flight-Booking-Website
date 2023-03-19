@@ -198,6 +198,67 @@ public class AdminFlightManager extends ArrayList<Flight> {
     }
 
     public static void main(String[] args) {
-        new AdminFlightManager().deleteFlight("5");
+        System.out.println(new AdminFlightManager().getFlight("5"));;
     }
+
+    public Flight getFlight(String flightID) {
+        Flight flight = null;
+        String sql = "select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status \n"
+                + "from flight fl join airport ap1 on fl.departure_id = ap1.id "
+                + "join airport ap2 on fl.destination_id = ap2.id where fl.id = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, flightID);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                flight = new Flight();
+                flight.setId(rs.getInt(1));
+                flight.setTakeOffTime(rs.getTime(2));
+                flight.setLandingTime(rs.getTime(3));
+                flight.setDepartureDate(rs.getDate(4));
+                flight.setPrice(rs.getInt(5));
+                flight.setAirlineName(rs.getString(6));
+                flight.setNoOfSeats(rs.getInt(7));
+                flight.setDeparture(rs.getNString(8));
+                flight.setDestination(rs.getNString(9));
+                flight.setStatus(rs.getInt(10));
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (Exception ex) {
+            Logger.getLogger(AdminFlightManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(flight != null){
+            System.out.println("got flight");
+        }
+        return flight;
+    }
+
+    public Boolean editFlight(String flightID, String takeOffTimeStr, String landingTimeStr, String depDate, String price, String airlineName, String numOfSeat, String depID, String desID) {
+        String sql = "update flight set takeoff_time = ?, landing_time = ?, "
+                + "departure_date = ?, price = ?, airline_name = ?, no_of_seats = ?, "
+                + "departure_id = ?, destination_id = ?, status = 0 where id = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, takeOffTimeStr);
+            ps.setString(2, landingTimeStr);
+            ps.setString(3, depDate);
+            ps.setString(4, price);
+            ps.setString(5, airlineName);
+            ps.setString(6, numOfSeat);
+            ps.setString(7, depID);
+            ps.setString(8, desID);
+            ps.setString(9, flightID);
+
+            return (ps.executeUpdate() == 1);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+    
 }

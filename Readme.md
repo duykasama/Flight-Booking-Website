@@ -46,17 +46,16 @@
 
     d. Flight booking + Seat selection:
 
-    - Select one flight for booking.
+    - Select one flight for booking (log-in necessity).
     - Fill in passenger ticket information, select seat for each passenger (required) and choose luggage weight (optional).
-    - Buy ticket for "more than one" passengers by clicking "Add Passenger Ticket" button.
+    - Fill in next ticket for "more than one" passengers by clicking "Save" button.
     - Show total price after providing passenger tickets' information.
-    - Confirm buying ticket(s) by clicking "Purchase" (log-in necessity) or Save without purchase.
+    - Confirm buying ticket(s) by clicking "Purchase" or Add to Cart without purchase.
 
     e. Booking history:
 
     - View your booking history.
     - Confirm purchase for saved invoices.
-    - Edit passenger ticket information.
 
   - **Admin:**
 
@@ -74,7 +73,7 @@
     c. Manage invoices:
 
     - View invoices.
-    - Calculate revenue in day, month or year.
+    - Calculate revenue.
 
 ---
 
@@ -112,4 +111,18 @@
 
 ---
 
-# 5. Conclusion and Discussion:
+# 5. Conclusion:
+
+Building a project like VnFlight taught us several valuable lessons:
+
+1. **Project organization:** Developing a large-scale web application requires careful planning and organization. This project can help us understand how to structure our codebase, manage dependencies, and handle version control using tools like Git and Maven.
+
+2. **User experience design:** VnFlight's success largely depends on its user experience design. This project can help us learn how to create a user-friendly interface, and simplify the booking process to enhance the overall user experience.
+
+3. **Booking ticket management:** VnFlight's feature of booking tickets is a critical part of the system. Building this feature can teach us how to design an efficient system for booking tickets, how to handle ticket availability and reservation conflicts, and how to integrate ticket booking with the seat selection process. We can also learn how to calculate the total price of a booking, handle purchase processing, and generate invoices for customers. Additionally, we can learn about seat selection and management, such as how to handle seat availability and conflicts, how to display seat maps to customers, and how to integrate seat selection with the ticket booking process.
+
+4. **Database management:** Storing and managing large volumes of data is critical to the success of any web application. By building VnFlight, we can learn how to design a database schema, connect to a database using JDBC, and manage data using SQL queries.
+
+5. **Teamwork:** Building a project like VnFlight requires a collaborative effort from a team of developers. In real-life scenarios, working with a team of 4 people on a project like this can help us learn how to communicate effectively, delegate tasks, manage conflicts, and maintain a consistent coding style and project structure. In addition, using a version control system like Git and hosting the project on Github can help us learn how to collaborate efficiently and effectively.
+
+Overall, building a project like VnFlight can help us gain valuable skills and insights into project management, user experience design, database management, seat booking systems, and teamwork.

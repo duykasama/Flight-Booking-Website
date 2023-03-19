@@ -70,6 +70,7 @@
             <%@include file="/user_header.jsp" %>
              ${choosenflightID}
             ${flightPrice}
+            ${seatNumberList}
             <br>
             ${AddMessage}
             <header id="gtco-header" class="gtco-cover-special gtco-cover-md" role="banner" style="background-image: url(${pageContext.request.contextPath}/images/img_bg_2.jpg)">
@@ -161,7 +162,7 @@
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="seat">Select Seat</label>
-                                                                <%@include file="/user_plane_seats.jsp" %>
+                                                                <%@include file="/user_plane_seats.jsp" %>  
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">

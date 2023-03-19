@@ -139,6 +139,7 @@ public class UserTicketManager extends ArrayList<Ticket> {
                 String seatNumber = rs.getString("seat_number");
                 float luggage_weight = rs.getFloat("luggage_weight");
                 ticketIDList.add(new Ticket(ticketID, seatNumber, luggage_weight));
+
             }
         } catch (Exception e) {
             System.out.println(e);

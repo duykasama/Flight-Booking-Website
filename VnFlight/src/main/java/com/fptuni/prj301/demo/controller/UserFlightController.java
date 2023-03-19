@@ -67,6 +67,7 @@ public class UserFlightController extends HttpServlet {
             request.getSession().setAttribute("quantityOfSeats", UserFlightManager.getQuantityOfSeats(Integer.parseInt(flightID)));
             request.getSession().setAttribute("choosenflightID", flightID);
             request.getSession().setAttribute("flightPrice", flightPrice);
+            request.getSession().setAttribute("seatNumberList", new UserSeatManager().seatNumberList(flightID));
             response.sendRedirect(request.getContextPath() + "/user_search_flight_detail.jsp");
 
         } else if (path.equals("/save")) {

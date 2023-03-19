@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -71,11 +72,32 @@ public class UserSeatManager extends ArrayList<Seat> {
         return false;
     }
 
+    public List<String> seatNumberList(String flightid) {
+        String sql = "select seat_number from seat where flight_id = ?";
+        List<String> list = new ArrayList();
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, flightid);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String numberSeat = rs.getString("seat_number");
+                list.add(numberSeat);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
 //        System.out.println(new UserSeatManager().AddSeat("1a", 6, 14));
 //        System.out.println(new UserSeatManager().AddSeat("1D", "7", 0));
 //        System.out.println(new UserSeatManager().checkSeat("1C", "7"));
 //        System.out.println(new UserSeatManager().checkSeat("1d", "1"));
-
+        System.out.println(new UserSeatManager().seatNumberList("6"));
+        System.out.println(new UserSeatManager().seatNumberList("6").contains("2G"));
     }
 }

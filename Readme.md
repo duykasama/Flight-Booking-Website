@@ -109,7 +109,14 @@
 
 # 4. System design:
 
----
+- **Model:**
+  ![Alt text](SystemDesignDiagram/Model.png)
+- **Manager:**
+  ![Alt text](SystemDesignDiagram/Manager.png)
+- **Controller:**
+  ![Alt text](SystemDesignDiagram/Controller.png)
+- **Util:**
+  ![Alt text](SystemDesignDiagram/Utils.png)
 
 # 5. Conclusion:
 

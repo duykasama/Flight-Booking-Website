@@ -25,4 +25,3 @@ BEGIN
 END
 
 --call DeleteFlightRecord('12')
-select * from flight

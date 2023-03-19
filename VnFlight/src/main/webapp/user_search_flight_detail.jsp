@@ -68,7 +68,8 @@
         <div id="page">
 
             <%@include file="/user_header.jsp" %>
-
+             ${choosenflightID}
+            ${flightPrice}
             <header id="gtco-header" class="gtco-cover-special gtco-cover-md" role="banner" style="background-image: url(${pageContext.request.contextPath}/images/img_bg_2.jpg)">
                 <div class="overlay"></div>
                 <div class="gtco-container">

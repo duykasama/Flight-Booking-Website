@@ -135,7 +135,6 @@ public class UserInvoiceManager {
 //            e.printStackTrace();
 //        }
 //    }
-
     public Invoice getDetailInvoice(int invoiceId) {
         Invoice i = new Invoice();
         String sql = "SELECT id, flight_id, booking_date, total_price,purchase_status "
@@ -173,6 +172,24 @@ public class UserInvoiceManager {
             PreparedStatement ps = conn.prepareStatement(query);
 
             ps.setInt(1, invoiceId);
+            ResultSet rs = ps.executeQuery();
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateInvoiceTotalPrice(int invoiceID, float totalprice) {
+
+        String sql = "update [dbo].[invoice] set total_price = ? from [dbo].[invoice] where id = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setFloat(1, totalprice);
+            ps.setInt(2, invoiceID);
             ResultSet rs = ps.executeQuery();
             rs.close();
             ps.close();

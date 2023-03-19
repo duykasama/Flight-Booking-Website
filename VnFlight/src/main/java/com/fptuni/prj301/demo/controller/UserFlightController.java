@@ -5,20 +5,20 @@
  */
 package com.fptuni.prj301.demo.controller;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import com.fptuni.prj301.demo.dbmanager.UserFlightManager;
 import com.fptuni.prj301.demo.dbmanager.UserAirportManager;
+import com.fptuni.prj301.demo.dbmanager.UserFlightManager;
 import com.fptuni.prj301.demo.dbmanager.UserInvoiceManager;
 import com.fptuni.prj301.demo.dbmanager.UserTicketManager;
 import com.fptuni.prj301.demo.model.Invoice;
 import com.fptuni.prj301.demo.model.Ticket;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -40,6 +40,7 @@ public class UserFlightController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String path = request.getPathInfo();
         System.out.println(path);
+        PrintWriter out = response.getWriter();
         if (path.equals("/search")) {
             UserAirportManager aManager = new UserAirportManager();
             request.getSession().setAttribute("airportList", aManager.loadAirport());
@@ -54,6 +55,7 @@ public class UserFlightController extends HttpServlet {
             String userID = request.getParameter("userID");
             String flightID = request.getParameter("flightID");
             String bookingDate = request.getParameter("bookingDate");
+            String flightPrice = request.getParameter("flightPrice");
             String purchaseStatus = request.getParameter("purchaseStatus");
             Invoice iTemp = UserInvoiceManager.createInvoiceTemp(userID, flightID, bookingDate, purchaseStatus);
 
@@ -62,7 +64,8 @@ public class UserFlightController extends HttpServlet {
 
             request.getSession().setAttribute("tempTicketList", new ArrayList<>());
             request.getSession().setAttribute("quantityOfSeats", UserFlightManager.getQuantityOfSeats(Integer.parseInt(flightID)));
-
+            request.getSession().setAttribute("choosenflightID", flightID);
+            request.getSession().setAttribute("flightPrice", flightPrice);
             response.sendRedirect(request.getContextPath() + "/user_search_flight_detail.jsp");
 
         } else if (path.equals("/save")) {
@@ -102,8 +105,39 @@ public class UserFlightController extends HttpServlet {
                 ticket.setInvoiceId(invoiceId);
             }
             UserTicketManager.insertTicketList(tList);
+            // checking seat status
+            float total_price = 0;
+            ArrayList<Ticket> list = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
+            for (Ticket ticket : tList) {
+                out.println(ticket.getCardId() + "<br>");
+                out.println(ticket.getDob() + "<br>");
+                out.println(ticket.getFirstName() + "<br>");
+                out.println(ticket.getGender() + "<br>");
+                out.println(ticket.getId() + "<br>");
+                out.println(ticket.getInvoiceId() + "<br>");
+                out.println(ticket.getLastName() + "<br>");
+                out.println(ticket.getLuggageWeight() + "<br>");
+                out.println(ticket.getNationality() + "<br>");
+                out.println(ticket.getSeatNumber() + "<br>");
+                float luggagePrice = 0;
+                if (ticket.getLuggageWeight() == 15) {
+                    luggagePrice = 200000;
+                } else if (ticket.getLuggageWeight() == 25) {
+                    luggagePrice = 300000;
+
+                }
+                out.print(luggagePrice);
+
+                float flightPrice = Float.parseFloat((String) request.getSession().getAttribute("flightPrice"));
+                String flightID = (String) request.getSession().getAttribute("choosenflightID");
+                total_price = luggagePrice + flightPrice;
+
+            }
+
+//
+            UserInvoiceManager.updateInvoiceTotalPrice(invoiceId, total_price);
             UserInvoiceManager.updateInvoicePurchaseStatus(invoiceId);
-            response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
+//            response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

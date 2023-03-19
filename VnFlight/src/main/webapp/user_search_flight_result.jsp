@@ -123,6 +123,7 @@
             <!--loginpop-->
             <%--<%@include file="/login_popup_form.jsp" %>--%>  
             <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
+                
                 <div class="product-status mgtop mg-b-30">
                     <div class="container-fluid">
                         <div class="row">
@@ -171,6 +172,7 @@
                                                                     <input type="hidden" name="userID" value="${usersession.getId()}"/>
                                                                     <input type="hidden" name="flightID" value="${flightList.get(i).getId()}"/>
                                                                     <input type="hidden" name="bookingDate" id="bookingDate" value=""/>
+                                                                    <input type="hidden" name="flightPrice" value="${flightList.get(i).getPrice()}">
                                                                     <script>
                                                                         var today = new Date().toISOString().substr(0, 10);
                                                                         document.getElementById("bookingDate").value = today;

@@ -115,7 +115,7 @@ public class UserFlightController extends HttpServlet {
             UserTicketManager.insertTicketList(tList);
             ArrayList<Ticket> ticketIDList = (ArrayList<Ticket>) UserTicketManager.getTicketID(invoiceId);
             float flightPrice = Float.parseFloat((String) request.getSession().getAttribute("flightPrice"));
-            float total_price = flightPrice;
+            float total_price = 0;
             for (Ticket x : ticketIDList) {
                 float luggage_price = 0;
                 out.print("ticket id: " + x.getId());
@@ -127,11 +127,13 @@ public class UserFlightController extends HttpServlet {
                     luggage_price = 300000;
 
                 }
-                total_price += luggage_price;
+                total_price += luggage_price + flightPrice;
                 new UserSeatManager().AddSeat(x.getSeatNumber(), flightID, x.getId());
             }
             UserInvoiceManager.updateInvoiceTotalPrice(invoiceId, total_price);
             UserInvoiceManager.updateInvoicePurchaseStatus(invoiceId);
+            response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
+
 //            UserSeatManager usManager = new UserSeatManager();
 //
 //            for (Ticket ticket : newTicketList) {

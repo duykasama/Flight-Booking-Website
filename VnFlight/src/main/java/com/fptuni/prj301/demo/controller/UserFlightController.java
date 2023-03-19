@@ -8,6 +8,7 @@ package com.fptuni.prj301.demo.controller;
 import com.fptuni.prj301.demo.dbmanager.UserAirportManager;
 import com.fptuni.prj301.demo.dbmanager.UserFlightManager;
 import com.fptuni.prj301.demo.dbmanager.UserInvoiceManager;
+import com.fptuni.prj301.demo.dbmanager.UserSeatManager;
 import com.fptuni.prj301.demo.dbmanager.UserTicketManager;
 import com.fptuni.prj301.demo.model.Invoice;
 import com.fptuni.prj301.demo.model.Ticket;
@@ -78,18 +79,23 @@ public class UserFlightController extends HttpServlet {
             String dob = request.getParameter("dob");
             String seatNumber = request.getParameter("seatNumber");
 
-            ArrayList<Ticket> tListTemp = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
-//            int invoiceID = (int) request.getSession().getAttribute("invoiceId");
-//            tListTemp.add(new Ticket(invoiceID, firstname, lastname, luggageWeight, cardID, gender, nationality, dob, seatNumber));
-            tListTemp.add(new Ticket(firstname, lastname, luggageWeight, cardID, gender, nationality, dob, seatNumber));
-            request.getSession().setAttribute("tempTicketList", tListTemp);
+            String flightID = (String) request.getSession().getAttribute("choosenflightID");
+            UserSeatManager usManager = new UserSeatManager();
+            if (usManager.checkSeat(seatNumber, flightID) == false) {
+                ArrayList<Ticket> tListTemp = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
+                tListTemp.add(new Ticket(firstname, lastname, luggageWeight, cardID, gender, nationality, dob, seatNumber));
+                request.getSession().setAttribute("tempTicketList", tListTemp);
+                request.setAttribute("ticket_msg", "Ticket Saved");
 
-//            PrintWriter out = response.getWriter();
-//            out.print(tListTemp);
-            request.setAttribute("ticket_msg", "Ticket Saved");
+                RequestDispatcher rd = request.getRequestDispatcher("/user_search_flight_detail.jsp");
+                rd.forward(request, response);
 
-            RequestDispatcher rd = request.getRequestDispatcher("/user_search_flight_detail.jsp");
-            rd.forward(request, response);
+            } else {
+                request.setAttribute("ticket_msg", "Ticket is has currently been booked");
+                RequestDispatcher rd = request.getRequestDispatcher("/user_search_flight_detail.jsp");
+                rd.forward(request, response);
+            }
+
         } else if (path.equals("/addToCart")) {
             int invoiceId = UserInvoiceManager.insertReturnInvoiceID((Invoice) request.getSession().getAttribute("invoice"));
             ArrayList<Ticket> tList = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
@@ -104,40 +110,44 @@ public class UserFlightController extends HttpServlet {
             for (Ticket ticket : tList) {
                 ticket.setInvoiceId(invoiceId);
             }
+            String flightID = (String) request.getSession().getAttribute("choosenflightID");
+            // ...............
             UserTicketManager.insertTicketList(tList);
-            // checking seat status
-            float total_price = 0;
-            ArrayList<Ticket> list = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
-            for (Ticket ticket : tList) {
-                out.println(ticket.getCardId() + "<br>");
-                out.println(ticket.getDob() + "<br>");
-                out.println(ticket.getFirstName() + "<br>");
-                out.println(ticket.getGender() + "<br>");
-                out.println(ticket.getId() + "<br>");
-                out.println(ticket.getInvoiceId() + "<br>");
-                out.println(ticket.getLastName() + "<br>");
-                out.println(ticket.getLuggageWeight() + "<br>");
-                out.println(ticket.getNationality() + "<br>");
-                out.println(ticket.getSeatNumber() + "<br>");
-                float luggagePrice = 0;
-                if (ticket.getLuggageWeight() == 15) {
-                    luggagePrice = 200000;
-                } else if (ticket.getLuggageWeight() == 25) {
-                    luggagePrice = 300000;
+            ArrayList<Ticket> ticketIDList = (ArrayList<Ticket>) UserTicketManager.getTicketID(invoiceId);
+            float flightPrice = Float.parseFloat((String) request.getSession().getAttribute("flightPrice"));
+            float total_price = flightPrice;
+            for (Ticket x : ticketIDList) {
+                float luggage_price = 0;
+                out.print("ticket id: " + x.getId());
+                out.print("seat_number: " + x.getSeatNumber());
+                out.print("luggage_weight: " + x.getLuggageWeight());
+                if (x.getLuggageWeight() == 15) {
+                    luggage_price = 200000;
+                } else if (x.getLuggageWeight() == 25) {
+                    luggage_price = 300000;
 
                 }
-                out.print(luggagePrice);
-
-                float flightPrice = Float.parseFloat((String) request.getSession().getAttribute("flightPrice"));
-                String flightID = (String) request.getSession().getAttribute("choosenflightID");
-                total_price = luggagePrice + flightPrice;
-
+                total_price += luggage_price;
+                new UserSeatManager().AddSeat(x.getSeatNumber(), flightID, x.getId());
             }
-
-//
             UserInvoiceManager.updateInvoiceTotalPrice(invoiceId, total_price);
             UserInvoiceManager.updateInvoicePurchaseStatus(invoiceId);
-//            response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
+//            UserSeatManager usManager = new UserSeatManager();
+//
+//            for (Ticket ticket : newTicketList) {
+//                out.println(ticket.getCardId() + "<br>");
+//                out.println(ticket.getDob() + "<br>");
+//                out.println(ticket.getFirstName() + "<br>");
+//                out.println(ticket.getGender() + "<br>");
+//                out.println(ticket.getId() + "<br>");
+//                out.println(ticket.getInvoiceId() + "<br>");
+//                out.println(ticket.getLastName() + "<br>");
+//                out.println(ticket.getLuggageWeight() + "<br>");
+//                out.println(ticket.getNationality() + "<br>");
+//                out.println(ticket.getSeatNumber() + "<br>");
+//
+////
+//            }
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

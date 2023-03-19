@@ -5,26 +5,22 @@
  */
 package com.fptuni.prj301.demo.dbmanager;
 
-import com.fptuni.prj301.demo.model.Invoice;
 import com.fptuni.prj301.demo.model.Seat;
-import com.fptuni.prj301.demo.model.User;
 import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author Administrator
  */
-public class UserSeatManager extends ArrayList<Seat>  {
+public class UserSeatManager extends ArrayList<Seat> {
 
     public UserSeatManager loadSeat(int flightID) {
         String sql = "SELECT seat_id, seat_number, passenger_ticket_id, seat_status FROM [seat] WHERE flightID = ?";
-       UserSeatManager seats = new UserSeatManager();
+        UserSeatManager seats = new UserSeatManager();
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement stm = conn.prepareStatement(sql)) {
             stm.setInt(1, flightID);
@@ -43,22 +39,43 @@ public class UserSeatManager extends ArrayList<Seat>  {
         return seats;
     }
 
-    public void AddSeat( String seat_number, int flight_id, int passenger_id, int status) {
+    public void AddSeat(String seat_number, String flight_id, int ticket_id) {
         String sql = "insert into [seat] values "
-                + " (?, ?, ?, ?, ?)";
+                + " (?, ?, ?,1)";
+
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, seat_number);
-            stm.setInt(2, flight_id);
-            stm.setInt(3, passenger_id);
-            stm.setInt(4, status);
+            stm.setString(2, flight_id);
+            stm.setInt(3, ticket_id);
+            stm.executeUpdate();
 
-            ResultSet rs = stm.executeQuery();
-            rs.close();
             stm.close();
             conn.close();
         } catch (Exception ex) {
         }
+    }
+
+    public boolean checkSeat(String seatNumber, String flightID) {
+        String sql = "select * from seat where seat_number = ? and flight_id = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, seatNumber);
+            ps.setString(2, flightID);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+//        System.out.println(new UserSeatManager().AddSeat("1a", 6, 14));
+//        System.out.println(new UserSeatManager().AddSeat("1D", "7", 0));
+//        System.out.println(new UserSeatManager().checkSeat("1C", "7"));
+//        System.out.println(new UserSeatManager().checkSeat("1d", "1"));
+
     }
 }

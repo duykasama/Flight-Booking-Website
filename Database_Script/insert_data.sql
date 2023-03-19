@@ -44,7 +44,8 @@ insert into flight values
 ('14:15:00','20:40:00','3-17-2021',2600000,N'Vietjet Air',90,16,3,0),
 ('18:25:00','20:25:00','7-11-2022',3300000,N'Vietnam Airline',60,16,21,0),
 ('18:35:00','21:10:00','5-2-2022',3500000,N'Bamboo Airways',60,11,6,0),
-('7:15:00','9:10:00','9-12-2021',500000,N'Jetstar Pacific Airlines',120,2,16,0),
+('7:15:00','9:10:00','9-12-2021',500000,N'Jetstar Pacific Airlines',120,2,16,0)
+,
 ('17:55:00','22:20:00','11-19-2024',3400000,N'Jetstar Pacific Airlines',60,21,12,0),
 ('11:25:00','16:5:00','4-8-2024',4400000,N'Bamboo Airways',60,22,18,0),
 ('10:45:00','15:10:00','3-2-2025',1300000,N'Jetstar Pacific Airlines',60,18,4,0),
@@ -1053,3 +1054,12 @@ GO
 select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status 
                  from flight fl join airport ap1 on fl.departure_id = ap1.id 
                 join airport ap2 on fl.destination_id = ap2.id
+
+select * from flight
+select * from seat
+select * from [dbo].[passenger_ticket]
+insert into [dbo].[passenger_ticket] values(1,'A','B','15','21121231','male','vietnam','6-27-2020','1D')
+select * from [dbo].[invoice]
+insert into [dbo].[invoice] values(1,1,'6-27-2020',800000,1)
+update [dbo].[invoice] set total_price = 2000000 from [dbo].[invoice] where id = 5
+insert into [seat] values ('1D',1,2,1)

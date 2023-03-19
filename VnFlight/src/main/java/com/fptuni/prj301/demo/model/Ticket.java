@@ -31,7 +31,13 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket (String firstName, String lastName, String luggageWeight, String cardId, String gender, String nationality, String dob, String seatNumber) {
+    public Ticket(int id, String seatNumber, float luggageWeight) {
+        this.id = id;
+        this.seatNumber = seatNumber;
+        this.luggageWeight = luggageWeight;
+    }
+
+    public Ticket(String firstName, String lastName, String luggageWeight, String cardId, String gender, String nationality, String dob, String seatNumber) {
         this.setCardId(cardId);
         this.setFirstName(firstName);
         this.setGender(gender);
@@ -47,7 +53,7 @@ public class Ticket {
         this.setSeatNumber(seatNumber);
     }
 
-    public Ticket (int invoiceId, String firstName, String lastName, String luggageWeight, String cardId, String gender, String nationality, String dob, String seatNumber) {
+    public Ticket(int invoiceId, String firstName, String lastName, String luggageWeight, String cardId, String gender, String nationality, String dob, String seatNumber) {
         this.setInvoiceId(invoiceId);
         this.setCardId(cardId);
         this.setFirstName(firstName);

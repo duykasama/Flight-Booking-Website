@@ -6,20 +6,14 @@
 package com.fptuni.prj301.demo.dbmanager;
 
 import com.fptuni.prj301.demo.model.Flight;
-import com.fptuni.prj301.demo.model.Invoice;
 import com.fptuni.prj301.demo.model.Ticket;
 import com.fptuni.prj301.demo.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -131,6 +125,82 @@ public class UserTicketManager extends ArrayList<Ticket> {
         }
         return flight;
     }
+
+    public static List<Ticket> getTicketID(int invoiceID) {
+        List<Ticket> ticketIDList = new ArrayList();
+        String sql = "select id,seat_number,luggage_weight from [dbo].[passenger_ticket] where invoice_id = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setInt(1, invoiceID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int ticketID = rs.getInt("id");
+                String seatNumber = rs.getString("seat_number");
+                float luggage_weight = rs.getFloat("luggage_weight");
+                ticketIDList.add(new Ticket(ticketID, seatNumber, luggage_weight));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return ticketIDList;
+    }
+
+//    public static List<Ticket> insertReturnTicketList(List<Ticket> tickets) {
+//        Connection conn = null;
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//
+//        String sql = "INSERT INTO ticket (invoice_id, firstname, lastname, luggage_weight,card_id,gender,nationality,dob,seat_number) "
+//                + "VALUES (?, ?, ?, ?,?,?,?,?,?)";
+//
+//        try {
+//            conn = DBUtils.getConnection();
+//            ps = conn.prepareStatement(sql);
+//
+//            List<Ticket> ticketObjectList = new ArrayList<>();
+//
+//            for (Ticket ticket : tickets) {
+//                ps.setInt(1, ticket.getInvoiceId());
+//                ps.setString(2, ticket.getFirstName());
+//                ps.setString(3, ticket.getLastName());
+//                ps.setFloat(4, ticket.getLuggageWeight());
+//                ps.setString(5, ticket.getCardId());
+//                ps.setString(6, ticket.getGender());
+//                ps.setString(7, ticket.getNationality());
+//                ps.setDate(8, new java.sql.Date(ticket.getDob().getTime()));
+//                ps.setString(9, ticket.getSeatNumber());
+//
+//                int affectedRows = ps.executeUpdate();
+//
+//
+//            }
+//
+//            return ticketObjectList;
+//        } catch (SQLException ex) {
+//            System.out.println("Query Student error!" + ex.getMessage());
+//        } finally {
+//            try {
+//                if (rs != null) {
+//                    rs.close();
+//                }
+//            } catch (Exception e) {
+//            };
+//            try {
+//                if (ps != null) {
+//                    ps.close();
+//                }
+//            } catch (Exception e) {
+//            };
+//            try {
+//                if (conn != null) {
+//                    conn.close();
+//                }
+//            } catch (Exception e) {
+//            };
+//        }
+//        return null;
+//    }
 }
 //    public static int findTicketID(int invoiceID, String cardID) {
 //        int passengerID = 0;

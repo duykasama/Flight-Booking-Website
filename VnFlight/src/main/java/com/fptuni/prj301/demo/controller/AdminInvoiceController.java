@@ -36,9 +36,7 @@ public class AdminInvoiceController extends HttpServlet {
         String action = request.getParameter("action");
         out.print(action);
         if (action.equalsIgnoreCase("view")) {
-            if (request.getSession().getAttribute("iList") == null) {
-                request.getSession().setAttribute("iList", new AdminInvoiceManager());
-            }
+            request.getSession().setAttribute("iList", new AdminInvoiceManager());
             response.sendRedirect("admin_invoice.jsp");
         } else if (action.equalsIgnoreCase("sort")) {
             request.getSession().removeAttribute("iList");
@@ -55,6 +53,12 @@ public class AdminInvoiceController extends HttpServlet {
             String invoiceId = request.getParameter("invoiceId");
             new AdminInvoiceManager().deleteInvoice(invoiceId);
             request.getSession().setAttribute("iList", new AdminInvoiceManager());
+            response.sendRedirect("admin_invoice.jsp");
+        }else if(action.equalsIgnoreCase("viewByTime")){
+            String from = request.getParameter("since");
+            String to = request.getParameter("to");
+//            response.getWriter().print(from + " " + to);
+            request.getSession().setAttribute("iList", new AdminInvoiceManager().getInvoiceInterval(from, to));
             response.sendRedirect("admin_invoice.jsp");
         }
     }

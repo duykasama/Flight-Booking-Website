@@ -51,6 +51,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productlist.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/invoice.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/invoice_date_form.css">
 
         <!-- Modernizr JS -->
         <script src="${pageContext.request.contextPath}/js/modernizr-2.6.2.min.js"></script>
@@ -189,7 +190,17 @@
 
 
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                
+                                <form style="display: inline" action="AdminInvoiceController" method="post">
+                                    <input type="hidden" name="action" value="viewByTime">
+                                    <label for="since" >Since: </label>
+                                    <input type="month" name="since" min="2020-01" value="2020-01">
+                                    <label for="month" >To: </label>
+                                    <input type="month" name="to" min="2020-01" value="2020-01">
+                                    <input type="submit" value="See revenue">
+                                </form>
                                 <div class="product-status-wrap">
+                                   
                                     <h4>Invoice List</h4>
                                     <table>
                                         <tr>

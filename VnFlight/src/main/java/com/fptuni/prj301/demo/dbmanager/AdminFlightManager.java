@@ -197,10 +197,6 @@ public class AdminFlightManager extends ArrayList<Flight> {
         return this;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new AdminFlightManager().getFlight("5"));;
-    }
-
     public Flight getFlight(String flightID) {
         Flight flight = null;
         String sql = "select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status \n"

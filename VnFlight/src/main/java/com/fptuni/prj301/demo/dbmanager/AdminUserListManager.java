@@ -82,11 +82,6 @@ public class AdminUserListManager extends ArrayList<User> {
         return user;
     }
     
-    
-    public static void main(String[] args) {
-        System.out.println(new AdminUserListManager().deleteUser("3"));
-    }
-
     public boolean updateUser(String userId, String username, String phone, String email) {
         String sql = "update [user] set name = ?, email = ?, phone = ? where id = ?";
         try {

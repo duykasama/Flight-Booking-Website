@@ -41,8 +41,8 @@ create table flight(
 	price bigint not null,
 	airline_name nvarchar(50) not null,
 	no_of_seats int not null,
-	departure_id int not null foreign key references airport(id),
-	destination_id int not null foreign key references airport(id),
+	departure_id int foreign key references airport(id),
+	destination_id int foreign key references airport(id),
 	[status] int not null
 )
 

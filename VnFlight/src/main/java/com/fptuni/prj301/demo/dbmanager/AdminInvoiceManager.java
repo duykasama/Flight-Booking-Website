@@ -51,19 +51,23 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
     }
 
     public String getRevenue() {
-        String sql = "select sum(total_price) as 'revenue' from invoice";
+//        String sql = "select sum(total_price) as 'revenue' from invoice";
+//        int revenue = 0;
+//        try {
+//            Connection conn = DBUtils.getConnection();
+//            PreparedStatement stm = conn.prepareStatement(sql);
+//            ResultSet rs = stm.executeQuery();
+//            while (rs.next()) {
+//                revenue = rs.getInt("revenue");
+//            }
+//            rs.close();
+//            stm.close();
+//            conn.close();
+//        } catch (Exception ex) {
+//        }
         int revenue = 0;
-        try {
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement stm = conn.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                revenue = rs.getInt("revenue");
-            }
-            rs.close();
-            stm.close();
-            conn.close();
-        } catch (Exception ex) {
+        for (Invoice i : this) {
+            revenue += i.getTotalPrice();
         }
         String output = NumberFormat.getCurrencyInstance(new Locale("jp", "JP")).format(revenue);
         return output.substring(4) + " vnd";
@@ -175,14 +179,17 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
     }
 
     public boolean deleteInvoice(String invoiceId) {
-        String sql = "delete from invoice where id = ?";
-
-        try (Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, invoiceId);
-            return (ps.executeUpdate() == 1);
+        String sqlSetNull = "update passenger_ticket set invoice_id = null where invoice_id = ?";
+        String sqlDelete = "delete from invoice where id = ?";
+        try{
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sqlSetNull);
+            stm.setString(1, invoiceId);
+            stm.executeUpdate();
+            stm = conn.prepareStatement(sqlDelete);
+            stm.setString(1, invoiceId);
+            return (stm.executeUpdate() > 0);
         } catch (Exception ex) {
-            System.out.println("Insert invoice error: " + ex.getMessage());
         }
         return false;
     }
@@ -205,11 +212,32 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
         return quantity;
     }
 
-    public static void main(String[] args) {
-        List<Invoice> list = new AdminInvoiceManager().sortInvoice("amount", "asc");
-        for (Invoice x : list) {
-            System.out.println(x.getFlightId() + "," + x.getTotalPrice());
+    public ArrayList<Invoice> getInvoiceInterval(String from, String to) {
+        this.clear();
+        String sql = "select i.id, u.id as \'user_id\', f.id as \'flight_id\', i.booking_date, i.total_price, i.purchase_status\n"
+                + "from invoice i join [user] u on i.[user_id] = u.id join flight f on i.flight_id = f.id "
+                + "where booking_date between parse(? as date) and parse(? as date)";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, from);
+            stm.setString(2, to);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Invoice invoice = new Invoice();
+                invoice.setId(rs.getInt("id"));
+                invoice.setUserId(rs.getInt("user_id"));
+                invoice.setFlightId(rs.getInt("flight_id"));
+                invoice.setBookingDate(rs.getDate("booking_date"));
+                invoice.setTotalPrice(rs.getInt("total_price"));
+                invoice.setPurchaseStatus(rs.getInt("purchase_status"));
+                this.add(invoice);
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (Exception ex) {
         }
+        return this;
     }
-
 }

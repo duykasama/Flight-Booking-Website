@@ -25,7 +25,7 @@ public class UserFlightManager extends ArrayList<Flight> {
         String sql = " select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.airline_name, fl.no_of_seats, ap1.name as 'departure', ap2.name as 'destination', fl.status "
                 + " from flight fl join airport ap1 on fl.departure_id = ap1.id "
                 + " join airport ap2 on fl.destination_id = ap2.id "
-                + " where fl.departure_id = ? and fl.destination_id = ? and fl.departure_date = parse(? as date) ";
+                + " where fl.departure_id = ? and fl.destination_id = ? and fl.departure_date = parse(? as date) and fl.status = 0";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);

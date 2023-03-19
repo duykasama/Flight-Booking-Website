@@ -186,6 +186,24 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
         }
         return false;
     }
+    
+    public int getTotalPassengers(){
+        int quantity = 0;
+        String sql = "select count(id) as 'quantity' from passenger_ticket";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                quantity = rs.getInt("quantity");
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (Exception ex) {
+        }
+        return quantity;
+    }
 
     public static void main(String[] args) {
         List<Invoice> list = new AdminInvoiceManager().sortInvoice("amount", "asc");

@@ -141,7 +141,7 @@
                                             <div class="col-7 d-flex align-items-center">
                                                 <div class="numbers" style="text-align: center;">
                                                     <p class="card-category">Passengers</p>
-                                                    <h4 class="card-title">1,294</h4>
+                                                    <h4 class="card-title">${iList.getTotalPassengers()}</h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,7 +215,6 @@
                                             </th>
                                             <th>Purchase Status</th>
 
-                                            <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
                                         <c:if test="${iList.size() > 0}">
@@ -235,7 +234,6 @@
                                                         <td><button class="ds-setting">${iList.get(i).getPurchaseStatusString()}</button></td>
                                                     </c:when>
                                                 </c:choose>
-                                                <td><a href="">edit</a></td>
                                                 <td><a href="AdminInvoiceController?action=delete&invoiceId=${iList.get(i).getId()}"><i class="icon-delete"></i></a></td>
                                             </tr>
                                         </c:forEach>

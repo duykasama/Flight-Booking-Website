@@ -48,8 +48,8 @@ create table flight(
 
 create table invoice(
 	id int primary key identity(1,1),
-	[user_id] int not null foreign key references [user](id),
-	flight_id int not null foreign key references flight(id),
+	[user_id] int foreign key references [user](id),
+	flight_id int foreign key references flight(id),
 	booking_date date not null,
 	total_price bigint,
 	purchase_status int not null

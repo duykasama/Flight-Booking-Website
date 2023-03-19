@@ -109,7 +109,6 @@ public class AdminFlightController extends HttpServlet {
         } else if(action.equalsIgnoreCase("confirmEdit")){
             
             String flightID = request.getParameter("flightID");
-            
             String takeOffTimeStr = request.getParameter("takeOffTime");
             String landingTimeStr = request.getParameter("landingTime");
             String depDate = request.getParameter("depDate");
@@ -118,17 +117,12 @@ public class AdminFlightController extends HttpServlet {
             String desID = request.getParameter("desID");
             String airlineName = request.getParameter("airlineName");
             String price = request.getParameter("price");
-            try {
-                AdminFlightManager adManager = new AdminFlightManager();
-                Boolean check = adManager.editFlight(flightID, takeOffTimeStr, landingTimeStr, depDate, price, airlineName, numOfSeat, depID, desID);
-                request.getSession().removeAttribute("flight_msg");
-                request.getSession().setAttribute("fList", new AdminFlightManager().loadFlight());
-                request.getRequestDispatcher("AdminFlightController?action=view").forward(request, response);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+            new AdminFlightManager().editFlight(flightID, takeOffTimeStr, landingTimeStr, depDate, price, airlineName, numOfSeat, depID, desID);
+            request.getSession().setAttribute("fList", new AdminFlightManager().loadFlight());
+            request.getRequestDispatcher("AdminFlightController?action=view").forward(request, response);
             
         } else if(action.equalsIgnoreCase("cancelEdit")){
+            request.getSession().removeAttribute("flight");
             response.sendRedirect("admin_flight.jsp");
         }
     }

@@ -145,8 +145,8 @@
                                                 <td>${uList.get(i).getUserName()}</td>
                                                 <td>${uList.get(i).getPhone()}</td>
                                                 <td>${uList.get(i).getEmail()}</td>
-                                                <td><a href="">edit</a></td>
-                                                <td><a href=""><i class="icon-delete"></i></a></td></tr>
+                                                <td><a href="./AdminUserListController?action=edit&userId=${uList.get(i).getUserId()}">edit</a></td>
+                                                <td><a href="./AdminUserListController?action=delete&userId=${uList.get(i).getUserId()}"><i class="icon-delete"></i></a></td></tr>
                                             </tr>
                                         </c:forEach>
                                         </c:if>

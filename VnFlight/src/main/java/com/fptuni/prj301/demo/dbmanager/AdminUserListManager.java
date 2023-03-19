@@ -42,4 +42,63 @@ public class AdminUserListManager extends ArrayList<User> {
         } catch (Exception ex) {
         }
     }
+
+    public boolean deleteUser(String userId) {
+        String sqlSetNull = "update invoice set [user_id] = null where [user_id] = ?";
+        String sqlDelete = "delete from [user] where id = ?";
+        try{
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sqlSetNull);
+            stm.setString(1, userId);
+            stm.executeUpdate();
+            stm = conn.prepareStatement(sqlDelete);
+            stm.setString(1, userId);
+            return (stm.executeUpdate() > 0);
+        } catch (Exception ex) {
+        }
+        return false;
+    }
+    
+    public User loadUser(String id){
+        User user = null;
+        String sql = "select id,name, email, phone from [user] where id = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setUserId(rs.getInt("id"));
+                user.setUserName(rs.getString("name"));
+                user.setPhone(rs.getString("phone"));
+                user.setEmail(rs.getString("email"));
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (Exception ex) {
+        }
+        return user;
+    }
+    
+    
+    public static void main(String[] args) {
+        System.out.println(new AdminUserListManager().deleteUser("3"));
+    }
+
+    public boolean updateUser(String userId, String username, String phone, String email) {
+        String sql = "update [user] set name = ?, email = ?, phone = ? where id = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, username);
+            stm.setString(2, email);
+            stm.setString(3, phone);
+            stm.setString(4, userId);
+            return (stm.executeUpdate() > 0);
+        } catch (Exception ex) {
+        }
+        return false;
+    }
 }

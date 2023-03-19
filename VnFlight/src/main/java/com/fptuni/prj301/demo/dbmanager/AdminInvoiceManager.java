@@ -174,6 +174,19 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
         return this;
     }
 
+    public boolean deleteInvoice(String invoiceId) {
+        String sql = "delete from invoice where id = ?";
+
+        try (Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, invoiceId);
+            return (ps.executeUpdate() == 1);
+        } catch (Exception ex) {
+            System.out.println("Insert invoice error: " + ex.getMessage());
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         List<Invoice> list = new AdminInvoiceManager().sortInvoice("amount", "asc");
         for (Invoice x : list) {

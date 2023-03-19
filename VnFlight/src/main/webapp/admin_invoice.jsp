@@ -191,9 +191,6 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="product-status-wrap">
                                     <h4>Invoice List</h4>
-                                    <div class="add-product">
-                                        <a href="#">Add Flight</a>
-                                    </div>
                                     <table>
                                         <tr>
                                             <th>Invoice ID</th>
@@ -239,7 +236,7 @@
                                                     </c:when>
                                                 </c:choose>
                                                 <td><a href="">edit</a></td>
-                                                <td><a href=""><i class="icon-delete"></i></a></td>
+                                                <td><a href="AdminInvoiceController?action=delete&invoiceId=${iList.get(i).getId()}"><i class="icon-delete"></i></a></td>
                                             </tr>
                                         </c:forEach>
                                             </c:if>

@@ -6,6 +6,7 @@
 package com.fptuni.prj301.demo.controller;
 
 import com.fptuni.prj301.demo.dbmanager.AdminInvoiceManager;
+import com.fptuni.prj301.demo.model.Invoice;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -51,7 +52,10 @@ public class AdminInvoiceController extends HttpServlet {
             out.print(value);
             response.sendRedirect("admin_invoice.jsp");
         } else if (action.equalsIgnoreCase("delete")) {
-
+            String invoiceId = request.getParameter("invoiceId");
+            new AdminInvoiceManager().deleteInvoice(invoiceId);
+            request.getSession().setAttribute("iList", new AdminInvoiceManager());
+            response.sendRedirect("admin_invoice.jsp");
         }
     }
 

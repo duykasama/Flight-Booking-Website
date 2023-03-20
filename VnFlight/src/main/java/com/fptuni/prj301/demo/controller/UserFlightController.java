@@ -100,7 +100,7 @@ public class UserFlightController extends HttpServlet {
                 rd.forward(request, response);
 
             } else {
-                request.setAttribute("ticket_msg", "Ticket has currently been booked");
+                request.setAttribute("ticket_msg", "Seat has currently been booked");
                 RequestDispatcher rd = request.getRequestDispatcher("/user_search_flight_detail.jsp");
                 rd.forward(request, response);
             }
@@ -112,6 +112,37 @@ public class UserFlightController extends HttpServlet {
                 ticket.setInvoiceId(invoiceId);
             }
             String flightID = (String) request.getSession().getAttribute("choosenflightID");
+            // ...............
+            UserTicketManager.insertTicketList(tList);
+            ArrayList<Ticket> ticketIDList = (ArrayList<Ticket>) UserTicketManager.getTicketID(invoiceId);
+            float flightPrice = Float.parseFloat((String) request.getSession().getAttribute("flightPrice"));
+            float total_price = 0;
+            for (Ticket x : ticketIDList) {
+                float luggage_price = 0;
+//                out.print("ticket id: " + x.getId());
+//                out.print("seat_number: " + x.getSeatNumber());
+//                out.print("luggage_weight: " + x.getLuggageWeight());
+                if (x.getLuggageWeight() == 15) {
+                    luggage_price = 200000;
+                } else if (x.getLuggageWeight() == 25) {
+                    luggage_price = 300000;
+
+                }
+                total_price += luggage_price + flightPrice;
+                new UserSeatManager().AddSeat(x.getSeatNumber(), flightID, x.getId());
+            }
+            UserInvoiceManager.updateInvoiceTotalPrice(invoiceId, total_price);
+            response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
+        } else if (path.equals("/purchase")) {
+            int invoiceId = UserInvoiceManager.insertReturnInvoiceID((Invoice) request.getSession().getAttribute("invoice"));
+            ArrayList<Ticket> tList = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
+            String flightID = (String) request.getSession().getAttribute("choosenflightID");
+
+            List<String> seatNumberList = new UserSeatManager().seatNumberList(flightID);
+
+            for (Ticket ticket : tList) {
+                ticket.setInvoiceId(invoiceId);
+            }
             // ...............
             UserTicketManager.insertTicketList(tList);
             ArrayList<Ticket> ticketIDList = (ArrayList<Ticket>) UserTicketManager.getTicketID(invoiceId);
@@ -132,50 +163,9 @@ public class UserFlightController extends HttpServlet {
                 new UserSeatManager().AddSeat(x.getSeatNumber(), flightID, x.getId());
             }
             UserInvoiceManager.updateInvoiceTotalPrice(invoiceId, total_price);
+            UserInvoiceManager.updateInvoicePurchaseStatus(invoiceId);
             response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
-        } else if (path.equals("/purchase")) {
-            int invoiceId = UserInvoiceManager.insertReturnInvoiceID((Invoice) request.getSession().getAttribute("invoice"));
-            ArrayList<Ticket> tList = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");
-            String flightID = (String) request.getSession().getAttribute("choosenflightID");
 
-            List<String> seatNumberList = new UserSeatManager().seatNumberList(flightID);
-            boolean tripleCheck = false;
-            for (Ticket ticket : tList) {
-                if (seatNumberList.contains(ticket.getSeatNumber())) {
-                    tripleCheck = true;
-                }
-            }
-            if (tripleCheck = true) {
-                request.setAttribute("ticket_msg", "Ticket has currently been booked");
-                RequestDispatcher rd = request.getRequestDispatcher("/user_search_flight_detail.jsp");
-                rd.forward(request, response);
-            } else {
-                for (Ticket ticket : tList) {
-                    ticket.setInvoiceId(invoiceId);
-                }
-                // ...............
-                UserTicketManager.insertTicketList(tList);
-                ArrayList<Ticket> ticketIDList = (ArrayList<Ticket>) UserTicketManager.getTicketID(invoiceId);
-                float flightPrice = Float.parseFloat((String) request.getSession().getAttribute("flightPrice"));
-                float total_price = 0;
-                for (Ticket x : ticketIDList) {
-                    float luggage_price = 0;
-                    out.print("ticket id: " + x.getId());
-                    out.print("seat_number: " + x.getSeatNumber());
-                    out.print("luggage_weight: " + x.getLuggageWeight());
-                    if (x.getLuggageWeight() == 15) {
-                        luggage_price = 200000;
-                    } else if (x.getLuggageWeight() == 25) {
-                        luggage_price = 300000;
-
-                    }
-                    total_price += luggage_price + flightPrice;
-                    new UserSeatManager().AddSeat(x.getSeatNumber(), flightID, x.getId());
-                }
-                UserInvoiceManager.updateInvoiceTotalPrice(invoiceId, total_price);
-                UserInvoiceManager.updateInvoicePurchaseStatus(invoiceId);
-                response.sendRedirect(request.getContextPath() + "/BookingHistoryController/history");
-            }
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

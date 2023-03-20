@@ -99,7 +99,7 @@
     <body>
         <form action="AdminUserListController" method="post">
             <h2>Edit User Information</h2>
-            <input name="userId" value="${user.getUserId()}"/>
+            <input type="hidden" name="userId" value="${user.getUserId()}"/>
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" value="${user.getUserName()}"/>

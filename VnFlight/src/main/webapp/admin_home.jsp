@@ -108,12 +108,12 @@
                                                         </div>
 
 
-
+<!--
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <input type="submit" class="btn btn-primary btn-block" value="Update">
                                                             </div>
-                                                        </div>
+                                                        </div>-->
                                                     </form>	
                                                 </div>
 

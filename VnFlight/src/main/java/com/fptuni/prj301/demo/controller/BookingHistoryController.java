@@ -60,6 +60,12 @@ public class BookingHistoryController extends HttpServlet {
             request.getSession().setAttribute("BookingHistory", usm.getInvoiceHistory((int) request.getSession().getAttribute("userID")));
             response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
 
+        } else if(path.equals("/delete")){
+            UserInvoiceManager usm = new UserInvoiceManager();
+            int invoiceId = Integer.parseInt(request.getParameter("invoiceId"));
+            UserInvoiceManager.deleteInvoice(invoiceId);
+            request.getSession().setAttribute("BookingHistory", usm.getInvoiceHistory((int) request.getSession().getAttribute("userID")));
+            response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
         }
     }
 

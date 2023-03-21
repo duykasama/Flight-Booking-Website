@@ -179,17 +179,42 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
     }
 
     public boolean deleteInvoice(String invoiceId) {
-        String sqlSetNull = "update passenger_ticket set invoice_id = null where invoice_id = ?";
-        String sqlDelete = "delete from invoice where id = ?";
+//        String sqlSetNull = "update passenger_ticket set invoice_id = null where invoice_id = ?";
+//        String sqlDelete = "delete from invoice where id = ?";
+//        try{
+//            Connection conn = DBUtils.getConnection();
+//            PreparedStatement stm = conn.prepareStatement(sqlSetNull);
+//            stm.setString(1, invoiceId);
+//            stm.executeUpdate();
+//            stm = conn.prepareStatement(sqlDelete);
+//            stm.setString(1, invoiceId);
+//            return (stm.executeUpdate() > 0);
+//        } catch (Exception ex) {
+//        }
+        String sql = "select id from passenger_ticket where invoice_id = ?";
+        String sqlDeleteSeat = "delete seat where passenger_ticket_id = ?";
+        String sqlDeleteTicket = "delete passenger_ticket where invoice_id = ?";
+        String sqlDeleteInvoice = "delete from invoice where id = ?";
         try{
             Connection conn = DBUtils.getConnection();
-            PreparedStatement stm = conn.prepareStatement(sqlSetNull);
+            PreparedStatement stm1 = conn.prepareStatement(sqlDeleteSeat);
+            PreparedStatement stm2 = conn.prepareStatement(sqlDeleteTicket);
+            PreparedStatement stm3 = conn.prepareStatement(sqlDeleteInvoice);
+            PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, invoiceId);
-            stm.executeUpdate();
-            stm = conn.prepareStatement(sqlDelete);
-            stm.setString(1, invoiceId);
-            return (stm.executeUpdate() > 0);
+            stm1.setString(1, invoiceId);
+            stm2.setString(1, invoiceId);
+            stm3.setString(1, invoiceId);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                stm1.setString(1, rs.getString("id"));
+                stm1.executeUpdate();
+            }
+            stm2.executeUpdate();
+            int affectedRows = stm3.executeUpdate();
+            return (affectedRows == 1);
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
         return false;
     }
@@ -239,5 +264,9 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
         } catch (Exception ex) {
         }
         return this;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(new AdminInvoiceManager().deleteInvoice("4"));;
     }
 }

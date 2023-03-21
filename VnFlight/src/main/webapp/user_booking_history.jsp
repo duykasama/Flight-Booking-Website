@@ -136,6 +136,7 @@
                                             <th>Price</th>
                                             <th>Detail</th>
                                             <th>Purchase Status</th>
+                                            <th>Action</th>
                                         </tr>
                                         <c:if test="${BookingHistory.size() > 0}">
                                             <c:forEach var="i" begin="${begin}" end="${end}">
@@ -147,19 +148,29 @@
                                                             <input type="hidden" name="invoiceId" value="${BookingHistory.get(i).getId()}"/>
                                                             <button class="btn btn-success" type="submit" style = "padding: 2px 5px">Detail</button>
                                                         </form></td>
-                                                    <td>
+                                                    <!--<td>-->
                                                         <c:choose>
+                                                        
                                                             <c:when test="${BookingHistory.get(i).getPurchaseStatus()==1}">
-                                                                Done
+                                                                <td>Done</td>
+                                                                    
                                                             </c:when>
                                                             <c:otherwise>
+                                                                <td>
                                                                 <form method="POST" action="${pageContext.request.contextPath}/BookingHistoryController/finish">                                                                 
                                                                     <input type="hidden" name="invoiceId" value="${BookingHistory.get(i).getId()}"/>
                                                                     <button class="btn btn-success" type="submit" style = "padding: 2px 5px">Click to Purchase</button>
                                                                 </form>
+                                                                </td>
+                                                                <td>
+                                                                    <form method="POST" action="${pageContext.request.contextPath}/BookingHistoryController/delete">                                                                 
+                                                                    <input type="hidden" name="invoiceId" value="${BookingHistory.get(i).getId()}"/>
+                                                                    <button class="btn btn-danger" type="submit" style = "padding: 2px 5px">Delete</button>
+                                                                </form>
+                                                                </td>
                                                             </c:otherwise>
                                                         </c:choose>
-                                                    </td>
+                                                    <!--</td>-->
                                                 </tr>
                                             </c:forEach>
                                         </c:if>

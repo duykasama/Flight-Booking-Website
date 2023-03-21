@@ -94,6 +94,35 @@ public class UserInvoiceManager {
         return -1;
     }
 
+    public static boolean deleteInvoice(int invoiceId) {
+        String sql = "select id from passenger_ticket where invoice_id = ?";
+        String sqlDeleteSeat = "delete seat where passenger_ticket_id = ?";
+        String sqlDeleteTicket = "delete passenger_ticket where invoice_id = ?";
+        String sqlDeleteInvoice = "delete from invoice where id = ?";
+        try{
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm1 = conn.prepareStatement(sqlDeleteSeat);
+            PreparedStatement stm2 = conn.prepareStatement(sqlDeleteTicket);
+            PreparedStatement stm3 = conn.prepareStatement(sqlDeleteInvoice);
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, invoiceId);
+            stm1.setInt(1, invoiceId);
+            stm2.setInt(1, invoiceId);
+            stm3.setInt(1, invoiceId);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                stm1.setString(1, rs.getString("id"));
+                stm1.executeUpdate();
+            }
+            stm2.executeUpdate();
+            int affectedRows = stm3.executeUpdate();
+            return (affectedRows == 1);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+
     public List<Invoice> getInvoiceHistory(int userId) {
         List<Invoice> invoice = new ArrayList<>();
         String sql = " SELECT id, flight_id, booking_date, total_price,purchase_status "
@@ -172,8 +201,9 @@ public class UserInvoiceManager {
             PreparedStatement ps = conn.prepareStatement(query);
 
             ps.setInt(1, invoiceId);
-            ResultSet rs = ps.executeQuery();
-            rs.close();
+            ps.executeUpdate();
+//            ResultSet rs = ps.executeQuery();
+//            rs.close();
             ps.close();
             conn.close();
         } catch (SQLException e) {
@@ -190,8 +220,9 @@ public class UserInvoiceManager {
 
             ps.setFloat(1, totalprice);
             ps.setInt(2, invoiceID);
-            ResultSet rs = ps.executeQuery();
-            rs.close();
+            ps.executeUpdate();
+//            ResultSet rs = ps.executeQuery();
+//            rs.close();
             ps.close();
             conn.close();
         } catch (SQLException e) {

@@ -5,11 +5,13 @@
  */
 package com.fptuni.prj301.demo.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ASUS
  */
-public class Airport {
+public class Airport implements Serializable{
     private int id;
     private String name;
 

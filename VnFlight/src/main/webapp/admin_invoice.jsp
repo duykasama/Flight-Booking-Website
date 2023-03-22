@@ -142,7 +142,7 @@
                                             <div class="col-7 d-flex align-items-center">
                                                 <div class="numbers" style="text-align: center;">
                                                     <p class="card-category">Passengers</p>
-                                                    <h4 class="card-title">${iList.getTotalPassengers()}</h4>
+                                                    <h4 class="card-title">${totalPassengers}</h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,8 +179,8 @@
                                             </div>
                                             <div class="col-7 d-flex align-items-center">
                                                 <div class="numbers" style="text-align: center;">
-                                                    <p class="card-category">Flights</p>
-                                                    <h4 class="card-title">${iList.getTotalFlights()}</h4>
+                                                    <p class="card-category">Total flights in system</p>
+                                                    <h4 class="card-title">${totalFlights}</h4>
                                                 </div>
                                             </div>
                                         </div>

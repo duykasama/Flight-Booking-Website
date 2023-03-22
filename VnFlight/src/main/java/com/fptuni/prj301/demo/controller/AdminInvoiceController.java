@@ -35,17 +35,20 @@ public class AdminInvoiceController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         out.print(action);
+        request.getSession().setAttribute("totalPassengers", new AdminInvoiceManager().getTotalPassengers());
+        request.getSession().setAttribute("totalFlights", new AdminInvoiceManager().getTotalFlights());
         if (action.equalsIgnoreCase("view")) {
             request.getSession().setAttribute("iList", new AdminInvoiceManager());
+//            request.getSession().setAttribute("totalPassengers", new AdminInvoiceManager().getTotalPassengers());
             response.sendRedirect("admin_invoice.jsp");
         } else if (action.equalsIgnoreCase("sort")) {
             request.getSession().removeAttribute("iList");
 
             String cate = request.getParameter("cate");
             String value = request.getParameter("value");
-            if (request.getSession().getAttribute("iList") == null) {
-                request.getSession().setAttribute("iList", new AdminInvoiceManager().sortInvoice(cate, value));
-            }
+            request.getSession().setAttribute("iList", new AdminInvoiceManager().sortInvoice(cate, value));
+//            request.getSession().setAttribute("totalPassengers", new AdminInvoiceManager().getTotalPassengers());
+
             out.print(cate);
             out.print(value);
             response.sendRedirect("admin_invoice.jsp");
@@ -53,11 +56,14 @@ public class AdminInvoiceController extends HttpServlet {
             String invoiceId = request.getParameter("invoiceId");
             new AdminInvoiceManager().deleteInvoice(invoiceId);
             request.getSession().setAttribute("iList", new AdminInvoiceManager());
+//            request.getSession().setAttribute("totalPassengers", new AdminInvoiceManager().getTotalPassengers());
             response.sendRedirect("admin_invoice.jsp");
         }else if(action.equalsIgnoreCase("viewByTime")){
             String from = request.getParameter("since");
             String to = request.getParameter("to");
 //            response.getWriter().print(from + " " + to);
+            request.getSession().setAttribute("totalFlights", new AdminInvoiceManager().getTotalFlights(from, to));
+            request.getSession().setAttribute("totalPassengers", new AdminInvoiceManager().getTotalPassengers(from, to));
             request.getSession().setAttribute("iList", new AdminInvoiceManager().getInvoiceInterval(from, to));
             response.sendRedirect("admin_invoice.jsp");
         }

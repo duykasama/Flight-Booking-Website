@@ -67,7 +67,9 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
 //        }
         int revenue = 0;
         for (Invoice i : this) {
-            revenue += i.getTotalPrice();
+            if(i.getPurchaseStatus() == 1){
+                revenue += i.getTotalPrice();
+            }
         }
         String output = NumberFormat.getCurrencyInstance(new Locale("jp", "JP")).format(revenue);
         return output.substring(4) + " vnd";
@@ -79,6 +81,26 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                quantity = rs.getInt("quantity");
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (Exception ex) {
+        }
+        return quantity;
+    }
+    
+    public Object getTotalFlights(String from, String to) {
+        int quantity = 0;
+        String sql = "select count(id) as 'quantity' from flight where departure_date between parse(? as date) and parse(? as date)";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, from);
+            stm.setString(2, to);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 quantity = rs.getInt("quantity");
@@ -236,6 +258,26 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
         }
         return quantity;
     }
+    
+    public int getTotalPassengers(String since, String to){
+        int quantity = 0;
+        String sql = "select count(p.id) as 'quantity' from invoice i join passenger_ticket p on i.id = p.invoice_id where i.booking_date between parse( ? as date ) and parse( ? as date )";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, since);
+            stm.setString(2, to);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                quantity = rs.getInt("quantity");
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (Exception ex) {
+        }
+        return quantity;
+    }
 
     public ArrayList<Invoice> getInvoiceInterval(String from, String to) {
         this.clear();
@@ -269,4 +311,5 @@ public class AdminInvoiceManager extends ArrayList<Invoice> {
     public static void main(String[] args) {
         System.out.println(new AdminInvoiceManager().deleteInvoice("4"));;
     }
+
 }

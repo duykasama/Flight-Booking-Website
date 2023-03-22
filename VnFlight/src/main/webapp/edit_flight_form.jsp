@@ -118,16 +118,16 @@
                 <div class="col-md-6">
                     <label for="from">FROM</label>
                     <select class="form-control" id="from" name="depID">
-                        <option hidden selected value="${flight.getDeparture()}">${flight.getDeparture()}</option>
+                        <option hidden selected>${flight.getDeparture()}</option>
                         <c:forEach var="i" begin="0" end="22">
                             <option value="${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
-                        </c:forEach>/option>
+                        </c:forEach>
                     </select>
                 </div>
                 <div class="col-md-6">
                     <label for="to">TO</label>
                     <select class="form-control" id="to" name="desID">
-                        <option hidden selected value="${flight.getDestination()}">${flight.getDestination()}</option>
+                        <option hidden selected>${flight.getDestination()}</option>
                         <c:forEach var="i" begin="0" end="22">
                             <option value="${airportList.get(i).getId()}">${airportList.get(i).getName()}</option>
                         </c:forEach>

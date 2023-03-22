@@ -226,16 +226,34 @@ public class AdminFlightManager extends ArrayList<Flight> {
         } catch (Exception ex) {
             Logger.getLogger(AdminFlightManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(flight != null){
+        if (flight != null) {
             System.out.println("got flight");
         }
         return flight;
     }
 
     public Boolean editFlight(String flightID, String takeOffTimeStr, String landingTimeStr, String depDate, String price, String airlineName, String numOfSeat, String depID, String desID) {
+        boolean cond = false;
+        try {
+            Integer.parseInt(depID);
+        } catch (Exception e) {
+            cond = true;
+        }
+        if (cond) {
+            depID = "(select departure_id from flight where id = " + flightID + ")";
+        }
+        cond = false;
+        try {
+            Integer.parseInt(desID);
+        } catch (Exception e) {
+            cond = true;
+        }
+        if (cond) {
+            desID = "(select destination_id from flight where id = " + flightID + ")";
+        }
         String sql = "update flight set takeoff_time = ?, landing_time = ?, "
                 + "departure_date = ?, price = ?, airline_name = ?, no_of_seats = ?, "
-                + "departure_id = ?, destination_id = ?, status = 0 where id = ?";
+                + "departure_id = " + depID + ", destination_id = " + desID + ", status = 0 where id = ?";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -245,9 +263,7 @@ public class AdminFlightManager extends ArrayList<Flight> {
             ps.setString(4, price);
             ps.setString(5, airlineName);
             ps.setString(6, numOfSeat);
-            ps.setString(7, depID);
-            ps.setString(8, desID);
-            ps.setString(9, flightID);
+            ps.setString(7, flightID);
 
             return (ps.executeUpdate() == 1);
 
@@ -256,5 +272,5 @@ public class AdminFlightManager extends ArrayList<Flight> {
         }
         return false;
     }
-    
+
 }

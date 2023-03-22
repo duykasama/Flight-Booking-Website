@@ -93,6 +93,7 @@ begin
 	where (departure_date < getdate() or (departure_date = getdate() and takeoff_time < cast(getdate() as time))) and [status] = 0
 end
 
+execute pro_checkFlightStatus
 
 
 --if object_id('pr_createInvoice') is not null

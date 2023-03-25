@@ -80,7 +80,7 @@ public class UserFlightController extends HttpServlet {
             String nationality = request.getParameter("nationality");
             String dob = request.getParameter("dob");
             String seatNumber = request.getParameter("seatNumber");
-
+            
             String flightID = (String) request.getSession().getAttribute("choosenflightID");
             UserSeatManager usManager = new UserSeatManager();
             ArrayList<Ticket> tListTemp = (ArrayList<Ticket>) request.getSession().getAttribute("tempTicketList");

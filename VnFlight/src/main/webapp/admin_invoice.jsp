@@ -205,14 +205,14 @@
                                     <table>
                                         <tr>
                                             <th>Invoice ID</th>
-                                            <th>UserName</th>
+                                            <th>UserID</th>
                                             <th>FLightID</th>
                                             <th>Booking Date
                                             <th>
                                                  <select  onchange="location = this.value"type="submit" class="form-control " style="transform: translateY(7px) translateX(-50px);width:10px;display: inline">
                                                     <option value="" disabled selected hidden><i class="ti-arrow-down"></i></option>
-                                                    <option value="./AdminInvoiceController?action=sort&cate=bookingDate&value=desc">desc</option>
-                                                    <option value="./AdminInvoiceController?action=sort&cate=bookingDate&value=asc">asc</option>
+                                                    <option value="./AdminInvoiceController?action=sort&cate=bookingDate&value=desc">Latest</option>
+                                                    <option value="./AdminInvoiceController?action=sort&cate=bookingDate&value=asc">Earliest</option>
                                                 </select>
                                             </th>
                                             </th>

@@ -38,22 +38,19 @@
     - View and edit user account information.
     - Change user account password.
 
-    c. Search flights:
+    c. Flight booking + Seat selection:
 
-    - Searh all flights having the same departure point, landing point and departure date.
-
-    d. Flight booking + Seat selection:
-
+    - Search all flights having the same departure point, landing point and departure date.
     - Select one flight for booking (log-in necessity).
     - Fill in passenger ticket information, select seat for each passenger (required) and choose luggage weight (optional).
-    - Fill in next ticket for "more than one" passengers by clicking "Save" button.
-    - Show total price after providing passenger tickets' information.
-    - Confirm buying ticket(s) by clicking "Purchase" or Add to Cart without purchase.
+    - Fill in ticket information for the next passenger after clicking "Save" button.
+    - Confirm buying ticket(s) by clicking "Purchase" or "Add to cart" without purchase.
 
-    e. Booking history:
+    d. Booking history:
 
-    - View your booking history.
-    - Confirm purchase for saved invoices.
+    - View your booking history including general invoice information and invoice total price.
+    - Click "Detail" to show details of each invoice such as their flight, ticket, and seat information.
+    - Confirm purchase for or delete saved invoices.
 
   - **Admin:**
 
@@ -66,12 +63,12 @@
     b. Manage users:
 
     - View users.
-    - Add, edit, remove users.
+    - Edit, remove users.
 
     c. Manage invoices:
 
-    - View invoices.
-    - Calculate revenue.
+    - View invoices, remove invoices.
+    - Calculate revenue, show total passengers, revenue, flights in a chosen specific period of time.
 
 ---
 

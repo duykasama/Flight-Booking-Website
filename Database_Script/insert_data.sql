@@ -1058,8 +1058,8 @@ select fl.id, fl.takeoff_time, fl.landing_time, fl.departure_date, fl.price, fl.
 select * from flight
 select * from seat
 select * from [dbo].[passenger_ticket]
-insert into [dbo].[passenger_ticket] values(1,'A','B','15','21121231','male','vietnam','6-27-2020','1D')
-select * from [dbo].[invoice]
-insert into [dbo].[invoice] values(1,1,'6-27-2020',800000,1)
-update [dbo].[invoice] set total_price = 2000000 from [dbo].[invoice] where id = 5
-insert into [seat] values ('1D',1,2,1)
+--insert into [dbo].[passenger_ticket] values(1,'A','B','15','21121231','male','vietnam','6-27-2020','1D')
+--select * from [dbo].[invoice]
+--insert into [dbo].[invoice] values(1,1,'6-27-2020',800000,1)
+--update [dbo].[invoice] set total_price = 2000000 from [dbo].[invoice] where id = 5
+--insert into [seat] values ('1D',1,2,1)

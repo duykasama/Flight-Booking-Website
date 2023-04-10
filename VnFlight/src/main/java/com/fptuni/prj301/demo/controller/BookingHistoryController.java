@@ -9,7 +9,6 @@ import com.fptuni.prj301.demo.dbmanager.UserInvoiceManager;
 import com.fptuni.prj301.demo.dbmanager.UserTicketManager;
 import com.fptuni.prj301.demo.model.Ticket;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -60,10 +59,11 @@ public class BookingHistoryController extends HttpServlet {
             request.getSession().setAttribute("BookingHistory", usm.getInvoiceHistory((int) request.getSession().getAttribute("userID")));
             response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
 
-        } else if(path.equals("/delete")){
+        } else if (path.equals("/delete")) {
             UserInvoiceManager usm = new UserInvoiceManager();
             int invoiceId = Integer.parseInt(request.getParameter("invoiceId"));
             UserInvoiceManager.deleteInvoice(invoiceId);
+
             request.getSession().setAttribute("BookingHistory", usm.getInvoiceHistory((int) request.getSession().getAttribute("userID")));
             response.sendRedirect(request.getContextPath() + "/user_booking_history.jsp");
         }

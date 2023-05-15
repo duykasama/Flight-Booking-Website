@@ -1,0 +1,37 @@
+body{
+    position: relative;
+}
+.add-product a{
+    cursor: pointer;
+}
+.form {
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    transition: transform 0.3s ease 0s;
+    display: none;
+    z-index: 2;
+    background-color:grey; 
+    width: 50%; 
+    padding: 20px 30px;
+
+
+}
+.form-show {
+    display: block; /* this class is added when the form button is clicked, making the form appear */
+}
+
+.open-form-button:hover {
+    cursor: pointer;
+}
+.form-background {
+    display: none; /* starts out with display of none so it can be changed to block on click */
+    position: fixed; /* stays on screen despite scroll */
+    width: 100%; /* covers entire width of screen */
+    height: 100%; /* covers entire height of screen */
+    z-index: 1; /* will be displayed behind background */
+}
+label,.form-title{
+    color: goldenrod;
+}
+

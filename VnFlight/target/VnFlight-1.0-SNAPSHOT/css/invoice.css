@@ -1,0 +1,266 @@
+/*!
+
+ =========================================================
+ * Ready Bootstrap Dashboard (Bootstrap 4)
+ =========================================================
+
+ * Product Page: http://www.themekita.com/
+ * Copyright 2018 Theme Kita (http://www.themekita.com/)
+ * Licensed under MIT ()
+
+ =========================================================
+
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+ */
+/*   Background   */
+.bg-default {
+  background: #607D8B !important;
+}
+
+.bg-primary {
+  background: #1D62F0 !important;
+}
+
+.bg-info {
+  background: #23CCEF !important;
+}
+
+.bg-success {
+  background: #59d05d !important;
+}
+
+.bg-warning {
+  background: #fbad4c !important;
+}
+
+.bg-danger {
+  background: #ff646d !important;
+}
+
+*:focus {
+  outline: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/*   Typography    */
+
+@font-face {
+  font-family: LineAwesome;
+  src: url(../fonts/line-awesome.eot?v=1.1.);
+  src: url(../fonts/line-awesome.eot??v=1.1.#iefix) format("embedded-opentype"), url(../fonts/line-awesome.woff2?v=1.1.) format("woff2"), url(../fonts/line-awesome.woff?v=1.1.) format("woff"), url(../fonts/line-awesome.ttf?v=1.1.) format("truetype"), url(../fonts/line-awesome.svg?v=1.1.#fa) format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: LineAwesome;
+    src: url(../fonts/line-awesome.svg?v=1.1.#fa) format("svg");
+  }
+}
+.la {
+  font: normal normal normal 16px/1 LineAwesome;
+  font-size: inherit;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+
+/*     Card     */
+.la-check-circle:before {
+  content: "\f17c";
+}
+
+.la-newspaper-o:before {
+  content: "\f29c";
+}
+.la-users:before {
+  content: "\f369";
+}
+.la-bar-chart:before {
+  content: "\f12e";
+}
+
+.la-bar-chart-o:before {
+  content: "\f12f";
+}
+.align-items-center,.numbers{
+    align-items: center !important;
+}
+.card {
+  border-radius: 0px;
+  background-color: #ffffff;
+  margin-bottom: 30px;
+  -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+  -moz-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+  box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+  border: 1px solid #eee;
+}
+.card .card-header {
+  padding: 15px 15px;
+  background-color: transparent;
+  border-bottom: 1px solid #ebedf2 !important;
+}
+.card .card-title {
+  margin: 0;
+  color: #575962;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.card .card-sub {
+  display: block;
+  margin: 5px 0 10px 0;
+  font-size: .9rem;
+  background: #f7f8fa;
+  color: #575962;
+  padding: 0.85rem 1.5rem;
+  border-radius: 4px;
+}
+.card .card-category {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #9A9A9A;
+  margin-bottom: 0px;
+}
+.card label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9A9A9A;
+  margin-bottom: 0px;
+}
+.card .card-body {
+  padding: 15px 15px 10px 15px;
+}
+.card .card-footer {
+  background-color: transparent;
+  line-height: 30px;
+  border-top: 1px solid #ebedf2 !important;
+  font-size: 14px;
+}
+.card .card-action {
+  padding: 30px;
+  background-color: transparent;
+  line-height: 30px;
+  border-top: 1px solid #ebedf2 !important;
+  font-size: 14px;
+}
+.card .card-footer hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.card .card-footer .legend {
+  display: inline-block;
+}
+
+.card-stats .card-category {
+  margin-top: 0px;
+}
+.card-stats .icon-big {
+  font-size: 3em;
+  min-height: 64px;
+}
+
+.card-tasks .table thead th {
+  border-top: 1px solid #f4f4f4;
+  background: #fafafa !important;
+}
+.card-tasks .table .form-check {
+  padding: 0 0 0 0.75rem !important;
+}
+.card-tasks .table .form-check label {
+  margin-bottom: 0px !important;
+}
+.card-tasks .table tbody td:first-child, .card-tasks .table thead th:first-child {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.card-tasks .table tbody td:last-child, .card-tasks .table thead th:last-child {
+  padding-right: 15px;
+}
+.card-tasks .card-body .table td {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.card-tasks .card-body .table td .btn {
+  font-size: 17px;
+  opacity: 0.7;
+  transition: all .3s;
+}
+.card-tasks .card-body .table td:hover .btn {
+  opacity: 1;
+}
+
+.card-default, .card-primary, .card-info, .card-success, .card-warning, .card-danger {
+  color: #ffffff;
+  border: 0px;
+}
+
+.card-default .card-header, .card-primary .card-header, .card-info .card-header, .card-success .card-header, .card-warning .card-header, .card-danger .card-header {
+  border-bottom: transparent !important;
+}
+
+.card-default .card-category, .card-primary .card-category, .card-info .card-category, .card-success .card-category, .card-warning .card-category, .card-danger .card-category, .card-default .card-title, .card-primary .card-title, .card-info .card-title, .card-success .card-title, .card-warning .card-title, .card-danger .card-title, .card-default label, .card-primary label, .card-info label, .card-success label, .card-warning label, .card-danger label {
+  color: #ffffff;
+}
+
+.card-default .icon-big > i, .card-primary .icon-big > i, .card-info .icon-big > i, .card-success .icon-big > i, .card-warning .icon-big > i, .card-danger .icon-big > i {
+  color: #ffffff !important;
+}
+
+.card-default .card-footer, .card-primary .card-footer, .card-info .card-footer, .card-success .card-footer, .card-warning .card-footer, .card-danger .card-footer {
+  border-top: transparent !important;
+}
+
+.card-default {
+  background: #607D8B;
+}
+
+.card-primary {
+  background: #1D62F0;
+}
+
+.card-info {
+  background: #23CCEF;
+}
+
+.card-success {
+  background: #59d05d;
+}
+
+.card-warning {
+  background: #fbad4c;
+}
+
+.card-danger {
+  background: #ff646d;
+}
+
+
+
+
+
+.form-check-sign:hover:before {
+  border: 1px solid #ccc !important;
+}
+
+.form-check {
+  padding-left: 0.75rem;
+}
+
+.form-check-input {
+  position: relative;
+  margin-top: .3rem;
+}
+.statictis-mgtop{
+    margin-top: 7em;
+}
+
+
+/*# sourceMappingURL=ready.css.map */

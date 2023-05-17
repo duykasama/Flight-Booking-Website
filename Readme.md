@@ -19,7 +19,7 @@
 
   - VnFlight is a website that provides the service for booking domestic flight tickets.
 
-- **_Objects:_**
+- **_Objectives:_**
 
   - Users book ticket for one or many passengers.
   - Admins manage the system of flights, users, invoices.
